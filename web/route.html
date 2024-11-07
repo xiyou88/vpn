@@ -1,0 +1,318 @@
+<div class="layuimini-container layuimini-page-anim">
+  <div class="layuimini-main-route">
+    <div class="top">
+      <div class="title">
+        <button class="super">SVIP线路</button>
+        <button class="normal select">VIP线路</button>
+      </div>
+    </div>
+    <div style="padding: 16px 19px 0 19px;color: red;">温馨提示: 您获取到线路后，在到期之前可以一直使用，无需重复获取线路.</div>
+    <div class="body svip"><ul></ul></div>
+    <div class="body vip"><ul></ul></div>
+
+    <div class="show">
+      <div>
+        <button class="close"><img src="images/close.png"/></button>
+        <img src="images/icon-route.png">
+        <div class="title">线路信息</div>
+        <div class="sign"><span style="-webkit-line-clamp: 4;overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;"></span></div>
+        <a href="javascript:;" onclick="outlineDownload()">
+          <div style="height: 40px;line-height: 40px;width: 198px;background-color: #2468F2;margin: 24px auto 0 auto;color: white;">下载outline</div>
+        </a>
+        <button class="copy" style="margin-top: 12px;">复制并打开outline</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/utils.js" charset="utf-8"></script>
+<script>
+  layui.use(['form', 'table','miniPage'], function () {
+    var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            miniPage = layui.miniPage;
+
+    var select = $('div.layuimini-main-route .top').find("button");
+    $('div.layuimini-main-route .top button').on("click",function () {
+      select.removeClass('select');
+      $(this).addClass('select');
+
+      if ($(this).hasClass('normal')) {
+        $('div.layuimini-main-route .vip').show();
+        $('div.layuimini-main-route .svip').hide();
+      } else{
+        $('div.layuimini-main-route .vip').hide();
+        $('div.layuimini-main-route .svip').show();
+      }
+    });
+
+    $("div.layuimini-main-route").on('click', 'ul li .route-detail',function () {
+      let id = Number($(this).attr("value"));
+      let name = $(this).parent().find("span.name").text();
+      getUserRoute(id,name);
+    });
+    $(".layuimini-main-route .show .close").on('click',function () {
+      $(".layuimini-main-route .show").hide();
+    });
+    $('.layuimini-main-route .show .copy').on('click', function () {
+      copyText($(".layuimini-main-route .show .sign span").text());
+    });
+  
+    var routeInfo = layui.sessionData('route_list').info;
+    var userInfo = layui.sessionData('user').userInfo;
+
+    var timestamp=parseInt(new Date().getTime()/1000);
+
+    if (userInfo.vip_expire_time > timestamp){
+      $(".layuimini-main-route .top .title").hide();
+      $('div.layuimini-main-route .vip').hide();
+      $('div.layuimini-main-route .svip').show();
+    }
+
+    if (routeInfo == undefined || routeInfo.username == undefined){
+      var loadIndex = layer.load(2, {
+        shade: [0.2,'#000000'] //0.1透明度的白色背景
+      });
+      getRouteInfo(loadIndex,true);
+      return false;
+    }else {
+      let isReset = false;
+      let timestamp=parseInt(new Date().getTime()/1000);
+      if(timestamp-routeInfo.cache_ts>60){
+        isReset = true;
+        var loadIndex = layer.load(2, {
+          shade: [0.2,'#000000'] //0.1透明度的白色背景
+        });
+        getRouteInfo(loadIndex,isReset);
+      }
+
+      if (!isReset){
+        resetRoute();
+      }
+    };
+
+    function getRouteInfo(loadIndex,isReset){
+      axios({
+        "method": "GET",
+        "url": `${API_URL}/route/list`,
+      }).then((json) => {
+        if(loadIndex != undefined){
+          layer.close(loadIndex);
+        }
+        if (json.code == 200) {
+          let timestamp = parseInt(new Date().getTime()/1000);
+          json.data.cache_ts = timestamp;
+          layui.sessionData('route_list',{key:"info",value: json.data});
+          if (isReset){
+            resetRoute(json.data.vip,false);
+            resetRoute(json.data.svip,true);
+          }
+        } else if(json.code == 4003){
+          layer.msg(json.msg, {
+            time: 1000
+          }, function() {
+            layui.data('route',{key:"info",remove: true})
+            window.location = 'login.html';
+          });
+        }else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        if(loadIndex != undefined){
+          layer.close(loadIndex);
+        }
+        layer.msg(e.errorType);
+      });
+    };
+
+    function resetRoute(routeList,isSvip){
+      var useRouteInfo = layui.data('route');
+      let timestamp = parseInt(new Date().getTime()/1000);
+      let html = "";
+      layui.each(routeList,function (index,item) {
+        if(item.type_name != "CN2XX-JP-JSQ"){
+            let useStyle = "";
+            layui.each(useRouteInfo, function (index2, item2) {
+              if (index2 == item.id && timestamp - item2.cache_ts < 300) {
+                // useStyle = "use";
+                return true;
+              }
+            });
+            html += `<li id="${item.id}" svip='${isSvip}'><div class="fixed ${useStyle}"></div><div class="route-body"><div><img src="${item.image_url}"><span class="name">${item.name}</span></div><div class="route-detail" value="${item.id}">获取线路</div></div> </li>`;
+          }
+      });
+      
+      if (isSvip) {
+        $(".layuimini-main-route .svip ul").html(html);
+      }else {
+        $(".layuimini-main-route .vip ul").html(html);
+      }
+    };
+
+    function getUserRoute(id,name){
+      var loadIndex = 0;
+
+      let timestamp = parseInt(new Date().getTime()/1000);
+      var routeInfo = layui.data('route');
+      let isReq = true;
+      if (routeInfo != undefined){
+        layui.each(routeInfo, function (index,item) {
+          if(index == id){
+            if (timestamp-item.cache_ts < 60){
+                let sign = item.sign;
+                if (sign.indexOf("#") < 0){
+                  sign = sign+"#"+name;
+                }
+
+                showRouteInfo(sign);
+                isReq = false;
+                return true;
+            }
+          }
+        })
+      }
+
+      if(!isReq){
+        return false;
+      }
+
+      var userInfo = layui.sessionData('user').userInfo;
+      let isSvip = $("#"+id).attr("svip");
+      if (isSvip=="true"){
+        if (userInfo.vip_expire_time<= timestamp){
+          layer.msg("SVIP时间已到期，请先充值");
+          return  true;
+        }
+      }else {
+        if (userInfo.expire_time<= timestamp){
+          layer.msg("VIP时间已到期，请先充值");
+          return  true;
+        }
+      }
+
+
+      let routeTs = layui.data("get_route").ts;
+      if (routeTs != undefined && routeTs > timestamp){
+        prompt();
+        return  false;
+      }
+
+
+      loadIndex = layer.load(2, {shade: [0.2,'#000000']});
+
+      axios({
+        "method": "GET",
+        "url": `${API_URL}/user/route/info?id=${id}`,
+      }).then((json) => {
+        layer.close(loadIndex);
+        if (json.code == 200) {
+          let timestamp = parseInt(new Date().getTime()/1000);
+          json.data.cache_ts = timestamp;
+          let isExist = false;
+          layui.sessionData('route',null);
+          if (routeInfo != undefined){
+            layui.each(routeInfo, function (index,item) {
+              if(index != id){
+                item.is_use = false;
+              
+                layui.data('route',{key:index,value:item});
+              }
+            })
+          }
+
+          json.data.is_use = true;
+          layui.data('route',{key:id,value: json.data});
+
+          // $('.layuimini-main-route ul li').find('div.fixed').removeClass('use');
+          // $(`#${id} .fixed`).addClass("use");
+          let sign = json.data.sign;
+          if (sign.indexOf("#") < 0){
+            sign = sign+"#"+name;
+          }
+        
+          showRouteInfo(sign);
+        } else if(json.code == 4003){
+          layer.msg(json.msg, {
+            time: 1000
+          }, function() {
+            window.location = 'login.html';
+          });
+        }else if (json.code == 4077){
+          layui.data('get_route',{key: "ts", value: timestamp+10});
+          prompt();
+        } else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        if(loadIndex != undefined){
+          layer.close(loadIndex);
+        }
+        layui.data('get_route',{key: "ts", value: timestamp+10});
+        prompt();
+        layer.msg(e.errorType);
+      });
+    };
+
+    function prompt(){
+      layer.open({
+        type: 1
+        ,offset: 'auto' //具体配置参考：offset参数项
+        ,content: '<div style="padding: 10px 20px;">请求线路失败，请稍后重试</div>'
+        ,btn: '了解了'
+        ,btnAlign: 'c' //按钮居中
+        ,shade: 0 //不显示遮罩
+        ,yes: function(){
+          layer.closeAll();
+        }
+      });
+    }
+
+    function showRouteInfo(sign){
+      $(".layuimini-main-route .show .sign span").text(sign);
+      $(".layuimini-main-route .show").toggle();
+    };
+
+    function copyText(obj) {
+      if (!obj) {
+        return false;
+      }
+      var text;
+      if (typeof(obj) == 'object') {
+        if (obj.nodeType) { // DOM node
+          obj = $(obj); // to jQuery object
+        }
+        try {
+          text = obj.text();
+          if (!text) { // Maybe <textarea />
+            text = obj.val();
+          }
+        } catch (err) { // as JSON
+          text = JSON.stringify(obj);
+        }
+      } else {
+        text = obj;
+      }
+
+      var $temp = $('<textarea>');
+      $('body').append($temp);
+      $temp.val(text).select();
+      var res = document.execCommand('copy');
+      $temp.remove();
+      layer.msg("复制成功",{time:1000});
+      openUrl(obj);
+      return res;
+    }
+
+    function openUrl(url){
+      let deviceOs = layui.data('deviceInfo').device_os;
+      if(deviceOs != undefined && deviceOs == "ios") {
+        postMessage(JSON.stringify({type: "outWeb", data: url}));
+      }else {
+        window.location.href = url;
+      }
+    }
+
+    form.render();
+  });
+</script>

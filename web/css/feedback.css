@@ -1,0 +1,36 @@
+.layuimini-main-feedback > div.title{position: relative;height: 50px;text-align: center;color: #393D41;line-height: 50px;background-color: white;}
+.layuimini-main-feedback > div.title div{position: absolute;top: 0;right: 15px;color: #2468F2;cursor: pointer;}
+.layuimini-main-feedback .body{width: 334px;margin: 21px auto;}
+.layuimini-main-feedback .body .feedback-type .title{line-height: 19px;font-weight: bold;color: #393D41;}
+.layuimini-main-feedback .body .feedback-type ul{margin-top: 11px;display: table;}
+.layuimini-main-feedback .body .feedback-type ul li{display: inline-table;text-align: center;margin: 0 15px 18px 0;width: 101px;height: 36px;background-color: #BEBEBE;line-height: 36px;color: #FFFFFF;cursor: pointer;}
+.layuimini-main-feedback .body .feedback-type ul li:nth-child(3n){margin-right: 0;}
+.layuimini-main-feedback .body .feedback-type ul li.selected{background-color: #2468F2;}
+.layuimini-main-feedback .body .content .title{margin-bottom: 7px;line-height: 19px;color: #393D41;font-weight: bold;}
+.layuimini-main-feedback .body .content .content2{position: relative;}
+.layuimini-main-feedback .body .content .content2 textarea{height: 175px;}
+.layuimini-main-feedback .body .content .content2 .num{font-size: 15px;color: #B7B7B7;line-height: 19px;position: absolute;right: 12px;bottom: 7px;}
+.layuimini-main-feedback .body .picture{position: relative;width: 68px;height: 65px;background-color: white;margin-top: 11px;text-align: center;}
+.layuimini-main-feedback .body .picture img{width: 20px;}
+.layuimini-main-feedback .body .picture .txt{margin-top: 5px;font-size: 9px;color: #B7B7B7;}
+.layuimini-main-feedback .body .picture div.cancel-picture{position: absolute;top: 0;right: 0;margin-top: 0;width: 10px;height: 10px;line-height: 10px;cursor: pointer;}
+.layuimini-main-feedback .body .post{margin: 21px auto 33px auto;width: 320px;height: 45px;background-color: #2468F2;text-align: center;line-height: 45px;color: white;font-size: 15px;cursor: pointer;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #B7B7B7;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #B7B7B7;}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {color: #B7B7B7;}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {color: #B7B7B7;}
+.layuimini-main-feedback-list .layui-tab{text-align: center!important;}
+.layuimini-main-feedback-list .layui-tab-title li{min-width:0;padding: 0;width: 50%;font-size: 15px;}
+.layuimini-main-feedback-list .layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{border-bottom:2px solid #2468F2;}
+.layuimini-main-feedback-list .layui-tab-brief>.layui-tab-title .layui-this{color: #2468F2;}
+.layuimini-main-feedback-list > div.title{height: 50px;text-align: center;color: #393D41;line-height: 50px;background-color: white;}
+.layuimini-main-feedback-list .top{margin-top: 4px;background-color: white;}
+.layuimini-main-feedback-list .layui-tab-content{padding: 0;}
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li{margin: 16px 0 20px 0;text-align: left;padding: 0 17px;}
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li .time{font-size: 15px;line-height: 20px;color: #767D84;margin-bottom: 11px;}
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li img{width: 22px;height: 22px;margin-right: 10px;float: left;}
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li .content{margin-bottom: 11px;}
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li .content div{margin-left: 33px;}
+.layuimini-main-feedback-list .layui-tab-content .line{height: 3px;width: 100%;background-color: #F6F6F6}

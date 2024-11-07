@@ -1,0 +1,7 @@
+::-webkit-scrollbar {
+    display: block; /* Chrome Safari */
+}
+ul,ol{list-style:none;margin:0;padding:0;}
+.layuimini-main-guide ul{margin: auto 5px;}
+.layuimini-main-guide ul li{font-size: 15px;margin-top: 20px;}
+.layuimini-main-guide ul li img{margin-top: 6px;}

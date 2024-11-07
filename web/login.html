@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="./lib/layui-v2.6.7/css/layui.css" media="all">
+    <link rel="stylesheet" href="./css/public.css" media="all">
+    <link rel="stylesheet" href="./css/login.css" media="all">
+    <link rel="stylesheet" href="./css/mescroll.min.css" media="all">
+    <link rel="apple-touch-icon" sizes="108x108" href="./images/icon-cp.png">
+    <link rel="icon" href="./favicon.ico">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .box{height: 40px;padding: 5px 10px;line-height: 40px;display: none;}
+        .marquee-container {
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .marquee-container .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .marquee-text-animation {
+            animation: marquee 10s linear infinite; /* 滚动动画，时间可根据需要调整 */
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <div style="float: left;color: red"><i class="layui-icon layui-icon-notice" style="font-size: 14px;margin-right: 5px;"></i>温馨提示:</div>
+    <div class="marquee-container">
+        <span class="marquee-text">会员时间已到期，加速服务暂无法使用，请登录会员中心续费。</span>
+    </div>
+</div>
+    <div class="mescroll layui-container"  id="mescroll">
+        <div class="admin-login-background">
+            <div class="layui-form login-form">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item logo-title">
+                        <div class="icon-cp"></div>
+                        <h1 style="font-size: 24px;line-height: 31px;color: #393D41;">登录</h1>
+                    </div>
+
+                    <div class="form-body">
+                        <div class="layui-form-item input">
+                            <!-- <label class="layui-icon layui-icon-username"></label> -->
+                            <img src="./images/icon_phone.png" class="icon" />
+                            <input type="text" name="username" placeholder="请输入您的手机号" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-item input">
+                            <img src="./images/icon_password.png" class="icon" />
+                            <input type="text" id="login-password" name="password" autocomplete="off" placeholder="请输入您的密码" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item login">
+                        <button lay-submit="" lay-filter="login">登 录</button>
+                    </div>
+                </form>
+            </div>
+            <div class="footer">
+                <div id="forgot-password">忘记密码?</div>
+                <div id="register">注册新账号</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/layui-v2.6.7/layui.js" charset="utf-8"></script>
+    <script src="js/refresh.js" charset="utf-8"></script>
+    <script src="js/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/md5.min.js" charset="utf-8"></script>
+    <script src="js/utils.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.jquery;
+
+
+            let request = GetRequestParams(layui.router().href);
+            if (request["channel"] != undefined && request["channel"] != ""){
+                layui.data('channel',{key:"info",value: request["channel"]});
+            }
+            if(request["expire"] != undefined){
+                $(".box").show()
+            }
+
+            $('#forgot-password').on('click', function () {
+                location.href = "forgot_password.html";
+            });
+
+            $('#register').on('click', function () {
+                location.href = "register.html";
+            });
+
+            $("#login-password").bind("input propertychange",function(event){
+                let password = $("#login-password").val();
+                if (password.length <=0){
+                    $("#login-password").attr("type","text");
+                }else {
+                    $("#login-password").attr("type","password");
+                }
+            });
+
+            const container = document.querySelector(".marquee-container");
+            const text = document.querySelector(".marquee-text");
+
+            // 判断文本内容是否超出容器宽度
+            if (text.getBoundingClientRect().width > container.clientWidth) {
+                text.classList.add("marquee-text-animation"); // 添加滚动样式
+            } else {
+                text.classList.remove("marquee-text-animation"); // 移除滚动样式
+            }
+
+            // 进行登录操作
+            form.on('submit(login)', function(data) {
+                data = data.field;
+                if (!/^1\d{10}$/.test(data.username)) {
+                    layer.msg('手机号格式有误', {
+                        time: 1000
+                    });
+                    return false;
+                }
+                if (data.password.length < 6 || data.password.length > 20) {
+                    layer.msg('密码长度为6-20位', {
+                        time: 1000
+                    });
+                    return false;
+                }
+
+                var loadIndex = layer.load(2, {
+                    shade: [0.2,'#000000'] //0.1透明度的白色背景
+                });
+
+                axios({
+                    "method": "POST",
+                    "url": `${API_URL}/user/login`,
+                    "data": data,
+                }).then((json) => {
+                    layer.close(loadIndex);
+                    if (json.code == 200) {
+                        json.data.cache_ts = parseInt(new Date().getTime()/1000);
+                        layui.sessionData('user',{key:"userInfo",value: json.data});
+                        layui.data('token', {key:"info",value: json.data.token});
+
+                        layer.msg('登录成功', {
+                            time: 1000
+                        }, function() {
+                            setTimeout(window.location = 'index.html',500);
+                        });
+                    } else {
+                        layer.msg(json.msg);
+                    }
+                }, (e) => {
+                    layer.close(loadIndex);
+                    layer.msg(e.errorType);
+                });
+
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

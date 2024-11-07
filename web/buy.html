@@ -1,0 +1,434 @@
+
+<div class="layuimini-container layuimini-page-anim">
+  <div class="layuimini-main-buy">
+    <div class="top">
+      <div class="title">
+        <button class="normal select">普通会员VIP</button>
+        <button class="super">超级会员SVIP</button>
+      </div>
+    </div>
+    <div class="desc">
+      <div class="normal common" style="display: block;">
+        <div class="title">普通会员尊享特权</div>
+
+        <ul>
+          <li><img src="images/icon-safe.png"><span>数据安全</span></li>
+          <li><img src="images/icon-share.png"><span>共享线路</span></li>
+          <li><img src="images/icon-earth.png"><span>多个出口地区</span></li>
+          <li><img src="images/icon-fast.png"><span>快速上网</span></li>
+          <li><img src="images/icon-lc.png"><span>流畅音频图片</span></li>
+          <li><img src="images/icon-bandwidth.png"><span>高速流量50G</span></li>
+        </ul>
+      </div>
+      <div class="super common" style="display: none;">
+        <div class="title">超级会员尊享特权</div>
+        <ul>
+          <li><img src="images/icon-safe.png"><span>数据安全</span></li>
+          <li><img src="images/icon-dx.png"><span>SVIP独享线路</span></li>
+          <li><img src="images/icon-earth.png"><span>多个出口地区</span></li>
+          <li><img src="images/icon-fast.png"><span>快速上网</span></li>
+          <li><img src="images/icon-js.png"><span>极速音频图片</span></li>
+          <li><img src="images/icon-bandwidth.png"><span>高速流量100G</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="title">套餐选择</div>
+      <div class="vip" style="display: block;">
+        <ul></ul>
+      </div>
+      <div class="svip" style="display: none;">
+        <ul></ul>
+      </div>
+    </div>
+
+    <div class="payment">
+      <div class="title">支付方式</div>
+      <div class="line"></div>
+      <div class="list">
+        <ul>
+        </ul>
+      </div>
+      <div class="pay" id="order-pay"><span>立即支付</span></div>
+    </div>
+
+    <div class="show">
+      <div>
+        <button class="close"><img src="images/close.png"/></button>
+        <img src="images/icon-buy.png">
+        <div class="title">支付成功？</div>
+        <div class="desc"><span>支付成功后，请在用户中心查看是否到账,如遇到到账慢问题，请5分钟后重新刷新.</span></div>
+        <div class="bottom">
+          <button class="cancel">未支付</button>
+          <button class="success">已支付</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/utils.js" charSet="utf-8"></script>
+<script src="js/qrcode.min.js" charSet="utf-8"></script>
+<script>
+  layui.use(['form', 'table', 'miniPage'], function () {
+    var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            miniPage = layui.miniPage;
+
+    var postage_id = 0;
+    var select = $('div.layuimini-main-buy .top').find("button");
+
+    // let requestParams = GetRequestParams(layui.router().href);
+    // if(requestParams.svip != undefined && requestParams.svip == 1){
+    //   updateSelect(true);
+    // }else {
+    //   updateSelect(false);
+    // }
+    let isSvip = layui.sessionData('buy_tab').is_svip;
+    if(isSvip != undefined && isSvip == 1){
+      updateSelect(true);
+    }else {
+      updateSelect(false);
+    }
+
+    $('div.layuimini-main-buy .top button').on("click",function () {
+      select.removeClass('select');
+      $(this).addClass('select');
+
+      if ($(this).hasClass('normal')) {
+        $('div.layuimini-main-buy .desc .normal').show();
+        $('div.layuimini-main-buy .desc .super').hide();
+        $('div.layuimini-main-buy .vip').show();
+        $('div.layuimini-main-buy .svip').hide();
+        layui.sessionData('buy_tab', {key:"is_svip",value: 0});
+      } else{
+        $('div.layuimini-main-buy .desc .super').show();
+        $('div.layuimini-main-buy .desc .normal').hide();
+        $('div.layuimini-main-buy .vip').hide();
+        $('div.layuimini-main-buy .svip').show();
+        layui.sessionData('buy_tab', {key:"is_svip",value: 1});
+      }
+    });
+
+    function updateSelect(isSvip){
+      if(isSvip){
+        $('div.layuimini-main-buy .top').find("button").removeClass('select');
+        $('div.layuimini-main-buy .top .super').addClass('select');
+        $('div.layuimini-main-buy .desc .normal').hide();
+        $('div.layuimini-main-buy .desc .super').show();
+        $('div.layuimini-main-buy .vip').hide();
+        $('div.layuimini-main-buy .svip').show();
+      }else {
+
+      }
+    }
+
+    $(".layuimini-main-buy .show .close").on('click', function () {
+      $(".layuimini-main-buy .show").toggle();
+    });
+    $(".layuimini-main-buy .show .cancel").on('click', function () {
+      $(".layuimini-main-buy .show").toggle();
+    });
+    $(".layuimini-main-buy .show .success").on('click', function () {
+      miniPage.hashChange('user.html');
+    });
+
+    $(".layuimini-main-buy .content ul").on('click','li', function () {
+      postage_id = $(this).attr('id');
+
+      $('.layuimini-main-buy .content ul').find('li').removeClass('selected');
+      $(this).addClass('selected');
+      $('.layuimini-main-buy .content ul').find('div.right').removeClass('selected');
+      $(this).find('div.right').addClass('selected');
+
+      // var money = $(this).attr('value');
+      // console.log(money)
+      // if(money<5100){
+      //   let payment = $('.layuimini-main-buy .payment ul').find('li.selected').attr("id");
+      //   if(payment == "UNIONPAY"){
+      //
+      //   };
+      // }
+
+    });
+    $(".layuimini-main-buy .payment ul").on('click', 'li', function () {
+      $('.layuimini-main-buy .payment ul').find('li').removeClass('selected');
+      $('.layuimini-main-buy .payment ul li div img').attr('src','images/icon-no-select.png');
+      $(this).find('div img').attr('src','images/icon-select.png');
+      $(this).addClass('selected');
+    });
+
+    $("#order-pay").on('click', function () {
+      if(postage_id<=0){
+        layer.msg("请选择套餐",{time:1000});
+        return false;
+      }
+      let money = $(".layuimini-main-buy .content ul").find('li.selected').attr('value');
+      let payment = $('.layuimini-main-buy .payment ul').find('li.selected').attr("id");
+      if (payment==""){
+        layer.msg("请选择支付方式",{time:1000});
+        return false;
+      }
+      let isScan = $('.layuimini-main-buy .payment ul').find('li.selected').attr("isScan");
+
+      let now = parseInt(new Date().getTime()/1000);
+      let ts = layui.data('postage').buy_ts;
+      if (ts>now){
+        layer.msg("10s内不允许重复下单",);
+        return false;
+      }
+
+      var loadIndex = layer.load(2, {
+        shade: [0.2,'#000000'] //0.1透明度的白色背景
+      });
+
+      var sUserAgent = navigator.userAgent.toLowerCase();
+      var isSafari = sUserAgent.indexOf('Safari');
+      var winOpen = "";
+
+      if(isSafari > -1){
+        winOpen = window.open("","_blank");
+      }
+      // var winOpen = window.open("","_blank");
+      axios({
+        "method": "POST",
+        "url": `${API_URL}/order/buy`,
+        "data":{"pay_type": payment,"id": postage_id}
+      }).then((json) => {
+      
+        layer.close(loadIndex);
+        layui.data('postage',{key:"buy_ts",value: now+10});
+        if (json.code == 200) {
+          $('.layuimini-main-buy .show').toggle();
+
+          let deviceOs = layui.data('deviceInfo').device_os;
+          if(deviceOs != undefined && deviceOs == "ios"){
+            postMessage(JSON.stringify({type: "outWeb", data: json.data.pay_url}));
+          }else {
+            let payUrl = json.data.pay_url;
+
+            if (isScan=='true'){
+              layer.open({
+                type: 1,
+                title: '扫码',
+                area: '300px',
+                content: `<div><div style="text-align: center;color: red;margin-top: 15px;">请截图保存,并使用对应app扫码</div><div id="qrcode" style="width: 256px;height: 256px;margin:15px auto"></div></div>`,
+                success: function(layero, index){
+                  new QRCode(document.getElementById("qrcode"), payUrl);
+                }
+              });
+            } else if(isSafari > -1){
+              setTimeout(function() {  //这里使用setTimeout非常重要，没有将无法实现
+                //原因是window.open会中断正在执行的进程，这样能保证其它代码执行完成再执行这个。
+                winOpen.location = payUrl; //改变页面的location
+              }, 500);
+            }else{
+              window.location.href = payUrl;
+            }
+          }
+        } else if(json.code == 4003){
+          layer.msg(json.msg, {
+            time: 1000
+          }, function() {
+            layui.sessionData('postage',{key:"info",remove: true});
+            window.location = 'login.html';
+          });
+        }else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        layer.close(loadIndex);
+        layer.msg(e.errorType);
+      });
+    })
+
+    var postageInfo = layui.sessionData('postage').info;
+
+    if (postageInfo == undefined){
+      var loadIndex = layer.load(2, {
+        shade: [0.2,'#000000'] //0.1透明度的白色背景
+      });
+      getPostageInfo(loadIndex,true);
+      return false;
+    }else {
+      let isReset = false;
+      let timestamp=parseInt(new Date().getTime()/1000);
+      if(timestamp-postageInfo.cache_ts>30){
+        isReset = true;
+        var loadIndex = layer.load(2, {
+          shade: [0.2,'#000000'] //0.1透明度的白色背景
+        });
+        getPostageInfo(loadIndex,isReset);
+      }
+
+      if (!isReset){
+        loadPayment();
+        resetPostage(postageInfo.vip_list,false);
+        resetPostage(postageInfo.svip_list,true);
+      }
+    };
+
+    function getPostageInfo(loadIndex,isReset){
+      axios({
+        "method": "GET",
+        "url": `${API_URL}/postage/list`,
+      }).then((json) => {
+        if(loadIndex != undefined){
+          layer.close(loadIndex);
+        }
+        if (json.code == 200) {
+          let timestamp = parseInt(new Date().getTime()/1000);
+          json.data.cache_ts = timestamp;
+          layui.sessionData('postage',{key:"info",value: json.data});
+          if (isReset){
+            resetPostage(json.data.vip_list,false);
+            resetPostage(json.data.svip_list,true);
+            loadPayment();
+          }
+        } else if(json.code == 4003){
+          layer.msg(json.msg, {
+            time: 1000
+          }, function() {
+            layui.sessionData('postage',{key:"info",remove: true})
+            window.location = 'login.html';
+          });
+        }else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        if(loadIndex != undefined){
+          layer.close(loadIndex);
+        }
+        layer.msg(e.errorType);
+      });
+    };
+
+    function loadPayment(){
+      var paymentInfo = layui.sessionData('payment').info;
+      if (paymentInfo == undefined){
+        var loadIndex = layer.load(2, {
+          shade: [0.2,'#000000'] //0.1透明度的白色背景
+        });
+        getPaymentInfo(loadIndex,true);
+        return false;
+      }else {
+        let isReset = false;
+        let timestamp=parseInt(new Date().getTime()/1000);
+        if(timestamp-paymentInfo.cache_ts>30){
+          isReset = true;
+          var loadIndex = layer.load(2, {
+            shade: [0.2,'#000000'] //0.1透明度的白色背景
+          });
+          getPaymentInfo(loadIndex,isReset);
+        }
+
+        if (!isReset){
+          resetPayment(paymentInfo.new_list);
+        }
+      };
+    }
+
+    function getPaymentInfo(loadIndex,isReset){
+      axios({
+        "method": "GET",
+        "url": `${API_URL}/pay_method/list`,
+      }).then((json) => {
+        if(loadIndex != undefined){
+          layer.close(loadIndex);
+        }
+        if (json.code == 200) {
+          let timestamp = parseInt(new Date().getTime()/1000);
+          json.data.cache_ts = timestamp;
+          layui.sessionData('payment',{key:"info",value: json.data});
+          if (isReset){
+            resetPayment(json.data.new_list);
+          }
+        } else if(json.code == 4003){
+          layer.msg(json.msg, {
+            time: 1000
+          }, function() {
+            layui.sessionData('payment',{key:"info",remove: true})
+            window.location = 'login.html';
+          });
+        }else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        if(loadIndex != undefined){
+          layer.close(loadIndex);
+        }
+        layer.msg(e.errorType);
+      });
+    };
+
+    function resetPostage(postageList,isSvip){
+      let html = "";
+      layui.each(postageList,function (index,item) {
+        let desc = "";
+        let selected = "";
+        switch (item.day) {
+          case 7:
+            desc = "周套餐";
+            break;
+          case 30:
+            desc = "月套餐";
+            break;
+          case 90:
+            desc = "季套餐";
+            if(!isSvip){
+              postage_id = item.id;
+              selected = "selected";
+            }
+            break;
+          case 180:
+            desc = "半年套餐";
+            break;
+          case 360:
+            desc = "年套餐";
+            break;
+        }
+
+        let addDay = "";
+        let discount = "";
+        let middleStyle = "";
+        let rightStyle = "";
+        if(item.add_day>0){
+            addDay = `+${item.add_day}天`;
+        }
+        if(item.price_discount_str!=""){
+          discount = `限时${item.price_discount_str}折`;
+          middleStyle = "width: 48%;margin-left: 15px;";
+          rightStyle = "width: 19%;";
+        }
+        if(item.is_show==1) {
+          html += `<li style="padding: 25px 16px;" id="${item.id}" value="${item.money}" class="${selected}"><div class="left">${desc}<span style="color: red;margin-left: 2px;font-size: 12px;">${addDay}</span></div><div class="middle" style="${middleStyle}"><del>原价${CentToYuan(item.real_money)}</del><span style="color: red;font-size: 12px;margin-left: 5px;">${discount}</span></div><div class="right ${selected}" style="${rightStyle}">¥<span>${CentToYuan(item.money)}</span></div></li>`
+        }
+      });
+
+      if (isSvip) {
+        $(".layuimini-main-buy .svip ul").html(html);
+      }else {
+        $(".layuimini-main-buy .vip ul").html(html);
+      }
+    };
+
+    function resetPayment(paymentList){
+      let html = "";
+      layui.each(paymentList,function (index,item) {
+        let selected = "";
+        let iconImage = "images/icon-no-select.png";
+        if(index == 0){
+          selected = "selected";
+          iconImage = "images/icon-select.png";
+        }
+        html += `<li id="${item.payment}" isScan="${item.is_scan}" class="${selected}"><img src="${item.icon}"/><span>${item.name}</span><div><img src="${iconImage}"></div></li><div class="line"></div>`;
+      });
+
+      $(".layuimini-main-buy .payment ul").html(html);
+    };
+
+    form.render();
+  });
+</script>

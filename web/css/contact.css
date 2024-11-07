@@ -1,0 +1,8 @@
+.layuimini-main-contact .title{height: 50px;text-align: center;color: #393D41;line-height: 50px;background-color: white;}
+.layuimini-main-contact .body{text-align: center;width: 320px;margin: 0 auto;}
+.layuimini-main-contact .body .icon{width: 73px;height: 73px;background: url("../images/icon-cp.png") 0 0 no-repeat;background-size: cover;border-radius: 19px;margin: 19px auto 8px auto;}
+.layuimini-main-contact .body img{width: 63px;}
+.layuimini-main-contact .body .desc{margin-top: 15px;line-height: 24px;color: #575757;text-align: left;}
+.layuimini-main-contact .body .footer2{margin: 15px 31px;text-align: left;}
+.layuimini-main-contact .body .footer2 img{width: 60px;height: 20px;}
+.layuimini-main-contact .body .footer2 .info{margin-top: 14px;color: #575757;}

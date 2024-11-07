@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title class="icon-title">西柚加速器</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="lib/layui-v2.6.7/css/layui.css" media="all">
+    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="css/layuimini.css" media="all">
+    <link rel="stylesheet" href="css/themes/default.css" media="all">
+    <link rel="stylesheet" href="css/public.css" media="all">
+    <link rel="stylesheet" href="css/index.css" media="all">
+    <link rel="stylesheet" type="text/css" href="./css/user.css">
+    <link rel="stylesheet" type="text/css" href="./css/broadcast.css">
+    <link rel="stylesheet" type="text/css" href="./css/buy.css">
+    <link rel="stylesheet" type="text/css" href="./css/contact.css">
+    <link rel="stylesheet" type="text/css" href="./css/feedback.css">
+    <link rel="stylesheet" type="text/css" href="./css/feedback_list.css">
+    <link rel="stylesheet" type="text/css" href="./css/route.css">
+    <link rel="stylesheet" type="text/css" href="./css/update-password.css">
+    <link rel="stylesheet" href="./css/mescroll.min.css" media="all">
+    <link rel="apple-touch-icon" sizes="108x108" href="./images/icon-cp.png">
+    <link rel="icon" href="./favicon.ico">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="layui-layout-body layuimini-all">
+<div class="layui-layout layui-layout-admin">
+
+    <div class="index-header" style="background-color: #393D41;">
+        <div class="layui-header header">
+            <div class="logo" style="float: left;height: 50px;line-height: 50px;margin: 0 0 0 19px;font-size: 15px;font-weight: bold;color: white;">
+<!--                <img src="./images/logo.png"/>-->
+                <span>西柚</span>
+            </div>
+
+            <div class="layuimini-header-content">
+                <ul class="layui-nav layui-layout-right" style="margin-right: 17px;">
+                    <li class="layui-nav-item layui-this">
+                        <a href="javascript:;" class="center"><i>个人中心</i></a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" class="buy"><i>购买</i></a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" class="route"><i>线路列表</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="layui-body">
+            <div class="mescroll"  id="mescroll-3">
+                <div class="layuimini-content-page">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div style="z-index: 900;">
+        <div class="footer">
+            <div class="nav">
+                <span class="feedback">问题反馈<span id="feedback-id" style="margin-left: 3px;"></span></span>
+                <i></i>
+                <span class="contact">联系我们</span>
+                <i></i>
+                <span class="broadcast">信息公告<span id="broadcast-id" style="margin-left: 3px;"></span></span>
+                <i></i>
+                <span class="help-question">使用指南</span>
+            </div>
+
+            <div></div>
+        </div>
+    </div>
+
+    <div class="help">
+        <div class="container">
+            <div class="title">
+                <span>使用指南</span>
+                <div class="skip-help">跳过指南</div>
+            </div>
+            <div class="body">
+                <div class="desc"></div>
+                <div>
+                    <img src="" />
+                    <div class="next"><span>下一步</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="broadcast-show">
+        <div class="broadcast-container">
+            <div>
+                <button class="close"><img src="images/close.png"/></button>
+                <div class="title">最新公告</div>
+                <div class="time"></div>
+                <div class="id"></div>
+                <div class="desc"></div>
+                <div class="show-more">查看更多</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="lib/layui-v2.6.7/layui.js" charset="utf-8"></script>
+<script src="js/lay-config.js" charset="utf-8"></script>
+<script src="js/utils.js" charset="utf-8"></script>
+<script src="js/md5.min.js" charset="utf-8"></script>
+<script src="js/help.js" charset="utf-8"></script>
+<script src="js/common.js" charset="utf-8"></script>
+<script src="js/refresh.js" charset="utf-8"></script>
+<script src="js/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use(['jquery', 'layer','miniAdmin','miniPage'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            miniAdmin = layui.miniAdmin,
+            miniPage = layui.miniPage;
+
+        var index = 0;
+        var options = {
+            renderPageVersion: false,    // 初始化页面是否加版本号
+            bgColorDefault: false,      // 主题默认配置
+            multiModule: false,          // 是否开启多模块
+            menuChildOpen: false,       // 是否默认展开菜单
+            loadingTime: 0,             // 初始化加载时间
+            pageAnim: true,             // 切换菜单动画
+        };
+
+        var channel = "";
+        let request = GetRequestParams(layui.router().href);
+        console.log(request["channel"]);
+        if (request["channel"] != undefined && request["channel"] != ""){
+            channel = request["channel"];
+            layui.data('channel',{key:"info",value: request["channel"]});
+        }
+        options.channel = channel;
+
+        let deviceOs = layui.data('deviceInfo').device_os;
+        if(deviceOs != undefined && deviceOs == "ios") {
+            postMessage(JSON.stringify({type: "barColor", data: "\\#393D41"}));
+            postMessage(JSON.stringify({type: "statusBarStyle", data:"lightContent"}));
+        }
+
+        miniAdmin.render(options);
+
+    
+        var help = layui.data('help').info;
+        if(help == undefined || help != 1){
+            startHelp();
+        }
+
+        $('.login-out').on("click", function () {
+            layui.data("token",null);
+            layui.sessionData('route',null);
+            layui.sessionData('user',null);
+            layer.msg('退出登录成功', function () {
+                window.location = 'login.html';
+            });
+        });
+        $('.skip-help').on('click', function () {
+            layui.data('help',{key:"info",value: 1});
+            $(".help").toggle();
+        });
+        $('.footer .contact').on('click', function () {
+            let now = parseInt(new Date().getTime()/1000);
+            miniPage.hashChange("contact.html?ts="+now);
+        });
+        $('.footer .broadcast').on('click', function () {
+            let now = parseInt(new Date().getTime()/1000);
+            miniPage.hashChange("broadcast.html?ts="+now);
+        });
+        $('.footer .feedback').on('click', function () {
+            let now = parseInt(new Date().getTime()/1000);
+            miniPage.hashChange("feedback.html?ts="+now);
+        });
+        $('.footer .help-question').on('click', function () {
+            startHelp();
+        });
+        $('.help .next').on('click', function () {
+            index += 1;
+            if (index==2){
+                layui.data('help',{key:"info",value: 1});
+                $('.help .next span').text('完成');
+            }else if(index>2){
+                $(".help").toggle();
+                return false;
+            }
+
+            $(".help .body .desc").html(helpList[index].content);
+            $(".help .body img").attr('src',helpList[index].image_url);
+        });
+        $('.broadcast-show .show-more').on('click', function () {
+            $('.broadcast-show').toggle();
+            let now = parseInt(new Date().getTime()/1000);
+            miniPage.hashChange('broadcast.html?ts='+now);
+        });
+
+        $('.broadcast-show .broadcast-container .close').on('click', function () {
+            $('.broadcast-show').toggle();
+            let id = $('.broadcast-show .broadcast-container .id').text();
+            $('#broadcast-id').removeClass("layui-badge-dot");
+            layui.data('broadcast',{key:"last",value: id});
+        });
+        function startHelp(){
+            index = 0;
+            $('.help .next span').text('下一步');
+            $(".help .body .desc").html(helpList[0].content);
+            $(".help .body img").attr('src',helpList[0].image_url);
+            $(".help").toggle();
+        }
+    });
+
+    function outlineDownload(){
+        var outlineUrl = "https://apps.apple.com/us/app/outline-app/id1356177741";
+        let deviceOs = layui.data('deviceInfo').device_os;
+        if(deviceOs != undefined && deviceOs == "ios") {
+            postMessage(JSON.stringify({type: "outWeb", data: outlineUrl}));
+        }else {
+            window.location.href = outlineUrl;
+        }
+        // var winOpen = window.open("","_blank");
+        // setTimeout(function() {  //这里使用setTimeout非常重要，没有将无法实现
+        //     //原因是window.open会中断正在执行的进程，这样能保证其它代码执行完成再执行这个。
+        //     winOpen.location = outlineUrl; //改变页面的location
+        // }, 500);
+    }
+</script>
+</body>
+</html>

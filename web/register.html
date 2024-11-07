@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>注册</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="./lib/layui-v2.6.7/css/layui.css" media="all">
+  <link rel="stylesheet" href="./css/public.css" media="all">
+  <link rel="stylesheet" href="./css/login.css" media="all">
+  <link rel="stylesheet" href="./css/mescroll.min.css" media="all">
+  <link rel="stylesheet" href="./css/slidercaptcha.css" media="all">
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" sizes="108x108" href="./images/icon-cp.png">
+  <link rel="icon" href="./favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+    <style>
+      .service{margin-top: 12px;height: 18px;}
+      .service div{float: left;}
+      .service div:last-child{line-height: 18px;}
+      .service a{color: #2468F2;}
+    </style>
+</head>
+
+<body>
+<div class="mescroll layui-container"  id="mescroll">
+  <div class="admin-login-background">
+    <div class="layui-form login-form">
+      <form class="layui-form" action="">
+        <div class="layui-form-item logo-title">
+          <div class="icon-cp"></div>
+          <h1 style="font-size: 24px;line-height: 31px;color: #393D41;">注册</h1>
+        </div>
+
+        <div class="form-body">
+          <div class="layui-form-item input">
+            <img src="./images/icon_phone.png" class="icon" />
+            <input type="text" name="username" placeholder="请输入您的手机号" autocomplete="off" class="layui-input">
+          </div>
+          <div class="layui-form-item input">
+            <img src="./images/icon_password.png" class="icon" />
+            <input type="password" name="password" placeholder="密码" autocomplete="off" class="layui-input">
+          </div>
+          <div class="layui-form-item input">
+              <img src="./images/icon_phone.png" class="icon" />
+              <input type="text" name="captcha" placeholder="输入验证码" autocomplete="off" class="layui-input" style="padding-right: 150px;">
+            <div class="captcha" id="captcha">发送验证码</div>
+            <div class="captcha countdown"><span>90</span>s后重发</div>
+          </div>
+
+<!--          <div class="layui-form-item input" style="height: 198px;">-->
+<!--            <div id="slide-captcha"></div>-->
+<!--          </div>-->
+          <!-- <div class="custom-control custom-checkbox custom-control-primary"><input type="checkbox" class="custom-control-input" style="z-index: 1000;"><label class="custom-control-label"><div>我已阅读并同意 <a target="_blank" href="https://v4speed.com">服务条款</a></div></label>
+          </div> -->
+
+          <div class="service">
+            <div>
+              <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="select" checked >
+            </div>
+            <div>我已阅读并同意 <a target="_blank" href="service.html">服务条款</a></div>
+          </div>
+
+        </div>
+
+        <div class="layui-form-item login">
+          <button lay-submit="" lay-filter="register">注册</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="footer">
+      <div style="float: none;text-align: center;">已有账号？ <span id="login" style="color: #2468F2;cursor: pointer;">登录</span></div>
+    </div>
+  </div>
+</div>
+<script src="lib/layui-v2.6.7/layui.js" charset="utf-8"></script>
+<script src="js/utils.js" charset="utf-8"></script>
+<script src="js/refresh.js" charset="utf-8"></script>
+<script src="js/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/md5.min.js" charset="utf-8"></script>
+<!--<script src="js/longbow.slidercaptcha.js"></script>-->
+<script>
+  layui.use(['form'], function() {
+    var form = layui.form,
+    layer = layui.layer
+    $ = layui.jquery;
+
+    let request = GetRequestParams(window.location.href);
+    if (request["channel"] != undefined && request["channel"] != ""){
+        layui.data('channel',{key:"info",value: request["channel"]});
+    }
+
+    $('#login').on('click', function () {
+      location.href = "login.html";
+    });
+
+    var isSelect = true;
+
+    var second = 90;
+    let timestamp=parseInt(new Date().getTime()/1000);
+    let captchaTs = layui.sessionData('captcha').ts;
+    if (captchaTs != undefined && captchaTs > timestamp){
+      second = captchaTs - timestamp;
+      resetCode(second);
+    }
+
+    function resetCode(second){
+      $('#captcha').hide();
+      $('div.countdown span').text(second);
+      $('div.countdown').show();
+      var timer = null;
+      timer = setInterval(function(){
+        second -= 1;
+        if(second >0 ){
+          $('div.countdown span').text(second);
+        }else{
+          clearInterval(timer);
+          $('#captcha').show();
+          $('div.countdown').hide();
+        }
+      },1000);
+    }
+
+    $("#captcha").on('click', function () {
+      var data = new Object();
+      data.type = 0;
+      data.username = $("input[name='username']").val();
+
+      if (!/^1\d{10}$/.test(data.username)) {
+        layer.msg('手机号格式有误', {
+          time: 1000
+        });
+        return false;
+      };
+
+      axios({
+        "method": "POST",
+        "url": `${API_URL}/common/captcha`,
+        "data": data,
+      }).then((json) => {
+        if (json.code == 200) {
+          let timestamp=parseInt(new Date().getTime()/1000);
+          layui.sessionData('captcha',{key:"ts",value:timestamp+90});
+          resetCode(90);
+          $("input[name='captcha']").val(json.data.captcha);
+          layer.msg('发送成功');
+        } else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        layer.msg(e.errorType);
+      });
+    });
+
+    form.on('checkbox(select)', function(data){
+      isSelect = data.elem.checked
+    });
+
+    form.on('submit(register)', function(data) {
+      data = data.field;
+      if (!/^1\d{10}$/.test(data.username)) {
+        layer.msg('手机号格式有误', {
+          time: 1000
+        });
+        return false;
+      }
+      if (data.password.length < 6 || data.password.length > 20) {
+        layer.msg('密码长度为6-20位', {
+          time: 1000
+        });
+        return false;
+      }
+      if(data.captcha.length<3){
+        layer.msg('验证码长度有误', {time: 1000});
+        return false;
+      }
+      if(!isSelect){
+        layer.msg('请先勾选服务条款', {time: 1500});
+        return false;
+      }
+
+      axios({
+        "method": "POST",
+        "url": `${API_URL}/user/register`,
+        "data": data,
+      }).then((json) => {
+        if (json.code == 200) {
+          json.data.cache_ts = parseInt(new Date().getTime()/1000);
+          layui.sessionData('user',{key:"userInfo",value: json.data});
+          layui.data('token', {key:"info",value: json.data.token});
+          layer.msg('注册成功', {
+            time: 1000
+          }, function() {
+            setTimeout(window.location = 'index.html',500);
+          });
+        } else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        layer.msg(e.errorType);
+      });
+
+      return false;
+    });
+  });
+</script>
+</body>
+
+</html>

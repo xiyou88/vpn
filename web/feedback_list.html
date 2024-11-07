@@ -1,0 +1,80 @@
+<div class="layuimini-container layuimini-page-anim">
+  <div class="layuimini-main-feedback-list">
+    <div class="title">回复列表</div>
+    <div class="top">
+      <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+          <li>未回复</li>
+          <li class="layui-this">已回复</li>
+        </ul>
+        <div class="layui-tab-content">
+          <div class="layui-tab-item no-reply">
+            <ul></ul>
+          </div>
+          <div class="layui-tab-item layui-show reply">
+            <ul></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/utils.js" charSet="utf-8"></script>
+<script>
+  layui.use(['form', 'table', 'miniPage','element'], function () {
+    var $ = layui.jquery,
+            layer = layui.layer,
+            element = layui.element,
+            form = layui.form;
+
+    var loadIndex = layer.load(2, {shade: [0.2,'#000000']});
+    axios({
+      "method": "GET",
+      "url": `${API_URL}/common/feedback/list`
+    }).then((json) => {
+      layer.close(loadIndex);
+      if (json.code == 200) {
+        let html = "";
+        $('#feedback-id').removeClass("layui-badge-dot");
+        layui.each(json.data.list,function (index,item) {
+          if(index==0){
+            layui.data('feedback',{key:"last",value: item.id});
+          }
+
+          if(item.state==1){
+            $('.layuimini-main-feedback-list .reply ul').append(`<li><div class="time">${dateUnixFormat(item.created)}</div><div class="content">
+              <img src="images/icon-q.png" />
+              <div><span>${item.desc}</span></div>
+            </div>
+              <div class="content">
+                <img src="images/icon-a.png" />
+                <span>${item.reply}</span>
+              </div>
+            </li><div class="line"></div>`);
+          }else {
+            $('.layuimini-main-feedback-list .no-reply ul').append(`<li><div class="time">${dateUnixFormat(item.created)}</div><div class="content">
+              <img src="images/icon-q.png" />
+              <div><span>${item.desc}</span></div>
+            </div>
+            </li><div class="line"></div>`);
+          }
+        });
+
+        // $('.layuimini-main-broadcast ul').html(html);
+      } else if(json.code == 4003){
+        layer.msg(json.msg, {
+          time: 1000
+        }, function() {
+          window.location = 'login.html';
+        });
+      }else {
+        layer.msg(json.msg);
+      }
+    }, (e) => {
+      layer.close(loadIndex);
+      layer.msg(e.errorType);
+    });
+
+    form.render();
+  });
+</script>

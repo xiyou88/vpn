@@ -1,0 +1,49 @@
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main-broadcast">
+        <div class="title">信息公告</div>
+        <div class="content">
+            <ul>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="js/utils.js" charSet="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'miniPage'], function () {
+        var $ = layui.jquery,
+            form = layui.form;
+
+        var loadIndex = layer.load(2, {shade: [0.2,'#000000']});
+        axios({
+            "method": "GET",
+            "url": `${API_URL}/common/broadcast/list`
+        }).then((json) => {
+            layer.close(loadIndex);
+            if (json.code == 200) {
+                let html = "";
+                $('#broadcast-id').removeClass("layui-badge-dot");
+                layui.each(json.data.list,function (index,item) {
+                    if(index==0){
+                        layui.data('broadcast',{key:"last",value: item.id});
+                    }
+                    html += `<li><div class="desc">${item.content}</div><div class="time">${dateUnixFormat(item.created)}</div></li>`;
+                });
+
+                $('.layuimini-main-broadcast ul').html(html);
+            } else if(json.code == 4003){
+                layer.msg(json.msg, {
+                    time: 1000
+                }, function() {
+                    window.location = 'login.html';
+                });
+            }else {
+                layer.msg(json.msg);
+            }
+        }, (e) => {
+            layer.close(loadIndex);
+            layer.msg(e.errorType);
+        });
+
+        form.render();
+    });
+</script>

@@ -1,0 +1,44 @@
+<link rel="stylesheet" type="text/css" href="./css/quick_guide.css">
+<div class="layuimini-container layuimini-page-anim">
+  <div class="layuimini-main-guide">
+    <div class="body">
+      <ul>
+        <div style="font-size: 16px;font-weight: bold;text-align: center;margin-top: 20px;">超方便~添加快捷方式到桌面，实现一键登录。</div>
+        <li>
+          <div>
+            1.在西柚登录页面，点击“共享”图标，如图：
+          </div>
+          <img src="images/step-1.png">
+        </li>
+        <li>
+          <div>2. 在接着弹出的视图上可以找到“添加到主屏幕”按钮，点击如图：</div>
+          <img src="images/step-2.png">
+        </li>
+        <li>
+          <div>3. 编辑要在桌面显示的图标名称，然后点击导航条“添加”按钮，如图：</div>
+          <img src="images/step-3.png">
+        </li>
+        <li>
+          <div>4. 现在iPhone主界面上面就登录图标了，很方便下次直接进入，如图：</div>
+          <img src="images/step-4.png">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    function openUrl(url){
+      var outlineUrl = url;
+      let deviceOs = layui.data('deviceInfo').device_os;
+      if(deviceOs != undefined && deviceOs == "ios") {
+        postMessage(JSON.stringify({type: "outWeb", data: outlineUrl}));
+      }else {
+        window.location.href = outlineUrl;
+      }
+      // var winOpen = window.open("","_blank");
+      // setTimeout(function() {  //这里使用setTimeout非常重要，没有将无法实现
+      //     //原因是window.open会中断正在执行的进程，这样能保证其它代码执行完成再执行这个。
+      //     winOpen.location = outlineUrl; //改变页面的location
+      // }, 500);
+    }
+  </script>
+</div>

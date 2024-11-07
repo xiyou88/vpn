@@ -1,0 +1,34 @@
+.layui-header div.logo{width: 51px;height: 21px;margin: 14px 0 auto 19px;}
+.layui-layout-admin .layui-body{padding-bottom: 0}
+.layui-layout-admin{height: 100%;position: relative;}
+.layui-layout-admin .layui-body{left: 0;}
+.layui-layout-admin .index-header{height: 50px;width: 100%;position: relative;}
+.layui-nav .layui-nav-item{line-height: 50px; color: #979797;}
+.layui-nav-item.layui-this{background-color: #393D41}
+.layui-body{margin-bottom: 60px;}
+.layuimini-content-page{height: 100%;max-width: 420px;margin: 0 auto;scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */}
+.layui-layout-admin .footer{position: absolute;bottom: 0;left: 0;height: 60px;width: 100%;background-color: #393D41;color: #B2B6BA;text-align: center;}
+.layui-layout-admin .footer .nav{display: flex;flex-direction: row;margin-top: 19px;text-align: center;}
+.layui-layout-admin .footer .nav span{flex: 1;cursor: pointer;}
+.layui-layout-admin .footer .nav i{width: 1px;height: 15px;margin-top: 3px;background: #B2B6BA;}
+.layui-layout-admin .footer div:last-child{font-size: 12px;line-height: 16px;color: #7A7A7A;margin-top: 20px;}
+.layui-layout-admin .help{position: absolute;top:0;left: 0;width: 100%;height: 100%;background: rgba(74,74,74,0.5);display: none;z-index: 900}
+.layui-layout-admin .help .container{width: 319px;margin: 104px auto 0 auto;background-color: white;display: grid;}
+.layui-layout-admin .help .container .title{margin: 18px 0; text-align: center;font-size: 17px;font-weight: bold;color: #393D41;position: relative;}
+.layui-layout-admin .help .container .title .skip-help{position: absolute;right: 25px;top: 0;color: #C4C4C4;cursor: pointer;}
+.layui-layout-admin .help .container .body{width: 270px;margin: 0 auto 28px auto;font-size: 15px;color: #727272;}
+.layui-layout-admin .help .container .body > div:last-child{width: 229px;margin: 37px auto 0 auto;}
+.layui-layout-admin .help .container .body img{height: 201px;}
+.layui-layout-admin .help .container .body div div.next{width: 192px;height: 32px;background: #2468F2;color: white;line-height: 32px;text-align: center;margin: 22px auto 0 auto;cursor: pointer;}
+
+.layui-layout-admin .broadcast-show{position: absolute;top:0;left: 0;width: 100%;height: 100%;background: rgba(74,74,74,0.5);display: none;z-index: 910;}
+.layui-layout-admin .broadcast-show .broadcast-container{width: 263px; margin: 120px auto 0 auto;background-color: white;text-align: center;position: relative;}
+.layui-layout-admin .broadcast-show .broadcast-container > div{padding: 18px 23px;}
+.layui-layout-admin .broadcast-show .broadcast-container div .title{font-size: 17px;font-weight: bold;line-height: 22px;color: #393D41;}
+.layui-layout-admin .broadcast-show .broadcast-container div .time{margin: 12px auto auto;line-height: 17px;color: #B4B4B4;}
+.layui-layout-admin .broadcast-show .broadcast-container div .id{display: none;}
+.layui-layout-admin .broadcast-show .broadcast-container div .close{position: absolute;top: 0;right: 0;width: 40px;height: 40px;cursor: pointer;}
+.layui-layout-admin .broadcast-show .broadcast-container div .close img{width: 13px;height: 14px;}
+.layui-layout-admin .broadcast-show .broadcast-container div .desc{font-size: 14px;line-height: 30px;color: #858585;text-align: left;display: -webkit-box;-webkit-box-orient: vertical;text-overflow: ellipsis;overflow: hidden;-webkit-line-clamp:5;}
+.layui-layout-admin .broadcast-show .broadcast-container div .show-more{line-height: 17px;color: #2468F2;}

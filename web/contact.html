@@ -1,0 +1,55 @@
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main-contact">
+        <div class="title">联系我们</div>
+        <div class="body">
+            <div class="icon"></div>
+            <div style="color: #5187F5;">西柚</div>
+            <div class="desc">
+                <span>西柚加速器帮助用户无障碍浏览网站视频，加速访问网站，多个私有化私密协议，特有的智能分流技术，多地区无限流量服务器多种设备用户端，无论在哪里，都能完美解决你的上网难题！。
+                </span>
+            </div>
+            <div class="footer2">
+                <img src="images/icon-contact.png" />
+                <div class="info" id="outline-id" style="display: none;">outline地址: <span ><a onclick="openUrl('https://apps.apple.com/us/app/outline-app/id1356177741')" style="color: blue" href="javascript:;">点击下载</a></span ></div>
+                <div class="info" id="website-id" style="display: none;">
+                    <div style="float: left;">永久域名: </div>
+                    <div>
+                        <span style="margin-left: 18px;">
+                    <a style="color: blue" href="javascript:;" onclick="openUrl('http://xy58.me')">xy58.me</a>
+                    <a style="color: blue" href="javascript:;"></a>
+                    </span>
+                    </div>
+                </div>
+                <div class="info">防封邮箱: <span>xiyou368@gmail.com</span></div>
+                <div class="info"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        layui.use(['form', 'table'], function () {
+            var $ = layui.jquery,
+            form = layui.form;
+
+            let channel = layui.data('channel').info;
+            if(channel!="ss4"){
+                $("#website-id").css("display", "block");
+                $("#outline-id").css("display", "block");
+            }
+        });
+
+        function openUrl(url){
+            var outlineUrl = url;
+            let deviceOs = layui.data('deviceInfo').device_os;
+            if(deviceOs != undefined && deviceOs == "ios") {
+                postMessage(JSON.stringify({type: "outWeb", data: outlineUrl}));
+            }else {
+                window.location.href = outlineUrl;
+            }
+            // var winOpen = window.open("","_blank");
+            // setTimeout(function() {  //这里使用setTimeout非常重要，没有将无法实现
+            //     //原因是window.open会中断正在执行的进程，这样能保证其它代码执行完成再执行这个。
+            //     winOpen.location = outlineUrl; //改变页面的location
+            // }, 500);
+        }
+    </script>
+</div>

@@ -1,0 +1,159 @@
+<div class="layuimini-container layuimini-page-anim">
+  <div class="layuimini-main-feedback">
+    <div class="title">反馈 <div class="reply">回复列表</div></div>
+    <div class="body">
+      <div class="feedback-type">
+        <div class="title">问题分类</div>
+        <ul></ul>
+      </div>
+
+      <div class="content">
+        <div class="title">反馈内容</div>
+        <div class="content2">
+          <textarea id="feedback-desc" placeholder="请输入反馈内容" class="layui-textarea"></textarea>
+          <div class="num"><span>0</span>/255</div>
+        </div>
+
+      </div>
+      <div class="picture" id="picture-id">
+        <button id="upload-picture" style="display: block;width: 68px;height: 65px;">
+                  <img src="images/icon-camera.png"/>
+                  <div class="txt">添加图片</div>
+        </button>
+
+        <div id="show-picture" style="display: none;"><div class="cancel-picture">x</div><img src="" style="height: 60px;width: 55px;"/></div>
+      </div>
+
+      <button class="post"><span>立即提交</span></button>
+    </div>
+
+  </div>
+</div>
+<script src="js/utils.js" charSet="utf-8"></script>
+<script>
+  layui.use(['form', 'table', 'miniPage','upload'], function () {
+    var $ = layui.jquery,
+            miniPage = layui.miniPage,
+            upload = layui.upload,
+            form = layui.form;
+
+    var feedbackPictureUrl = "";
+    var loadIndex = layer.load(2, {shade: [0.2,'#000000']});
+    axios({
+      "method": "GET",
+      "url": `${API_URL}/common/feedback/type/list`
+    }).then((json) => {
+      layer.close(loadIndex);
+      if (json.code == 200) {
+        let html = "";
+        layui.each(json.data.list,function (index,item) {
+          let selected = "";
+          if(index == 0){selected = "selected";}
+          html += `<li id="type-${item.id}" class="${selected}"><span>${item.name}</span></li>`;
+        });
+
+        $('.layuimini-main-feedback .feedback-type ul').html(html);
+      } else if(json.code == 4003){
+        layer.msg(json.msg, {
+          time: 1000
+        }, function() {
+          window.location = 'login.html';
+        });
+      }else {
+        layer.msg(json.msg);
+      }
+    }, (e) => {
+      layer.close(loadIndex);
+      layer.msg(e.errorType);
+    });
+    
+    $('.layuimini-main-feedback .body ul').on('click','li', function () {
+      $('.layuimini-main-feedback .body ul').find('li').removeClass('selected');
+      $(this).addClass('selected');
+    });
+    $('.layuimini-main-feedback .reply').on('click', function () {
+      miniPage.hashChange("feedback_list.html");
+    });
+
+    $("#feedback-desc").bind("input propertychange",function(event){
+      let desc = $('#feedback-desc').val();
+      if(desc.length >255){
+        desc = desc.slice(0,255);
+        $('#feedback-desc').val(desc);
+      }
+      $(".layuimini-main-feedback .content .num span").text(desc.length);
+    });
+
+    var loadUploadIndex = 0;
+    var uploadInst = upload.render({
+      elem: '#upload-picture' //绑定元素
+      ,url: `${API_URL}/common/upload` //上传接口
+      ,headers: {Authorization:layui.data('token').info}
+      ,accept: 'images'
+      ,acceptMime: 'image/*'
+      ,before: function(obj){
+        loadUploadIndex = layer.load(2, {shade: [0.2,'#000000']});
+      }
+      ,done: function(res){
+        //上传完毕回调
+        layer.close(loadUploadIndex);
+        layer.msg("上传成功",{time:1000});
+        feedbackPictureUrl = res.data.file_url;
+        $("#show-picture img").attr("src",feedbackPictureUrl);
+        $("#upload-picture").hide();
+        $("#show-picture").show();
+      }
+      ,error: function(){
+        //请求异常回调
+        layer.close(loadUploadIndex);
+        layer.msg("上传出错!!");
+      }
+    });
+
+    $(".layuimini-main-feedback .picture").on('click','.cancel-picture', function () {
+      feedbackPictureUrl = "";
+      $("#upload-picture").show();
+      $("#show-picture").hide();
+    });
+
+    $('.layuimini-main-feedback .post').on('click touchend', function () {
+      let feedbackType = $('.layuimini-main-feedback .body ul').find('li.selected').attr("id");
+      feedbackType = feedbackType.replace("type-","");
+      let desc = $("#feedback-desc").val();
+      if(desc.length<=0){
+        layer.msg("请输入反馈内容",{time:1000});
+        return false;
+      }
+      if(desc.length>255){
+        layer.msg("反馈内容超出限制字数",{time:1000});
+        return false;
+      }
+      var userInfo = layui.sessionData('user').userInfo;
+
+      var loadIndex = layer.load(2, {shade: [0.2,'#000000']});
+      axios({
+        "method": "POST",
+        "url": `${API_URL}/common/feedback/info`,
+        "data":{"content": desc,"type":feedbackType,"image_url": feedbackPictureUrl,"username": userInfo.username}
+      }).then((json) => {
+        layer.close(loadIndex);
+        if (json.code == 200) {
+          layer.msg("反馈成功",{time:1000},function () {
+            $('#feedback-desc').val('');
+          });
+        } else if(json.code == 4003){
+          layer.msg(json.msg, {
+            time: 1000
+          });
+        }else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        layer.close(loadIndex);
+        layer.msg(e.errorType);
+      });
+    })
+
+    form.render();
+  });
+</script>

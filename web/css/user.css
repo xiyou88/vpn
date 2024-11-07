@@ -1,0 +1,29 @@
+.layuimini-main-user{margin: 8px 8px 0 8px;height: calc(100% - 60px);}
+.layuimini-main-user .top{background-color: white;height: 193px;}
+.layuimini-main-user .top .title{text-align: center;height: 133px;width: 100%;}
+.layuimini-main-user .top .title img{width: 60px;height: 60px;margin: 27px auto 12px auto;}
+.layuimini-main-user .top .title div{font-weight: bold;line-height: 20px;color: #313131;}
+.layuimini-main-user .top .line{width: 100%;height: 1px;background: #F5F5F5;}
+.layuimini-main-user .top .opera{display: flex;flex-direction: row;height: 59px;font-size: 15px;color: #313131;line-height: 59px;text-align: center;background-color: white;}
+.layuimini-main-user .top .opera div{flex: 1;cursor: pointer;}
+.layuimini-main-user .top .opera div img{width: 22px;height: 22px;margin:18px 9px 0 0;}
+.layuimini-main-user .top .opera i{width: 1px;height: 100%;background: #F5F5F5;}
+.layuimini-main-user .body{margin-top: 15px;background-color: white;padding: 13px 20px 0 20px;height: calc(100% - 110px);}
+.layuimini-main-user .body .title{font-weight: bold;color: #707070;line-height: 19px;}
+.layuimini-main-user .body .content{text-align: center;}
+.layuimini-main-user .body .content img{width: 94px;height: 70px;margin-top: 39px;}
+.layuimini-main-user .body .content div{margin-top: 15px;font-size: 13px;font-weight: bold;line-height: 17px;color: #B4B2B2;}
+.layuimini-main-user .body .content button{width: 100%;height: 45px;background: #2468F2;color: white;line-height: 45px;margin: 32px 0;}
+.layuimini-main-user .body .vip-content > div{height: 78px;margin-bottom: 14px;background: url('../images/vip-bg.png') 0 0 no-repeat;background-size: cover;}
+.layuimini-main-user .body .vip-content > div.svip{margin-top: 19px;}
+.layuimini-main-user .body .vip-content > div.valid{background: url('../images/valid-vip-bg.png') 0 0 no-repeat;background-size: cover;}
+.layuimini-main-user .body .vip-content .left{margin: 18px 0 0 20px;width: 60%;float: left;}
+.layuimini-main-user .body .vip-content .left .title img{width: 19px;height: 17px;margin-right: 5px;}
+/*.layuimini-main-user .body .vip-content .left .title span{font-size: 17px;font-weight: bold;color: #B4731C;line-height: 22px;}*/
+.layuimini-main-user .body .vip-content .left .time{font-size: 12px;line-height: 16px;color: #C2AC8D;margin-top: 5px;}
+.layuimini-main-user .body .vip-content button{float: right;margin: 26px 17px 0 0;width: 81px;height: 27px;background-color: #5187F5;border-radius: 15px;font-size: 15px;line-height: 27px;color: white}
+.layuimini-main-user .body .vip-content .left .title span{color: #8B8B8B;}
+.layuimini-main-user .body .vip-content .left .time{color: #8B8B8B;}
+.layuimini-main-user .body .vip-content .left .title .font-valid{color: #B4731C;}
+.layuimini-main-user .body .vip-content button.valid{background-color: #B4731C}
+
