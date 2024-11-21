@@ -190,7 +190,7 @@
     /*position: initial;*/
     overflow: hidden;
     bottom: 0px !important;
-    top: 50px !important;
+    top: 0px !important;
     transition: all .2s;
 }
 
@@ -276,7 +276,7 @@
 }
 
 .layui-nav {
-    padding: 0 !important;
+    padding: 0 !important;position: unset !important;
 }
 
 .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>神灯加速器</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -20,47 +20,16 @@
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-        .box{height: 40px;padding: 5px 10px;line-height: 40px;display: none;}
-        .marquee-container {
-            height: 40px;
-            overflow: hidden;
-        }
-
-        .marquee-container .marquee-text {
-            display: inline-block;
-            white-space: nowrap;
-        }
-
-        .marquee-text-animation {
-            animation: marquee 10s linear infinite; /* 滚动动画，时间可根据需要调整 */
-        }
-
-        @keyframes marquee {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-    </style>
 </head>
 
 <body>
-<div class="box">
-    <div style="float: left;color: red"><i class="layui-icon layui-icon-notice" style="font-size: 14px;margin-right: 5px;"></i>温馨提示:</div>
-    <div class="marquee-container">
-        <span class="marquee-text">会员时间已到期，加速服务暂无法使用，请登录会员中心续费。</span>
-    </div>
-</div>
     <div class="mescroll layui-container"  id="mescroll">
         <div class="admin-login-background">
             <div class="layui-form login-form">
                 <form class="layui-form" action="">
                     <div class="layui-form-item logo-title">
                         <div class="icon-cp"></div>
-                        <h1 style="font-size: 24px;line-height: 31px;color: #393D41;">登录</h1>
+                        <h1 style="font-size: 24px;line-height: 31px;color: #393D41;">web端登录</h1>
                     </div>
 
                     <div class="form-body">
@@ -75,14 +44,17 @@
                         </div>
                     </div>
 
+                    <div id="forgot-password" class="forgot-password">忘记密码?</div>
                     <div class="layui-form-item login">
                         <button lay-submit="" lay-filter="login">登 录</button>
                     </div>
                 </form>
+                <div id="register" class="login register">
+                    <button>没有账号？注册</button>
+                </div>
             </div>
             <div class="footer">
-                <div id="forgot-password">忘记密码?</div>
-                <div id="register">注册新账号</div>
+                <button onclick="oldEnter()">老用户使用Outline登录入口>></button>
             </div>
         </div>
     </div>
@@ -103,9 +75,6 @@
             if (request["channel"] != undefined && request["channel"] != ""){
                 layui.data('channel',{key:"info",value: request["channel"]});
             }
-            if(request["expire"] != undefined){
-                $(".box").show()
-            }
 
             $('#forgot-password').on('click', function () {
                 location.href = "forgot_password.html";
@@ -123,16 +92,6 @@
                     $("#login-password").attr("type","password");
                 }
             });
-
-            const container = document.querySelector(".marquee-container");
-            const text = document.querySelector(".marquee-text");
-
-            // 判断文本内容是否超出容器宽度
-            if (text.getBoundingClientRect().width > container.clientWidth) {
-                text.classList.add("marquee-text-animation"); // 添加滚动样式
-            } else {
-                text.classList.remove("marquee-text-animation"); // 移除滚动样式
-            }
 
             // 进行登录操作
             form.on('submit(login)', function(data) {
@@ -181,6 +140,9 @@
                 return false;
             });
         });
+        function  oldEnter(){
+            location.href = "https://xiyou88.github.io?channel=GitHub"
+        }
     </script>
 </body>
 

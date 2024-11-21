@@ -1,0 +1,85 @@
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main-contact">
+        <div class="title">
+            因本类产品的特殊性和政策原因，无法上架国内App Store，ios用户需使用海外Apple ID进行下载安装，<a onclick="downApp()">前往下载 ></a>
+        </div>
+        <div class="body">
+            <div>请选择适用你的场景</div>
+            <button class="mainland-btn select">我只有中国大陆 Apple ID</button>
+            <button class="oveas-btn" style="margin-top: 10px;margin-bottom: 15px;"> 我有海外 Apple ID</button>
+
+            <div class="content">
+                <div class="mainland">
+                    <div style="font-size: 18px;">我们提供三种下载解决方案</div>
+
+                    <ul>
+                        <a href="new.html">
+                        <li>
+                            <div>
+                                <div>创建新的Apple ID</div>
+                                <div>创建一个全新的"<span>香港 Apple ID</span>"下载</div>
+                            </div>
+                            <div>></div>
+                        </li>
+                        </a>
+                        <a href="modify.html">
+                        <li>
+                            <div>
+                                <div>修改已有Apple ID地区</div>
+                                <div>修改原Apple ID地区至"<span>香港</span>"下载</div>
+                            </div>
+                            <div>></div>
+                        </li>
+                        </a>
+                        <a href="freeAccount.html">
+                        <li>
+                            <div>
+                                <div>使用公开账号</div>
+                                <div>使用我们提供的"<span>公开香港ID</span>"下载</div>
+                            </div>
+                            <div>></div>
+                        </li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="oveas">
+                    <div style="font-size: 18px;">
+                        直接前往Apple App Store进行下载
+                    </div>
+
+                    <button onclick="downApp()" style="margin: 20px 0;text-align: left;font-size: 16px;color: #16b777">前往下载></button>
+
+                    <div style="font-size: 14px;">或在 App Store 中搜索 <span style="color: #16b777">XiYOU VPN </span>下载应用</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/utils.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.jquery;
+
+
+            $('.body > button').on('click', function () {
+                $(".body button").removeClass('select')
+                $(this).addClass('select')
+
+                if ($(this).hasClass('oveas-btn')){
+                    $(".content .oveas").show();
+                    $(".content .mainland").hide();
+                }else{
+                    $(".content .oveas").hide();
+                    $(".content .mainland").show();
+                }
+            });
+
+
+        });
+
+        function downApp(){
+            location.href="https://apps.apple.com/us/app/xiyou-vpn/id1587121262"
+        }
+    </script>
+</div>

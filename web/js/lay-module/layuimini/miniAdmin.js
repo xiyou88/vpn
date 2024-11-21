@@ -26,9 +26,9 @@ layui.define(["jquery", "miniMenu", "element","miniPage"], function (exports) {
     var menuInfo = [
         {
             "id":1,
-            "title":"用户中心",
+            "title":"首页",
             "href":menuHead+"user.html",
-            "select":"",
+            "select":"true",
             "target":"",
             "child": null,
         },
@@ -42,8 +42,8 @@ layui.define(["jquery", "miniMenu", "element","miniPage"], function (exports) {
         },
         {
             "id":3,
-            "title":"线路列表",
-            "href":menuHead+"route.html",
+            "title":"客户端下载",
+            "href":menuHead+"help.html",
             "select":"",
             "target":"",
             "child": null,

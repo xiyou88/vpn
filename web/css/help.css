@@ -1,0 +1,17 @@
+.layuimini-main-contact .title{text-align: center;color: #393D41;line-height: 28px;background-color: #FFFACD;padding: 6px 10px;}
+.layuimini-main-contact .title a{color: #16b777;}
+.layuimini-main-contact .body{text-align: center;width: 320px;margin: 0 auto;}
+.layuimini-main-contact .body > div:first-child{font-size: 20px;font-weight: bold;margin: 15px 0 5px 0;}
+.layuimini-main-contact .body > button{width: 230px;height: 45px;border: 1px solid #B4B2B2;border-radius: 30px;color: black;}
+.layuimini-main-contact .body > button:last-child{margin-top: 5px;margin-bottom: 15px;}
+.layuimini-main-contact .body > button.select{background-color: #16b777;color: #fff;border: 1px solid #16b777;}
+.layuimini-main-contact .body .content{margin-top: 20px;}
+.layuimini-main-contact .body .content .mainland{display: block;}
+
+.layuimini-main-contact .body .content .oveas{display: none;}
+
+.layuimini-main-contact .body .content .mainland ul li{cursor: pointer;border-radius: 5px;background-color: #B4B2B2;padding: 10px;margin-top: 20px;display: flex;}
+.layuimini-main-contact .body .content .mainland ul li > div:first-child{width: 98%;text-align: left;}
+.layuimini-main-contact .body .content .mainland ul li > div:last-child{margin-top: 9px;font-weight: bold;}
+.layuimini-main-contact .body .content .mainland ul li > div span{color: #16b777}
+.layuimini-main-contact .body .content .mainland ul li > div >div:first-child{font-size: 16px;}

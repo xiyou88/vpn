@@ -4,44 +4,105 @@
     <div class="top">
       <div class="title">
         <img src="images/icon-avatar.png" >
-        <div class="username"></div>
+        <div>
+          <div class="username"></div>
+          <div style="display: flex;">
+            <div class="btn modify-password">修改密码</div>
+            <div class="btn logout">退出登录</div>
+          </div>
+        </div>
       </div>
-      <div class="line"></div>
-      <div class="opera">
-        <div class="modify-password"><img src="images/icon-modify.png"/>修改密码</div>
-        <i></i>
-        <div class="logout"><img src="images/icon-logout.png"/>退出登录</div>
+      <div class="membership">
+        <div class="title">我的会员</div>
+        <div class="vip-content">
+          <div class="svip" style="display: none;">
+            <div class="left">
+              <div class="title">
+                <img src="images/icon-no-vip.png"/>
+                <span>SVIP超级会员</span>
+              </div>
+              <div class="time svip-time"><span></span>到期</div>
+            </div>
+            <button class="go-buy">续费</button>
+          </div>
+          <div class="vip" style="display: block">
+            <div class="left">
+              <div class="title">
+                <img src="images/icon-no-vip.png"/>
+                <span>VIP会员</span>
+              </div>
+              <div class="time vip-time"><span></span>到期</div>
+            </div>
+            <button class="vip-bg go-buy">续费</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="body">
-      <div class="title">我的会员</div>
-<!--      <div class="content">-->
-<!--        <img src="images/no-vip.png" />-->
-<!--        <div>无可用会员</div>-->
-<!--        <button class="go-buy">开通会员</button>-->
-<!--      </div>-->
-      <div class="vip-content">
-        <div class="svip">
-          <div class="left">
-            <div class="title">
-              <img src="images/icon-no-vip.png"/>
-              <span>SVIP超级会员</span>
-            </div>
-            <div class="time svip-time"><span></span>到期</div>
-          </div>
-          <button class="go-buy">续费</button>
+      <div class="body">
+        <div class="route-desc">
+          海量全球高质量专线，低延迟，无卡顿
+          <div class="gotoHelp">点此查看iOS下载方案>></div>
         </div>
-        <div class="vip">
-          <div class="left">
-            <div class="title">
-              <img src="images/icon-no-vip.png"/>
-              <span>VIP会员</span>
+        <ul>
+          <li id="1">
+            <div class="route-body">
+              <div>
+                <img src="images/flag_hk.png">
+                <span class="name">中国香港专线</span>
+              </div>
+              <div class="route-detail"></div>
             </div>
-            <div class="time vip-time"><span></span>到期</div>
-          </div>
-          <button class="vip-bg go-buy">续费</button>
-        </div>
+          </li>
+          <li id="2">
+            <div class="route-body">
+              <div>
+                <img src="images/flag_us.png">
+                <span class="name">美国专线</span>
+              </div>
+              <div class="route-detail"></div></div>
+          </li>
+          <li id="3">
+            <div class="route-body">
+              <div>
+                <img src="images/flag_sg.png">
+                <span class="name">新加坡专线</span>
+              </div>
+              <div class="route-detail"></div></div>
+          </li>
+          <li id="4">
+            <div class="route-body">
+              <div>
+                <img src="images/flag_jp.png">
+                <span class="name">日本专线</span>
+              </div>
+              <div class="route-detail"></div></div>
+          </li>
+          <li id="5">
+            <div class="route-body">
+              <div>
+                <img src="images/flag_nl.png">
+                <span class="name">荷兰专线</span>
+              </div>
+              <div class="route-detail"></div></div>
+          </li>
+          <li id="6">
+            <div class="route-body">
+              <div>
+                <img src="images/flag_fr.png">
+                <span class="name">法国专线</span>
+              </div>
+              <div class="route-detail"></div></div>
+          </li>
+          <li id="7">
+            <div class="route-body">
+              <div>
+                <img src="images/flag_cn.png">
+                <span class="name">中国专线</span>
+              </div>
+              <div class="route-detail"></div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -54,7 +115,6 @@
             form = layui.form,
             table = layui.table,
             miniPage = layui.miniPage;
-
 
     let request = GetRequestParams(layui.router().href);
     if (request["channel"] != undefined && request["channel"] != ""){
@@ -85,21 +145,12 @@
 
     function resetUser(userInfo){
       let timestamp=parseInt(new Date().getTime()/1000);
-
-        // $(".layuimini-main-user .body .content").hide();
-        $(".layuimini-main-user .body .vip-content").show();
+      $(".layuimini-main-user .body .vip-content").show();
 
       if(userInfo.vip_expire_time==0){
         userInfo.vip_expire_time = userInfo.created;
       }
 
-      if(userInfo.expire_time > timestamp){
-        $(".layuimini-main-user .vip-content .vip .title img").attr('src','images/icon-svip.png');
-        $(".layuimini-main-user .vip-content .vip .title span").addClass("font-valid");
-        $(".layuimini-main-user .vip-content .vip .left .time").css('color','#B4731C');
-        $(".layuimini-main-user .vip-content .vip").addClass('valid');
-        $(".layuimini-main-user .vip-content .vip button").addClass('valid');
-      }
       if(userInfo.vip_expire_time > timestamp){
         $(".layuimini-main-user .vip-content .svip .title img").attr('src','images/icon-svip.png');
         $(".layuimini-main-user .vip-content .svip .title span").addClass("font-valid");
@@ -107,12 +158,21 @@
         $(".layuimini-main-user .vip-content .svip").addClass('valid');
         $(".layuimini-main-user .vip-content .svip button").addClass('valid');
 
+        $(".layuimini-main-user .vip-content .svip").show();
         $(".layuimini-main-user .vip-content .vip").hide();
+      }else if(userInfo.expire_time > timestamp){
+        $(".layuimini-main-user .vip-content .vip .title img").attr('src','images/icon-svip.png');
+        $(".layuimini-main-user .vip-content .vip .title span").addClass("font-valid");
+        $(".layuimini-main-user .vip-content .vip .left .time").css('color','#B4731C');
+        $(".layuimini-main-user .vip-content .vip").addClass('valid');
+        $(".layuimini-main-user .vip-content .vip button").addClass('valid');
+
+        $(".layuimini-main-user .vip-content .vip").show();
+        $(".layuimini-main-user .vip-content .svip").hide();
       }
 
-
-      $(".layuimini-main-user .body .svip-time span").text(dateUnixFormat(userInfo.vip_expire_time));
-      $(".layuimini-main-user .body .vip-time span").text(dateUnixFormat(userInfo.expire_time))
+      $(".layuimini-main-user .svip-time span").text(dateUnixFormat(userInfo.vip_expire_time));
+      $(".layuimini-main-user .vip-time span").text(dateUnixFormat(userInfo.expire_time))
     }
 
     function getUserInfo(loadIndex){
@@ -169,6 +229,23 @@
       miniPage.hashChange("update_password.html");
     });
 
+    $("ul li").on('click', function (){
+      miniPage.hashChange('help.html');
+    })
+
+    for (let i=1;i<=7;i++){
+      if(i==2 || i==5 || i==6){
+        $("#"+i).find(".route-detail").text((Math.floor(Math.random() * (100 - 80 + 1)) + 70)+"ms")
+      }else{
+        $("#"+i).find(".route-detail").text((Math.floor(Math.random() * (80 - 25 + 1)) + 25)+"ms")
+      }
+    }
+
+    $(".gotoHelp").on('click', function (){
+      miniPage.hashChange('help.html');
+    })
     form.render();
   });
+
+
 </script>
