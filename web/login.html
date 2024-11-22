@@ -65,15 +65,18 @@
     <script src="js/md5.min.js" charset="utf-8"></script>
     <script src="js/utils.js" charset="utf-8"></script>
     <script>
+        let channel = "GitHub"
         layui.use(['form'], function() {
             var form = layui.form,
                 layer = layui.layer,
                 $ = layui.jquery;
 
 
+
             let request = GetRequestParams(layui.router().href);
             if (request["channel"] != undefined && request["channel"] != ""){
                 layui.data('channel',{key:"info",value: request["channel"]});
+                channel = request["channel"]
             }
 
             $('#forgot-password').on('click', function () {
@@ -141,7 +144,7 @@
             });
         });
         function  oldEnter(){
-            location.href = "https://xiyou88.github.io?channel=GitHub"
+            location.href = "https://xiyou88.github.io?channel="+channel
         }
     </script>
 </body>
