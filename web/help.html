@@ -13,7 +13,7 @@
                     <div style="font-size: 18px;">我们提供三种下载解决方案</div>
 
                     <ul>
-                        <a href="new.html">
+                        <a class="toNew">
                         <li>
                             <div>
                                 <div>创建新的Apple ID</div>
@@ -22,7 +22,7 @@
                             <div>></div>
                         </li>
                         </a>
-                        <a href="modify.html">
+                        <a class="toModify">
                         <li>
                             <div>
                                 <div>修改已有Apple ID地区</div>
@@ -31,7 +31,7 @@
                             <div>></div>
                         </li>
                         </a>
-                        <a href="freeAccount.html">
+                        <a class="toFreeAccount">
                         <li>
                             <div>
                                 <div>使用公开账号</div>
@@ -56,11 +56,11 @@
     </div>
     <script src="js/utils.js" charset="utf-8"></script>
     <script>
-        layui.use(['form'], function() {
+        layui.use(['form','miniPage'], function() {
             var form = layui.form,
                 layer = layui.layer,
-                $ = layui.jquery;
-
+                $ = layui.jquery,
+                miniPage = layui.miniPage;
 
             $('.body > button').on('click', function () {
                 $(".body button").removeClass('select')
@@ -75,7 +75,18 @@
                 }
             });
 
-
+            $("a.toNew").on('click', function (){
+                let now = parseInt(new Date().getTime()/1000);
+                miniPage.hashChange("new.html?ts="+now);
+            });
+            $("a.toModify").on('click', function (){
+                let now = parseInt(new Date().getTime()/1000);
+                miniPage.hashChange("modify.html?ts="+now);
+            });
+            $("a.toFreeAccount").on('click', function (){
+                let now = parseInt(new Date().getTime()/1000);
+                miniPage.hashChange("freeAccount.html?ts="+now);
+            })
         });
 
         function downApp(){

@@ -122,7 +122,7 @@
     }        
 
     var userInfo = layui.sessionData('user').userInfo;
-
+    console.log(userInfo)
     if (userInfo == undefined || userInfo.username == undefined){
       var loadIndex = layer.load(2, {
         shade: [0.2,'#000000'] //0.1透明度的白色背景
@@ -133,7 +133,7 @@
       let isReset = false;
       $(".layuimini-main-user .username").text(userInfo.username);
       let timestamp=parseInt(new Date().getTime()/1000);
-      if(timestamp-userInfo.cache_ts>60){
+      if(timestamp-userInfo.cache_ts>10){
         isReset = true;
         getUserInfo();
       }
@@ -176,6 +176,7 @@
     }
 
     function getUserInfo(loadIndex){
+      console.log("loadIndex: "+loadIndex)
       axios({
         "method": "GET",
         "url": `${API_URL}/user/info`,
