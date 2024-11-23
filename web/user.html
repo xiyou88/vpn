@@ -105,6 +105,20 @@
         </ul>
       </div>
     </div>
+    <div>
+    </div>
+    <div class="show">
+      <div>
+        <button class="close cancel1"><img src="images/close.png"/></button>
+        <div class="title">提示</div>
+        <div class="desc">你的账号暂无可用时长，请购买后再使用！</div>
+
+        <div class="footer2">
+          <button class="cancel cancel1">取消</button>
+          <button class="buy">购买会员</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -114,12 +128,13 @@
     var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
+            layer = layui.layer,
             miniPage = layui.miniPage;
 
     let request = GetRequestParams(layui.router().href);
     if (request["channel"] != undefined && request["channel"] != ""){
       layui.data('channel',{key:"info",value: request["channel"]});
-    }        
+    }
 
     var userInfo = layui.sessionData('user').userInfo;
     console.log(userInfo)
@@ -185,6 +200,7 @@
           layer.close(loadIndex);
         }
         if (json.code == 200) {
+          userInfo = json.data;
           let timestamp = parseInt(new Date().getTime()/1000);
           json.data.cache_ts = timestamp;
           layui.sessionData('user',{key:"userInfo",value: json.data});
@@ -231,7 +247,21 @@
     });
 
     $("ul li").on('click', function (){
-      miniPage.hashChange('help.html');
+      let timestamp=parseInt(new Date().getTime()/1000);
+      if(userInfo.expire_time > timestamp){
+        miniPage.hashChange('help.html');
+        return false
+      }else{
+       $(".layuimini-main-user .show").show();
+      }
+    })
+
+    $(".layuimini-main-user .show .cancel1").on('click', function (){
+      $(".layuimini-main-user .show").hide()
+    })
+    $(".layuimini-main-user .show .buy").on('click', function (){
+      $(".layuimini-main-user .show").hide();
+      miniPage.hashChange('buy.html');
     })
 
     for (let i=1;i<=7;i++){

@@ -36,3 +36,16 @@
 .layuimini-main-user .body ul li .route-body div{float: left;}
 .layuimini-main-user .body ul li .route-body div:last-child{float: right}
 .layuimini-main-user .body ul li  .route-detail{color: #16b777;}
+
+
+.layuimini-main-user .show{position: absolute;top:0;left: 0;width: 100%;height: 100%;background: rgba(74,74,74,0.5);display: none;}
+.layuimini-main-user .show > div{border-radius: 2px;display: grid;width: 263px; margin: 220px auto 0 auto;background-color: white;text-align: center;position: relative;}
+.layuimini-main-user .show div .title{margin-top: 15px;font-size: 17px;font-weight: bold;line-height: 22px;color: #393D41;}
+.layuimini-main-user .show div .desc{width: 250px;margin: 10px auto 0 auto;font-size: 15px;line-height: 25px;color: black;text-align: left;}
+.layuimini-main-user .show div .desc span{width: 250px;word-break: break-all;}
+.layuimini-main-user .show div .footer2{margin: 20px auto;}
+.layuimini-main-user .show div .footer2 button{width: 100px;height: 35px;background-color: #2468F2;border-radius: 2px;color: white;}
+.layuimini-main-user .show div .footer2 button:last-child{margin-left: 20px;}
+.layuimini-main-user .show div .footer2 button.cancel{border: 1px solid #2468F2;color: black;background:none;}
+.layuimini-main-user .show div .close{position: absolute;top: 0;right: 0;width: 40px;height: 40px;cursor: pointer;}
+.layuimini-main-user .show div .close img{width: 13px;height: 14px;margin-top: 10px;}
