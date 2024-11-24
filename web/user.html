@@ -138,7 +138,7 @@
 
     var userInfo = layui.data('user').userInfo;
     console.log(userInfo)
-    $(".layuimini-main-user .username").text(userInfo.username);
+    
     if (userInfo == undefined || userInfo.username == undefined){
       var loadIndex = layer.load(2, {
         shade: [0.2,'#000000'] //0.1透明度的白色背景
@@ -162,7 +162,7 @@
     function resetUser(userInfo){
       let timestamp=parseInt(new Date().getTime()/1000);
       $(".layuimini-main-user .body .vip-content").show();
-
+      $(".layuimini-main-user .username").text(userInfo.username);
       if(userInfo.vip_expire_time==0){
         userInfo.vip_expire_time = userInfo.created;
       }
