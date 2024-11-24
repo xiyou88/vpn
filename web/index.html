@@ -116,12 +116,16 @@
         if(layui.sessionData('user').userInfo!=undefined && layui.sessionData('user').userInfo.uid != undefined){
             uid = layui.sessionData('user').userInfo.uid;
         }
+        if(uid==0){
+            uid = layui.data('uid').uid;
+        }
 
         window.intercomSettings = {
             api_base: "https://api-iam.intercom.io",
             app_id: "kbx8admj",
             user_id: 'web-xy-'+uid,
         };
+        Intercom('update', {"user_id": 'web-xy-'+uid});
 
         $('.login-out').on("click", function () {
             layui.data("token",null);
