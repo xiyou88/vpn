@@ -144,7 +144,7 @@ const axios = function(options){
                 let res = JSON.parse(xhr.responseText);
                 if(res.code==4003){
                     layui.sessionData('route',null);
-                    layui.sessionData('user',null);
+                    layui.data('user',null);
                 }
                 resolve(res);
             }else {

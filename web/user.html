@@ -136,7 +136,7 @@
       layui.data('channel',{key:"info",value: request["channel"]});
     }
 
-    var userInfo = layui.sessionData('user').userInfo;
+    var userInfo = layui.data('user').userInfo;
     console.log(userInfo)
     if (userInfo == undefined || userInfo.username == undefined){
       var loadIndex = layer.load(2, {
@@ -203,13 +203,13 @@
           userInfo = json.data;
           let timestamp = parseInt(new Date().getTime()/1000);
           json.data.cache_ts = timestamp;
-          layui.sessionData('user',{key:"userInfo",value: json.data});
+          layui.data('user',{key:"userInfo",value: json.data});
           resetUser(json.data);
         } else if(json.code == 4003){
           layer.msg(json.msg, {
             time: 1000
           }, function() {
-            layui.sessionData('user',{key:"userInfo",remove: true})
+            layui.data('user',{key:"userInfo",remove: true})
             window.location = 'login.html';
           });
         }else {
@@ -225,7 +225,7 @@
 
     $(".layuimini-main-user .logout").on('click', function () {
       layui.data("token",null);
-      layui.sessionData('user',null);
+      layui.data('user',null);
       layui.data('route',null);
 
       layer.msg('退出登录成功', function () {

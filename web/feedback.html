@@ -128,7 +128,7 @@
         layer.msg("反馈内容超出限制字数",{time:1000});
         return false;
       }
-      var userInfo = layui.sessionData('user').userInfo;
+      var userInfo = layui.data('user').userInfo;
 
       var loadIndex = layer.load(2, {shade: [0.2,'#000000']});
       axios({

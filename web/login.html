@@ -130,7 +130,8 @@
                     layer.close(loadIndex);
                     if (json.code == 200) {
                         json.data.cache_ts = parseInt(new Date().getTime()/1000);
-                        layui.sessionData('user',{key:"userInfo",value: json.data});
+                        layui.data('user',{key:"userInfo",value: json.data});
+                        layui.data('user',{key:"userInfo",value: json.data});
                         layui.data('token', {key:"info",value: json.data.token});
                         layui.data('uid', {key:"uid",value: json.data.uid});
 

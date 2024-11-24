@@ -60,7 +60,7 @@
     });
   
     var routeInfo = layui.sessionData('route_list').info;
-    var userInfo = layui.sessionData('user').userInfo;
+    var userInfo = layui.data('user').userInfo;
 
     var timestamp=parseInt(new Date().getTime()/1000);
 
@@ -176,7 +176,7 @@
         return false;
       }
 
-      var userInfo = layui.sessionData('user').userInfo;
+      var userInfo = layui.data('user').userInfo;
       let isSvip = $("#"+id).attr("svip");
       if (isSvip=="true"){
         if (userInfo.vip_expire_time<= timestamp){
