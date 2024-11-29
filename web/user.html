@@ -247,7 +247,7 @@
       miniPage.hashChange("update_password.html");
     });
 
-    $("ul li").on('click', function (){
+    $(".layuimini-main-user ul li").on('click', function (){
       let timestamp=parseInt(new Date().getTime()/1000);
       if(userInfo.expire_time > timestamp){
         miniPage.hashChange('help.html');
