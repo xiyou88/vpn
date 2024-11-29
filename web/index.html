@@ -119,20 +119,16 @@
         if(uid==0){
             uid = layui.data('uid').uid;
         }
-
         window.intercomSettings = {
             api_base: "https://api-iam.intercom.io",
             app_id: "kbx8admj",
             user_id: 'web-xy-'+uid,
         };
-        Intercom('update', {"user_id": 'web-xy-'+uid});
-
+       
         $('.login-out').on("click", function () {
             layui.data("token",null);
             layui.sessionData('route',null);
-            layui.sessionData('user',null);
             layui.data('user',null);
-
             layer.msg('退出登录成功', function () {
                 window.location = 'login.html';
             });
