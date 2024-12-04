@@ -120,6 +120,7 @@ const axios = function(options){
         xhr.setRequestHeader("deviceId", deviceId);
         xhr.setRequestHeader("channel", channel);
         xhr.setRequestHeader("Platform", "web");
+        xhr.setRequestHeader("Outline","false");
 
         xhr.onabort = function () {
             reject(new Error({
