@@ -4,7 +4,7 @@
 
 **:arrow_double_down: [Android 版本.apk](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xiyou-V3.4.0-14.apk)**
 
-**:arrow_double_down: [iOS网页版(建议优选海外商店下载）](https://xiyou88.github.io/vpn/web/index.html?channel=GitHub)** 
+**:arrow_double_down: [iOS网页版(建议优选海外商店下载）](https://xiyou88.github.io/index.html?channel=GitHub)** 
 
 **:arrow_double_down: [iOS 海外商店版本](https://apps.apple.com/hk/app/xiyou-vpn/id1587121262)**
 
