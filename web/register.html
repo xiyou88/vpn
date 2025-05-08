@@ -41,12 +41,12 @@
             <img src="./images/icon_password.png" class="icon" />
             <input type="password" name="password" placeholder="密码" autocomplete="off" class="layui-input">
           </div>
-          <!-- <div class="layui-form-item input">
+          <div class="layui-form-item input">
               <img src="./images/icon_phone.png" class="icon" />
               <input type="text" name="captcha" placeholder="输入验证码" autocomplete="off" class="layui-input" style="padding-right: 150px;">
             <div class="captcha" id="captcha">发送验证码</div>
             <div class="captcha countdown"><span>90</span>s后重发</div>
-          </div> -->
+          </div>
 
         </div>
 
@@ -147,10 +147,10 @@
         });
         return false;
       }
-      // if(data.captcha.length<3){
-      //   layer.msg('验证码长度有误', {time: 1000});
-      //   return false;
-      // }
+      if(data.captcha.length<3){
+        layer.msg('验证码长度有误', {time: 1000});
+        return false;
+      }
 
       axios({
         "method": "POST",
