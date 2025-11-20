@@ -139,7 +139,7 @@
                 return true;
               }
             });
-            html += `<li id="${item.id}" svip='${isSvip}'><div class="fixed ${useStyle}"></div><div class="route-body"><div><img src="${item.image_url}"><span class="name">${item.name}</span></div><div class="route-detail" value="${item.id}">获取线路</div></div> </li>`;
+            html += `<li id="${item.id}" svip='${isSvip}'><div class="fixed ${useStyle}"></div><div class="route-body"><div><img src="${item.image_url}"><span class="name">${item.name}</span></div><div class="route-detail" value="${item.id}">${item.id==500 ? '重置线路':'获取线路'}</div></div> </li>`;
           }
       });
       
