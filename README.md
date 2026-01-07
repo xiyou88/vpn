@@ -6,7 +6,7 @@
 
 **:arrow_double_down: [iOS网页版(建议优选海外商店下载）](https://xiyou88.github.io/index.html?channel=GitHub)** 
 
-**:arrow_double_down: [iOS 海外商店版本](https://apps.apple.com/hk/app/xiyou-vpn/id1587121262)**
+**:arrow_double_down: [iOS 海外商店版本](https://apps.apple.com/us/app/starry-kit/id6749743412)**
 
 **:arrow_double_down: [Windows 版本.exe](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/seeyou%5BGithub%5D-V1.1.5.exe)**
 
