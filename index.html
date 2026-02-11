@@ -8,17 +8,25 @@
     <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./image/touch-icon-iphone.png">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-
+    <!-- <script type="text/javascript" charset="UTF-8" src="./js/jquery.min.js"></script> -->
     <link rel="stylesheet" href="style.css">
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?a0fd6ce964860ebbb66ec3d1b320466d";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
+    
+    <script type="text/javascript" charset="UTF-8" src="https://sdk.junzhuonuoda.cn/web/track.js"></script>
+    <script type="text/javascript">
+        var data = Track.parseUrlParams();
+        new Track({
+            appKey : "dbgl9wnk",
+            onready : function() {
+                this.schemeWakeup();
+                var m = this;
+                var button = document.getElementById("downloadButton");
+                button.onclick = function() {
+                    m.wakeupOrInstall();
+                    return false;
+                }
+            }
+        }, data);//初始化时传入data，作为一键拉起/App传参安装时候的参数
+    </script>
 </head>
 <body>
     <div class="container">
@@ -30,7 +38,7 @@
         <section class="content">
             <h2>请选择您的设备下载</h2>
             <div class="download-buttons">
-                <a href="https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xiyou-V3.4.0-14.apk" class="button">Android 下载 .apk</a>
+                <a href="javascript:;" id="downloadButton" class="button">Android 下载 .apk</a>
                 <a href="https://xiyou88.github.io/index.html?channel=GitHub" class="button">iOS 网页版（建议优选海外AppStore下载）</a>
                 <a href="https://apps.apple.com/us/app/starry-kit/id6749743412" class="button">iOS 海外AppStore下载</a>
                 <a href="https://github.com/xiyou88/vpn/raw/refs/heads/main/file/seeyou%5BGithub%5D-V1.1.5.exe" class="button">Windows 下载 .exe</a>
