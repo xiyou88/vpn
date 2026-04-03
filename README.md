@@ -8,8 +8,8 @@
 
 **:arrow_double_down: [iOS 海外商店版本](https://xiyou88.github.io/index.html?channel=GitHub#/pages/index/guide)**
 
-**:arrow_double_down: [Windows 版本.exe](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/seeyou%5BGithub%5D-V1.1.5.exe)**
+**:arrow_double_down: [Windows V2.0.0.exe](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xiyou-V2.0.0-50.exe)**
 
-**:arrow_double_down: [macOS 版本.pkg](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/seeyou-V1.0.49%5BGitHub%5D.pkg)**
+**:arrow_double_down: [macOS V2.0.0.pkg](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xy-v2.0.0-50.pkg)**
 
 - - - -
