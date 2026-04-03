@@ -2,7 +2,7 @@
 - - - -
 #### 请在浏览器内打开
 
-**:arrow_double_down: [Android 版本.apk](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xiyou-V3.4.0-14.apk)**
+**:arrow_double_down: [Android V3.4.0.apk](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xiyou-V3.4.0-14.apk)**
 
 **:arrow_double_down: [iOS网页版(建议优选海外商店下载）](https://xiyou88.github.io/index.html?channel=GitHub)** 
 
