@@ -10,6 +10,6 @@
 
 **:arrow_double_down: [Windows V2.0.0.exe](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xiyou-V2.0.0-50.exe)**
 
-**:arrow_double_down: [macOS V2.0.0.pkg](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xy-v2.0.0-50.pkg)**
+**:arrow_double_down: [macOS V2.0.3.pkg](https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xy-v2.0.3-56.pkg)**
 
 - - - -
