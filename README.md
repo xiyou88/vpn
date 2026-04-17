@@ -8,7 +8,7 @@
 
 **:arrow_double_down: [iOS 海外商店版本](https://xiyou88.github.io/index.html?channel=GitHub#/pages/index/guide)**
 
-**:arrow_double_down: [Windows V2.2.0.exe](https://github.com/xiyou88/vpn/releases/download/xiyou-latest-exe/xiyou-V2.2.0-52.exe)**
+**:arrow_double_down: [Windows V2.3.0.exe](https://github.com/xiyou88/vpn/releases/download/xiyou-latest-exe/xiyou-V2.3.0-53.exe)**
 
 **:arrow_double_down: [macOS V2.0.5.pkg](https://github.com/xiyou88/vpn/releases/download/xiyou-latest-pkg/xiyou-V2.0.5-58.pkg)**
 
