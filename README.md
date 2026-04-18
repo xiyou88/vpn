@@ -10,6 +10,6 @@
 
 **:arrow_double_down: [Windows V2.3.0.exe](https://github.com/xiyou88/vpn/releases/download/xiyou-latest-exe/xiyou-V2.3.0-53.exe)**
 
-**:arrow_double_down: [macOS V2.0.5.pkg](https://github.com/xiyou88/vpn/releases/download/xiyou-latest-pkg/xiyou-V2.0.5-58.pkg)**
+**:arrow_double_down: [macOS v2.1.0.pkg](https://github.com/xiyou88/vpn/releases/download/xiyou-latest-pkg/xiyou-v2.1.0-59.pkg)**
 
 - - - -
