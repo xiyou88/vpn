@@ -1,0 +1,355 @@
+.layuimini-main-help {
+    margin: 0;
+    padding: 18px 16px 28px;
+    color: #17142a;
+}
+
+.layuimini-main-help .page-header {
+    position: relative;
+    height: 50px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.layuimini-main-help .page-title {
+    display: inline-block;
+    line-height: 50px;
+    color: #17142a;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.layuimini-main-help .page-back {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(123, 47, 242, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    text-align: left;
+    cursor: pointer;
+}
+
+.layuimini-main-help .page-back .back-icon {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin-left: 3px;
+    border-left: 2px solid #7b2ff2;
+    border-bottom: 2px solid #7b2ff2;
+    transform: rotate(45deg);
+}
+
+.layuimini-main-help .page-intro,
+.layuimini-main-help .change,
+.layuimini-main-help .content {
+    position: relative;
+    border: 1px solid rgba(123, 47, 242, 0.12);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top left, rgba(123, 47, 242, 0.12), transparent 38%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 244, 255, 0.98) 100%);
+    box-shadow: 0 20px 48px rgba(76, 37, 145, 0.1);
+}
+
+.layuimini-main-help .page-intro {
+    margin: 0;
+    padding: 18px 18px 18px 46px;
+    font-size: 14px;
+    line-height: 1.75;
+    text-align: left;
+    color: #4a4260 !important;
+}
+
+.layuimini-main-help .page-intro::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7b2ff2, #9747ff);
+    box-shadow: 0 0 0 6px rgba(123, 47, 242, 0.1);
+}
+
+.layuimini-main-help .change {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+    padding: 10px;
+    text-align: center;
+}
+
+.layuimini-main-help .change > div {
+    position: relative;
+    min-width: 0;
+    padding: 14px 12px;
+    border: 1px solid rgba(123, 47, 242, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.88);
+    color: #241d36 !important;
+    cursor: pointer;
+    transition: all 0.22s ease;
+}
+
+.layuimini-main-help .change > div div:last-child {
+    color: #7a738f !important;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.layuimini-main-help .change .select {
+    border-color: rgba(123, 47, 242, 0.22);
+    background:
+        radial-gradient(circle at top, rgba(123, 47, 242, 0.12), transparent 40%),
+        rgba(250, 248, 255, 0.98);
+    color: #5f1fd7 !important;
+    box-shadow: 0 14px 30px rgba(123, 47, 242, 0.12);
+}
+
+.layuimini-main-help .change .fuli {
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    transform: translateX(-50%);
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #7b2ff2, #9747ff);
+    box-shadow: 0 8px 18px rgba(123, 47, 242, 0.18);
+    font-size: 11px;
+    color: #ffffff;
+}
+
+.layuimini-main-help .content {
+    margin-top: 16px;
+    padding: 18px;
+}
+
+.layuimini-main-help .content > div {
+    color: #3f3853;
+}
+
+.layuimini-main-help .content > div .title {
+    margin: 0 0 14px;
+    padding: 0;
+    border: 0 !important;
+    background: transparent !important;
+    border-radius: 0;
+    text-align: center;
+    font-size: 24px;
+    line-height: 1.25;
+    color: #181326 !important;
+}
+
+.layuimini-main-help .content .outline {
+    display: none;
+}
+
+.layuimini-main-help .content .appstore {
+    display: block;
+}
+
+.layuimini-main-help .content .outline .step {
+    margin-top: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #241d36 !important;
+}
+
+.layuimini-main-help .content .outline .step-desc {
+    margin-top: 10px;
+    padding: 16px;
+    border: 1px solid rgba(123, 47, 242, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.88);
+    color: #5f5875 !important;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.layuimini-main-help .content .outline .step-desc span,
+.layuimini-main-help .content .appstore .step span,
+.layuimini-main-help .content .appstore a {
+    color: #7b2ff2 !important;
+    font-weight: 700;
+}
+
+.layuimini-main-help .content .outline .step-desc img {
+    display: block;
+    width: min(100%, 287px);
+    margin: 14px auto 0;
+    border-radius: 16px;
+    box-shadow: 0 14px 28px rgba(76, 37, 145, 0.12);
+}
+
+.layuimini-main-help .appstore-intro,
+.layuimini-main-help .content .appstore .warning {
+    margin-bottom: 16px;
+    padding: 14px 16px !important;
+    border: 1px solid rgba(123, 47, 242, 0.12);
+    border-radius: 18px;
+    background: rgba(123, 47, 242, 0.06) !important;
+    color: #5f5875;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.layuimini-main-help .layui-collapse {
+    border: 0;
+    background: transparent !important;
+}
+
+.layuimini-main-help .layui-colla-item {
+    margin-bottom: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 47, 242, 0.08) !important;
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at top, rgba(123, 47, 242, 0.08), transparent 42%),
+        rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 14px 28px rgba(76, 37, 145, 0.08);
+}
+
+.layuimini-main-help .layui-colla-title {
+    position: relative;
+    min-height: 56px;
+    padding: 16px 44px 16px 18px;
+    border: 0;
+    background: transparent !important;
+    color: #241d36 !important;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 800;
+}
+
+.layuimini-main-help .layui-colla-title .layui-icon.layui-colla-icon {
+    display: none !important;
+}
+
+.layuimini-main-help .layui-colla-title::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #7b2ff2;
+    border-bottom: 2px solid #7b2ff2;
+    transform: translateY(-65%) rotate(45deg);
+    transition: transform 0.22s ease;
+}
+
+.layuimini-main-help .layui-colla-title.is-open::after {
+    transform: translateY(-35%) rotate(-135deg);
+}
+
+.layuimini-main-help .layui-colla-content {
+    padding: 0 18px 18px;
+    border-top: 1px solid rgba(123, 47, 242, 0.08);
+    color: #5f5875 !important;
+    background: transparent !important;
+}
+
+.layuimini-main-help .content .appstore .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding: 14px;
+    border: 1px solid rgba(123, 47, 242, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.layuimini-main-help .content .appstore .step > div:first-child {
+    flex: 1;
+    min-width: 0;
+    color: #5b5470;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.layuimini-main-help .content .appstore .step .btns {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 66px;
+    margin: 0 0 10px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(123, 47, 242, 0.14);
+    background: rgba(123, 47, 242, 0.08);
+    color: #7b2ff2;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.layuimini-main-help .content .appstore .step img {
+    width: 96px;
+    height: auto;
+    flex: 0 0 auto;
+    border-radius: 14px;
+    box-shadow: 0 12px 24px rgba(76, 37, 145, 0.1);
+}
+
+.layuimini-main-help .content .appstore .layui-colla-content button {
+    display: block;
+    width: min(100%, 220px);
+    height: 46px;
+    margin: 8px auto 20px;
+    border: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7b2ff2 0%, #9747ff 100%);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 46px;
+    box-shadow: 0 16px 28px rgba(123, 47, 242, 0.18);
+}
+
+.layuimini-main-help text[style*="#DD2828"],
+.layuimini-main-help span[style*="#DD2828"],
+.layuimini-main-help div[style*="#DD2828"] {
+    color: #ff8c79 !important;
+}
+
+@media (max-width: 420px) {
+    .layuimini-main-help {
+        padding: 16px 14px 24px;
+    }
+
+    .layuimini-main-help .page-intro,
+    .layuimini-main-help .change,
+    .layuimini-main-help .content {
+        border-radius: 20px;
+    }
+
+    .layuimini-main-help .page-intro {
+        padding: 16px 16px 16px 42px;
+        font-size: 13px;
+    }
+
+    .layuimini-main-help .change {
+        grid-template-columns: 1fr;
+    }
+
+    .layuimini-main-help .content > div .title {
+        font-size: 21px;
+    }
+
+    .layuimini-main-help .content .appstore .step {
+        flex-direction: column;
+    }
+
+    .layuimini-main-help .content .appstore .step img {
+        width: min(100%, 180px);
+        margin: 0 auto;
+    }
+}

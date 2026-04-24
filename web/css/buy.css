@@ -1,0 +1,491 @@
+.layuimini-main-buy {
+    min-height: calc(100% - 68px);
+    padding: 0 0 40px;
+    background: #ffffff;
+    color: #222222;
+}
+
+.layuimini-main-buy * {
+    box-sizing: border-box;
+}
+
+.layuimini-main-buy .package-level,
+.layuimini-main-buy .tips,
+.layuimini-main-buy .select-postage,
+.layuimini-main-buy .postage-body,
+.layuimini-main-buy .payment-methods,
+.layuimini-main-buy .pay,
+.layuimini-main-buy .windows {
+    width: min(690px, calc(100% - 32px));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.layuimini-main-buy .package-level {
+    padding-top: 18px;
+}
+
+.layuimini-main-buy .tab-box {
+    position: relative;
+    height: 50px;
+}
+
+.layuimini-main-buy .tab-box button {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: calc(50% + 9px);
+    height: 36px;
+    border: 0;
+    line-height: 36px;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #6e6f75;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.layuimini-main-buy .tab-box .normal {
+    left: 0;
+    background-image: url("../images/vip-bg.png");
+    color: #6f2f22;
+}
+
+.layuimini-main-buy .tab-box .super {
+    right: 0;
+    background-image: url("../images/svip-bg.png");
+    color: #f0b45d;
+}
+
+.layuimini-main-buy .tab-box .current {
+    width: 55%;
+    height: 50px;
+    line-height: 50px;
+    z-index: 10;
+}
+
+.layuimini-main-buy .tab-box .current img{
+    width: 16px;
+}
+
+.layuimini-main-buy .tab-box .normal.current,
+.layuimini-main-buy .tab-box .normal.select {
+    background-image: url("../images/vip-bg-select.png");
+}
+
+.layuimini-main-buy .tab-box .super.current,
+.layuimini-main-buy .tab-box .super.select {
+    background-image: url("../images/svip-bg-select.png");
+}
+
+.layuimini-main-buy .tab-box img {
+    width: 12px;
+    object-fit: contain;
+}
+
+.layuimini-main-buy .tips {
+    padding-top: 22px;
+    color: #727784;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.layuimini-main-buy .tips p + p {
+    margin-top: 4px;
+}
+
+.layuimini-main-buy .select-postage {
+    padding-top: 34px;
+    color: #1f1f1f;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.layuimini-main-buy .payment-title {
+    padding-top: 28px;
+}
+
+.layuimini-main-buy .postage-body {
+    padding-top: 16px;
+}
+
+.layuimini-main-buy .package {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.layuimini-main-buy .package li {
+    position: relative;
+    padding: 16px 10px 18px;
+    border: 1px solid #e8e8e8;
+    background: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.layuimini-main-buy .package li.select,
+.layuimini-main-buy .package li.selected {
+    border: 2px solid #edb15a;
+    background: #fff8ee;
+}
+
+.layuimini-main-buy .package li .day {
+    position: relative;
+    
+    color: #6f6f75;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.layuimini-main-buy .package li .day span {
+    display: block;
+    font-size: 15px;
+}
+
+.layuimini-main-buy .package li .day .add {
+    position: absolute;
+    left: 50%;
+    top: 28px;
+    transform: translateX(-50%);
+    width: 100%;
+    color: #e39e3f;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.layuimini-main-buy .package li .price {
+    padding-top: 10px;
+}
+
+.layuimini-main-buy .package li .price > div:first-child {
+    color: #edb15a;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.layuimini-main-buy .package li .price i {
+    font-style: normal;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.layuimini-main-buy .package li .price .addDay {
+    display: block;
+    min-height: 20px;
+    margin-top: 10px;
+    color: #d29134;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.layuimini-main-buy .package li .real-money {
+   
+    color: #8b919b;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.layuimini-main-buy .payment-methods {
+    padding-top: 10px;
+}
+
+.layuimini-main-buy .payment-methods ul {
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.layuimini-main-buy .payment-methods li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 4px;
+    border-bottom: 1px solid #f3f3f3;
+    cursor: pointer;
+}
+
+.layuimini-main-buy .payment-methods li:last-child {
+    border-bottom: 0;
+}
+
+.layuimini-main-buy .payment-methods li > img {
+    width: auto;
+    height: 28px;
+}
+
+.layuimini-main-buy .payment-methods li span {
+    flex: 1 1 auto;
+    min-width: 0;
+    color: #2d3139;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.layuimini-main-buy .payment-methods li div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+}
+
+.layuimini-main-buy .payment-methods li div img {
+    width: 16px;
+    height: 16px;
+}
+
+.layuimini-main-buy .pay {
+    padding-top: 26px;
+}
+
+.layuimini-main-buy .pay button {
+    width: 100%;
+    height: 56px;
+    border: 0;
+    background: #262626;
+    color: #f0b45d;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+
+.layuimini-main-buy .fa-cut {
+    height: 18px;
+    margin-top: 48px;
+    background: #fff7ea;
+}
+
+.layuimini-main-buy .windows {
+    padding-top: 38px;
+}
+
+.layuimini-main-buy .desc-window {
+    border: 1px solid #eeeeee;
+    background: #ffffff;
+}
+
+.layuimini-main-buy .window-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    height: 82px;
+    background: #333b5a;
+    color: #f0b45d;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.layuimini-main-buy .window-title div {
+    width: 28%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.86);
+}
+
+.layuimini-main-buy .desc-window ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.layuimini-main-buy .desc-window li {
+    display: grid;
+    grid-template-rows: repeat(7, minmax(52px, auto));
+}
+
+.layuimini-main-buy .desc-window li div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 8px;
+    color: #8a9099;
+    font-size: 15px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.layuimini-main-buy .desc-window li div:first-child {
+    background: #fff7ea;
+    color: #7d848d;
+    font-weight: 600;
+}
+
+.layuimini-main-buy .desc-window li:nth-child(2n) div:not(:first-child) {
+    background: #fafafa;
+}
+
+.layuimini-main-buy .show {
+    position: absolute;
+    inset: 0;
+    display: none;
+    background: rgba(0, 0, 0, 0.26);
+}
+
+.layuimini-main-buy .show .dialog-card {
+    position: relative;
+    width: min(320px, calc(100% - 36px));
+    margin: 120px auto 0;
+    padding: 22px 20px 18px;
+    border: 1px solid #ece3d6;
+    background: #ffffff;
+    text-align: center;
+}
+
+.layuimini-main-buy .show .dialog-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+    background: #fff5e8;
+}
+
+.layuimini-main-buy .show .dialog-icon img {
+    width: 42px;
+    height: 42px;
+}
+
+.layuimini-main-buy .show .title {
+    margin-top: 16px;
+    color: #1f1f1f;
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.layuimini-main-buy .show .desc {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #faf7f2;
+    border: 1px solid #eee6dc;
+    color: #737882;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.layuimini-main-buy .show .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #ece3d6;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.layuimini-main-buy .show .close img {
+    width: 12px;
+    height: 12px;
+}
+
+.layuimini-main-buy .show .bottom {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.layuimini-main-buy .show .bottom button {
+    height: 42px;
+    border: 1px solid #d6cec2;
+    background: #ffffff;
+    color: #666d77;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.layuimini-main-buy .show .bottom .success {
+    border-color: #262626;
+    background: #262626;
+    color: #f0b45d;
+}
+/* 
+@media (max-width: 520px) {
+    .layuimini-main-buy .package-level,
+    .layuimini-main-buy .tips,
+    .layuimini-main-buy .select-postage,
+    .layuimini-main-buy .postage-body,
+    .layuimini-main-buy .payment-methods,
+    .layuimini-main-buy .pay,
+    .layuimini-main-buy .windows {
+        width: calc(100% - 24px);
+    }
+
+    .layuimini-main-buy .tab-box button {
+        width: calc(50% + 6px);
+        height: 70px;
+        gap: 8px;
+        line-height: 70px;
+        font-size: 16px;
+    }
+
+    .layuimini-main-buy .tab-box {
+        height: 88px;
+    }
+
+    .layuimini-main-buy .tab-box .current {
+        width: 50%;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .layuimini-main-buy .tab-box img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .layuimini-main-buy .tips {
+        font-size: 14px;
+    }
+
+    .layuimini-main-buy .package {
+        gap: 10px;
+    }
+
+    .layuimini-main-buy .package li {
+        min-height: 188px;
+        padding: 14px 6px 16px;
+    }
+
+    .layuimini-main-buy .package li .day span {
+        font-size: 14px;
+    }
+
+    .layuimini-main-buy .package li .price i {
+        font-size: 34px;
+    }
+
+    .layuimini-main-buy .package li .real-money,
+    .layuimini-main-buy .package li .price .addDay {
+        font-size: 11px;
+    }
+
+    .layuimini-main-buy .window-title {
+        height: 70px;
+        gap: 10px;
+        font-size: 17px;
+    }
+
+    .layuimini-main-buy .desc-window li {
+        grid-template-rows: repeat(7, minmax(44px, auto));
+    }
+
+    .layuimini-main-buy .desc-window li div {
+        padding: 8px 4px;
+        font-size: 12px;
+    }
+} */

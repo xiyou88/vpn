@@ -1,0 +1,200 @@
+.layuimini-main-broadcast {
+    min-height: 100%;
+    padding: 0 0 24px;
+    color: #111827;
+    background: #ffffff;
+}
+
+.layuimini-main-broadcast .page-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: 52px;
+    margin-bottom: 14px;
+    text-align: center;
+    background: #ffffff;
+    border-bottom: 1px solid #eef1f4;
+}
+
+.layuimini-main-broadcast .page-title {
+    display: inline-block;
+    line-height: 52px;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.layuimini-main-broadcast .page-back {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    background: #ffffff;
+    cursor: pointer;
+    text-align: left;
+}
+
+.layuimini-main-broadcast .page-back .back-icon {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin-left: 3px;
+    border-left: 2px solid #26ccc4;
+    border-bottom: 2px solid #26ccc4;
+    transform: rotate(45deg);
+}
+
+.layuimini-main-broadcast .broadcast-summary {
+    margin: 0 14px 12px;
+    padding: 14px;
+    border: 1px solid #e8edf2;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.layuimini-main-broadcast .summary-title {
+    color: #111827;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.layuimini-main-broadcast .summary-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.layuimini-main-broadcast .summary-count em {
+    color: #26ccc4;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.layuimini-main-broadcast .broadcast-panel {
+    margin: 0 14px;
+    padding: 0;
+    border: 1px solid #e8edf2;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.layuimini-main-broadcast .panel-head {
+    padding: 14px 14px 0;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.layuimini-main-broadcast .content {
+    margin: 0 auto;
+}
+
+.layuimini-main-broadcast .broadcast-list {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 14px 14px;gap: 10px;
+}
+
+.layuimini-main-broadcast .broadcast-item {
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
+    background: #ffffff;
+}
+
+.layuimini-main-broadcast .broadcast-item:last-child {
+    border-bottom: none;
+}
+
+.layuimini-main-broadcast .item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.layuimini-main-broadcast .item-time {
+    color: #9ca3af;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.layuimini-main-broadcast .item-body {
+    padding: 0;
+}
+
+.layuimini-main-broadcast .item-content {
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.8;
+    word-break: break-word;
+}
+
+.layuimini-main-broadcast .item-content p {
+    margin: 0;
+}
+
+.layuimini-main-broadcast .item-content p + p {
+    margin-top: 8px;
+}
+
+.layuimini-main-broadcast .broadcast-empty {
+    margin: 14px;
+    padding: 32px 20px;
+    border: 1px solid #e8edf2;
+    border-radius: 14px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.layuimini-main-broadcast .empty-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #26ccc4;
+    font-size: 24px;
+}
+
+.layuimini-main-broadcast .empty-title {
+    margin-top: 12px;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.layuimini-main-broadcast .empty-desc {
+    margin-top: 8px;
+    color: #9ca3af;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media screen and (max-width: 768px) {
+    .layuimini-main-broadcast .summary-meta,
+    .layuimini-main-broadcast .item-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .layuimini-main-broadcast .item-time {
+        white-space: normal;
+    }
+}

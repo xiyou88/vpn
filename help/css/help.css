@@ -1,0 +1,82 @@
+.layuimini-main-contact .title{
+    text-align:center;
+    color:rgba(10,22,40,0.7);
+    line-height:26px;
+    background:rgba(38,204,196,0.06);
+    border-left:3px solid #26ccc4;
+    padding:10px 14px;
+    margin:14px 12px;
+    font-size:14px;
+    border-radius:0 8px 8px 0;
+}
+.layuimini-main-contact .title a{color:#26ccc4;font-weight:600;}
+
+.layuimini-main-contact .body{text-align:center;width:100%;max-width:320px;margin:0 auto;padding:0 12px;}
+.layuimini-main-contact .body > div:first-child{
+    font-size:17px;font-weight:700;margin:20px 0 12px;color:#0a1628;
+}
+.layuimini-main-contact .body > button{
+    display:block;margin:0 auto;
+    width:230px;height:46px;
+    border:1.5px solid rgba(38,204,196,0.25);
+    border-radius:23px;
+    color:rgba(10,22,40,0.5);
+    background:rgba(38,204,196,0.04);
+    font-size:14px;cursor:pointer;
+    transition:all .2s;
+    font-family:inherit;
+}
+.layuimini-main-contact .body > button + button{margin-top:10px;margin-bottom:15px;}
+.layuimini-main-contact .body > button.select{
+    background:linear-gradient(135deg,#26ccc4,#1aa09a);
+    color:#fff;border-color:transparent;font-weight:700;
+    box-shadow:0 4px 16px rgba(38,204,196,0.28);
+}
+
+.layuimini-main-contact .body .content{margin-top:20px;}
+.layuimini-main-contact .body .content .mainland{display:block;}
+.layuimini-main-contact .body .content .oveas{display:none;}
+
+.layuimini-main-contact .body .content .mainland ul{padding-bottom:24px;}
+.layuimini-main-contact .body .content .mainland ul li{
+    cursor:pointer;border-radius:12px;
+    background:#fff;
+    border:1px solid rgba(38,204,196,0.15);
+    padding:14px 16px;margin-top:12px;
+    display:flex;align-items:center;
+    transition:all .25s;text-align:left;
+    box-shadow:0 2px 12px rgba(38,204,196,0.06);
+}
+.layuimini-main-contact .body .content .mainland ul li:hover{
+    background:rgba(38,204,196,0.06);
+    border-color:rgba(38,204,196,0.35);
+    box-shadow:0 4px 20px rgba(38,204,196,0.12);
+    transform:translateY(-1px);
+}
+.layuimini-main-contact .body .content .mainland ul li > div:first-child{width:92%;text-align:left;}
+.layuimini-main-contact .body .content .mainland ul li > div:last-child{
+    font-weight:bold;color:#26ccc4;font-size:18px;flex-shrink:0;
+}
+.layuimini-main-contact .body .content .mainland ul li > div > div:first-child{
+    font-size:15px;font-weight:700;color:#0a1628;margin-bottom:3px;
+}
+.layuimini-main-contact .body .content .mainland ul li > div > div:last-child{
+    font-size:13px;color:rgba(10,22,40,0.45);
+}
+.layuimini-main-contact .body .content .mainland ul li > div span{color:#26ccc4;}
+
+.layuimini-main-contact .body .content .oveas{padding:12px 0 24px;text-align:center;}
+.layuimini-main-contact .body .content .oveas > div:first-child{
+    font-size:17px;font-weight:700;color:#0a1628;margin-bottom:16px;
+}
+.layuimini-main-contact .body .content .oveas button{
+    margin:12px auto;display:block;
+    font-size:15px;font-weight:700;color:#fff;
+    width:230px;height:46px;
+    background:linear-gradient(135deg,#26ccc4,#1aa09a);
+    text-align:center;border-radius:23px;border:none;cursor:pointer;
+    box-shadow:0 4px 16px rgba(38,204,196,0.28);transition:all .25s;
+}
+.layuimini-main-contact .body .content .oveas > div:last-child{
+    font-size:14px;color:rgba(10,22,40,0.45);
+}

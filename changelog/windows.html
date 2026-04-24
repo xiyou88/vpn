@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>发布日志</title>
+
+<style>
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #222;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(#c7d2fe, transparent);
+  }
+
+  .item {
+    position: relative;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s forwards;
+  }
+
+  .item:nth-child(2) { animation-delay: 0.15s; }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .dot {
+    position: absolute;
+    left: -2px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #6366f1;
+    box-shadow: 0 0 10px rgba(99,102,241,0.6);
+    transition: all 0.3s;
+  }
+
+  .item:hover .dot {
+    transform: scale(1.4);
+  }
+
+  .card {
+    position: relative;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  .meta {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 6px;
+  }
+
+  .title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .tags {
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-right: 6px;
+  }
+
+  .new { background: #e0e7ff; color: #3730a3; }
+  .opt { background: #dcfce7; color: #166534; }
+  .fix { background: #fee2e2; color: #991b1b; }
+
+  .content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s;
+    opacity: 0;
+  }
+
+  .content.open {
+    opacity: 1;
+    max-height: 200px;
+    margin-top: 10px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
+    color: #555;
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>What's New</h1>
+
+  <div class="timeline">
+
+    <div class="item">
+      <div class="dot"></div>
+      <div class="card">
+        <div class="meta">V3.0.0 · 2026-04-17</div>
+        <div class="content open">
+          <ul>
+            <li>1. 新增手机号换绑入口</li>
+            <li>2. 优化网络稳定性</li>
+            <li>3. 丰富首页自动诊断功能</li>
+            <li>4. 底层优化，更稳定和流畅</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+      const content = card.querySelector(".content");
+      content.classList.toggle("open");
+    });
+
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--x", e.clientX - rect.left + "px");
+      card.style.setProperty("--y", e.clientY - rect.top + "px");
+    });
+  });
+</script>
+
+</body>
+</html>

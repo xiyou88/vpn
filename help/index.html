@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title class="icon-title">西柚加速器</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="lib/layui-v2.6.7/css/layui.css" media="all">
+    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="css/layuimini.css" media="all">
+    <link rel="stylesheet" href="css/themes/default.css" media="all">
+    <link rel="stylesheet" href="css/public.css" media="all">
+    <link rel="stylesheet" href="css/index.css" media="all">
+    <link rel="stylesheet" type="text/css" href="./css/user.css">
+    <link rel="stylesheet" type="text/css" href="./css/broadcast.css">
+    <link rel="stylesheet" type="text/css" href="./css/buy.css">
+    <link rel="stylesheet" type="text/css" href="css/help.css">
+    <link rel="stylesheet" type="text/css" href="./css/feedback.css">
+    <link rel="stylesheet" type="text/css" href="./css/feedback_list.css">
+    <link rel="stylesheet" type="text/css" href="./css/route.css">
+    <link rel="stylesheet" type="text/css" href="./css/update-password.css">
+    <link rel="stylesheet" href="./css/mescroll.min.css" media="all">
+    <link rel="apple-touch-icon" sizes="108x108" href="./images/icon-cp.png">
+    <link rel="icon" href="./favicon.ico">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+<body class="layui-layout-body layuimini-all">
+<canvas id="bgCanvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
+<div class="layui-layout layui-layout-admin">
+    <div>
+        <div class="layui-body">
+            <div class="mescroll"  id="mescroll-3">
+                <div class="layuimini-content-page">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="lib/layui-v2.6.7/layui.js" charset="utf-8"></script>
+<script src="js/lay-config.js" charset="utf-8"></script>
+<script src="js/utils.js" charset="utf-8"></script>
+<script src="js/md5.min.js" charset="utf-8"></script>
+<script src="js/mescroll.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    layui.use(['jquery', 'layer','miniAdmin','miniPage'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            miniAdmin = layui.miniAdmin,
+            miniPage = layui.miniPage;
+ 
+
+        var index = 0;
+        var options = {
+            renderPageVersion: false,    // 初始化页面是否加版本号
+            bgColorDefault: false,      // 主题默认配置
+            multiModule: false,          // 是否开启多模块
+            menuChildOpen: false,       // 是否默认展开菜单
+            loadingTime: 0,             // 初始化加载时间
+            pageAnim: true,             // 切换菜单动画
+        };
+
+        miniAdmin.render(options);
+    });
+</script>
+<script>
+(function(){
+    var c=document.getElementById("bgCanvas");
+    if(!c)return;
+    var x=c.getContext("2d"),W,H,pts=[],N=50,A="38,204,196";
+    function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+    function mk(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.8+.8,a:Math.random()*.22+.06};}
+    function init(){resize();pts=[];for(var i=0;i<N;i++)pts.push(mk());}
+    function frame(){
+        x.clearRect(0,0,W,H);
+        pts.forEach(function(p){
+            p.x+=p.vx;p.y+=p.vy;
+            if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+            if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+            x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);
+            x.fillStyle="rgba("+A+","+p.a+")";x.fill();
+        });
+        for(var i=0;i<pts.length-1;i++){
+            for(var j=i+1;j<pts.length;j++){
+                var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+                if(d<130){x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);
+                    x.strokeStyle="rgba("+A+","+(1-d/130)*.08+")";x.lineWidth=.7;x.stroke();}
+            }
+        }
+        requestAnimationFrame(frame);
+    }
+    window.addEventListener("resize",init);
+    init();frame();
+})();
+</script>
+</body>
+</html>

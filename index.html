@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西柚VPN - 全球加速，突破限制，自由上网</title>
+    <meta name="apple-mobile-web-app-title" content="西柚VPN">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="./image/touch-icon-iphone.png">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg2: #f2fbfa;
+            --bg3: #e6f7f6;
+            --accent: #26ccc4;
+            --accent-light: #4de8e0;
+            --accent-dark: #1aa09a;
+            --accent-glow: rgba(38,204,196,0.10);
+            --accent-glow-md: rgba(38,204,196,0.18);
+            --accent-glow-strong: rgba(38,204,196,0.35);
+            --text: #0a1628;
+            --text-muted: rgba(10,22,40,0.52);
+            --text-dim: rgba(10,22,40,0.32);
+            --border: rgba(38,204,196,0.30);
+            --border-dim: rgba(10,22,40,0.08);
+            --card-bg: rgba(38,204,196,0.04);
+            --card-hover: rgba(38,204,196,0.08);
+            --radius: 18px;
+            --radius-sm: 12px;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{
+            background:var(--bg);
+            color:var(--text);
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+            line-height:1.6;
+            overflow-x:hidden;
+        }
+
+        /* ── Nav ── */
+        .nav{
+            position:fixed;top:0;left:0;right:0;z-index:1000;
+            padding:0 24px;
+            background:rgba(255,255,255,0.85);
+            backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px);
+            border-bottom:1px solid var(--border-dim);
+            box-shadow:0 1px 24px rgba(0,0,0,0.06);
+            transition:all .3s;
+        }
+        .nav.scrolled{background:rgba(255,255,255,0.97);}
+        .nav-inner{
+            max-width:1200px;margin:0 auto;
+            display:flex;align-items:center;justify-content:space-between;
+            height:64px;
+        }
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+        .logo-icon{font-size:26px;line-height:1;}
+        .logo-text{
+            font-size:20px;font-weight:700;color:var(--text);
+            letter-spacing:.5px;
+        }
+        .logo-accent{color:var(--accent);}
+        .nav-links{display:flex;gap:32px;}
+        .nav-links a{
+            color:var(--text-muted);text-decoration:none;
+            font-size:14px;font-weight:500;
+            transition:color .2s;
+        }
+        .nav-links a:hover{color:var(--accent);}
+        .nav-cta{
+            background:var(--accent);color:#ffffff;
+            padding:9px 22px;border-radius:100px;
+            font-size:14px;font-weight:700;
+            text-decoration:none;
+            transition:all .2s;
+            box-shadow:0 0 20px var(--accent-glow-md);
+        }
+        .nav-cta:hover{
+            background:var(--accent-light);
+            box-shadow:0 0 30px var(--accent-glow-strong);
+            transform:translateY(-1px);
+        }
+        .nav-menu-btn{
+            display:none;background:none;border:none;
+            color:var(--text);font-size:22px;cursor:pointer;padding:4px;
+        }
+
+        /* ── Smart detect banner ── */
+        .detect-banner{
+            position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+            z-index:999;
+            background:rgba(255,255,255,0.97);
+            border:1px solid var(--border);
+            border-radius:100px;
+            padding:12px 20px;
+            display:flex;align-items:center;gap:12px;
+            backdrop-filter:blur(20px);
+            box-shadow:0 8px 40px rgba(0,0,0,0.10),0 0 20px var(--accent-glow);
+            white-space:nowrap;
+            transition:all .4s;
+        }
+        .detect-icon{font-size:20px;}
+        .detect-text{font-size:14px;color:var(--text-muted);}
+        .detect-text strong{color:var(--text);}
+        .detect-btn{
+            background:var(--accent);color:#ffffff;
+            padding:7px 18px;border-radius:100px;
+            font-size:13px;font-weight:700;
+            text-decoration:none;
+            transition:all .2s;
+        }
+        .detect-btn:hover{background:var(--accent-light);}
+        .detect-close{
+            background:none;border:none;
+            color:var(--text-dim);font-size:18px;
+            cursor:pointer;padding:0 4px;
+            transition:color .2s;line-height:1;
+        }
+        .detect-close:hover{color:var(--text);}
+
+        /* ── Hero ── */
+        .hero{
+            position:relative;min-height:100vh;
+            display:flex;align-items:center;justify-content:center;
+            padding:100px 24px 60px;
+            overflow:hidden;
+        }
+        #heroCanvas{
+            position:absolute;inset:0;width:100%;height:100%;
+            pointer-events:none;
+        }
+        .hero-glow{
+            position:absolute;
+            width:600px;height:600px;
+            border-radius:50%;
+            background:radial-gradient(circle,rgba(38,204,196,.12) 0%,transparent 70%);
+            top:50%;left:50%;
+            transform:translate(-50%,-50%);
+            pointer-events:none;
+        }
+        .hero-content{
+            position:relative;z-index:2;
+            text-align:center;max-width:760px;
+            margin:0 auto;
+        }
+        .hero-badge{
+            display:inline-flex;align-items:center;gap:8px;
+            background:rgba(38,204,196,.08);
+            border:1px solid rgba(38,204,196,.25);
+            color:var(--accent);
+            padding:7px 18px;border-radius:100px;
+            font-size:13px;font-weight:600;
+            margin-bottom:32px;
+            letter-spacing:.3px;
+        }
+        .hero-badge::before{
+            content:'';width:7px;height:7px;border-radius:50%;
+            background:var(--accent);
+            box-shadow:0 0 8px var(--accent);
+            animation:pulse 2s infinite;
+        }
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+        .hero-title{
+            font-size:clamp(42px,7vw,80px);
+            font-weight:800;
+            line-height:1.1;
+            letter-spacing:-1px;
+            margin-bottom:24px;
+        }
+        .gradient-text{
+            background:linear-gradient(135deg,#1aa09a,var(--accent),#26ccc4);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+        }
+        .hero-sub{
+            font-size:16px;
+            color:var(--text-muted);
+            margin-bottom:40px;
+            line-height:1.8;
+        }
+        .hero-actions{
+            display:flex;align-items:center;justify-content:center;
+            gap:16px;flex-wrap:wrap;
+            margin-bottom:48px;
+        }
+        .btn-primary{
+            display:inline-flex;align-items:center;gap:10px;
+            background:var(--accent);
+            color:#ffffff;
+            padding:16px 36px;border-radius:100px;
+            font-size:16px;font-weight:700;
+            text-decoration:none;
+            transition:all .25s;
+            box-shadow:0 0 30px var(--accent-glow-md),0 4px 16px rgba(38,204,196,.25);
+        }
+        .btn-primary:hover{
+            background:var(--accent-dark);
+            transform:translateY(-2px);
+            box-shadow:0 0 40px var(--accent-glow-strong),0 8px 24px rgba(38,204,196,.3);
+        }
+        .btn-primary svg,.btn-ghost svg{width:18px;height:18px;flex-shrink:0;}
+        .btn-ghost{
+            display:inline-flex;align-items:center;gap:8px;
+            color:var(--text-muted);
+            padding:16px 28px;border-radius:100px;
+            font-size:15px;font-weight:600;
+            text-decoration:none;
+            border:1px solid var(--border-dim);
+            transition:all .25s;
+        }
+        .btn-ghost:hover{
+            color:var(--text);
+            border-color:var(--border);
+            background:var(--card-hover);
+        }
+        .hero-trust{
+            display:flex;align-items:center;justify-content:center;
+            gap:24px;flex-wrap:wrap;
+            font-size:13px;color:var(--text-dim);
+        }
+        .hero-trust span{display:flex;align-items:center;gap:6px;}
+        .hero-trust span::before{content:'✓';color:var(--accent);font-weight:700;}
+
+        /* ── Stats ── */
+        .stats{
+            background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+            padding:48px 24px;
+            border-top:1px solid var(--border-dim);
+            border-bottom:1px solid var(--border-dim);
+        }
+        .stats-inner{
+            max-width:900px;margin:0 auto;
+            display:grid;grid-template-columns:repeat(4,1fr);
+            gap:0;
+        }
+        .stat-item{
+            text-align:center;padding:24px 16px;
+            border-right:1px solid var(--border-dim);
+        }
+        .stat-item:last-child{border-right:none;}
+        .stat-num{
+            font-size:clamp(32px,4vw,52px);
+            font-weight:800;
+            color:var(--accent);
+            line-height:1;
+            margin-bottom:8px;
+            font-variant-numeric:tabular-nums;
+        }
+        .stat-suffix{font-size:.6em;font-weight:700;vertical-align:super;}
+        .stat-label{font-size:13px;color:var(--text-muted);font-weight:500;}
+
+        /* ── Section commons ── */
+        .section-header{
+            text-align:center;max-width:640px;margin:0 auto 64px;
+        }
+        .section-tag{
+            display:inline-block;
+            background:var(--accent-glow);
+            color:var(--accent);
+            border:1px solid var(--border);
+            padding:5px 16px;border-radius:100px;
+            font-size:12px;font-weight:700;
+            letter-spacing:1px;text-transform:uppercase;
+            margin-bottom:20px;
+        }
+        .section-title{
+            font-size:clamp(28px,4vw,44px);
+            font-weight:800;margin-bottom:16px;
+            line-height:1.2;
+        }
+        .section-sub{
+            font-size:15px;color:var(--text-muted);
+            line-height:1.8;
+        }
+
+        /* ── Features ── */
+        .features{
+            padding:100px 24px;
+            background:var(--bg);
+        }
+        .features-wrap{max-width:1200px;margin:0 auto;}
+        .features-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:20px;
+        }
+        .feature-card{
+            background:var(--card-bg);
+            border:1px solid var(--border-dim);
+            border-radius:var(--radius);
+            padding:32px 28px;
+            transition:all .3s;
+            position:relative;overflow:hidden;
+        }
+        .feature-card::before{
+            content:'';
+            position:absolute;inset:0;
+            border-radius:var(--radius);
+            background:radial-gradient(circle at 0% 0%,var(--accent-glow) 0%,transparent 60%);
+            opacity:0;
+            transition:opacity .4s;
+        }
+        .feature-card:hover{
+            border-color:var(--border);
+            transform:translateY(-4px);
+            box-shadow:0 20px 50px rgba(38,204,196,.10),0 0 0 1px var(--border);
+        }
+        .feature-card:hover::before{opacity:1;}
+        .feature-icon{
+            width:52px;height:52px;border-radius:14px;
+            background:var(--accent-glow);
+            border:1px solid var(--border);
+            display:flex;align-items:center;justify-content:center;
+            font-size:24px;margin-bottom:20px;
+            flex-shrink:0;
+        }
+        .feature-title{
+            font-size:17px;font-weight:700;
+            margin-bottom:10px;color:var(--text);
+        }
+        .feature-desc{
+            font-size:14px;color:var(--text-muted);
+            line-height:1.75;
+        }
+        .feature-card.featured{
+            border-color:var(--border);
+            background:linear-gradient(135deg,rgba(38,204,196,.08),rgba(38,204,196,.03));
+            grid-column:span 1;
+        }
+
+        /* ── Coverage ── */
+        .coverage{
+            padding:100px 24px;
+            background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%);
+        }
+        .coverage-wrap{max-width:1100px;margin:0 auto;}
+        .coverage-inner{
+            display:grid;grid-template-columns:1fr 1fr;
+            gap:60px;align-items:center;
+        }
+        .coverage-globe{
+            position:relative;
+            aspect-ratio:1;
+            display:flex;align-items:center;justify-content:center;
+        }
+        .globe-ring{
+            position:absolute;border-radius:50%;
+            border:1px solid var(--border);
+            animation:ringPulse 4s ease-in-out infinite;
+        }
+        .globe-ring:nth-child(1){width:80%;height:80%;animation-delay:0s;}
+        .globe-ring:nth-child(2){width:60%;height:60%;animation-delay:.5s;}
+        .globe-ring:nth-child(3){width:40%;height:40%;animation-delay:1s;}
+        .globe-core{
+            width:120px;height:120px;border-radius:50%;
+            background:radial-gradient(circle,rgba(38,204,196,.3),rgba(38,204,196,.08));
+            border:2px solid var(--accent);
+            display:flex;align-items:center;justify-content:center;
+            font-size:48px;
+            box-shadow:0 0 40px var(--accent-glow-md),inset 0 0 30px var(--accent-glow);
+            animation:coreGlow 3s ease-in-out infinite;
+            z-index:2;
+        }
+        @keyframes ringPulse{
+            0%,100%{transform:scale(1);opacity:.6;}
+            50%{transform:scale(1.04);opacity:1;}
+        }
+        @keyframes coreGlow{
+            0%,100%{box-shadow:0 0 40px var(--accent-glow-md),inset 0 0 30px var(--accent-glow);}
+            50%{box-shadow:0 0 70px var(--accent-glow-strong),inset 0 0 50px var(--accent-glow-md);}
+        }
+        .node-dot{
+            position:absolute;
+            width:8px;height:8px;border-radius:50%;
+            background:var(--accent);
+            box-shadow:0 0 10px var(--accent);
+            animation:blink 2s ease-in-out infinite;
+        }
+        @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+        .coverage-list{
+            display:flex;flex-direction:column;gap:20px;
+        }
+        .coverage-item{
+            display:flex;align-items:center;gap:16px;
+            padding:20px 24px;
+            background:var(--card-bg);
+            border:1px solid var(--border-dim);
+            border-radius:var(--radius-sm);
+            transition:all .3s;
+        }
+        .coverage-item:hover{
+            border-color:var(--border);
+            background:var(--card-hover);
+        }
+        .cov-icon{font-size:28px;flex-shrink:0;}
+        .cov-info{flex:1;}
+        .cov-title{font-size:15px;font-weight:700;margin-bottom:3px;}
+        .cov-desc{font-size:13px;color:var(--text-muted);}
+        .cov-badge{
+            background:var(--accent-glow);
+            color:var(--accent);
+            border:1px solid var(--border);
+            padding:4px 12px;border-radius:100px;
+            font-size:12px;font-weight:700;
+            white-space:nowrap;
+        }
+
+        /* ── Download ── */
+        .download{
+            padding:100px 24px;
+            background:var(--bg);
+        }
+        .download-wrap{max-width:1000px;margin:0 auto;}
+        .platform-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:20px;
+        }
+        .platform-card{
+            background:var(--card-bg);
+            border:1px solid var(--border-dim);
+            border-radius:var(--radius);
+            padding:32px 28px;
+            display:flex;flex-direction:column;
+            gap:16px;
+            transition:all .3s;
+            position:relative;overflow:hidden;
+        }
+        .platform-card:hover{
+            border-color:var(--border);
+            box-shadow:0 16px 40px rgba(38,204,196,.12);
+        }
+        .platform-card.recommended{
+            border-color:var(--accent);
+            background:linear-gradient(135deg,rgba(38,204,196,.08),var(--card-bg));
+            box-shadow:0 0 30px var(--accent-glow);
+        }
+        .recommended-badge{
+            position:absolute;top:16px;right:16px;
+            background:var(--accent);color:#ffffff;
+            font-size:11px;font-weight:700;
+            padding:4px 10px;border-radius:100px;
+            letter-spacing:.3px;
+        }
+        .platform-header{
+            display:flex;align-items:center;gap:14px;
+        }
+        .platform-icon{
+            width:56px;height:56px;
+            display:flex;align-items:center;justify-content:center;
+            font-size:30px;flex-shrink:0;
+        }
+        .platform-info{}
+        .platform-name{
+            font-size:18px;font-weight:700;margin-bottom:2px;
+        }
+        .platform-version{
+            font-size:13px;color:var(--text-muted);
+        }
+        .platform-desc{
+            font-size:13px;color:var(--text-muted);
+            line-height:1.7;
+        }
+        .platform-actions{
+            display:flex;flex-direction:column;gap:10px;margin-top:auto;
+        }
+        .dl-btn{
+            display:flex;align-items:center;justify-content:center;gap:8px;
+            padding:13px 20px;border-radius:var(--radius-sm);
+            font-size:14px;font-weight:700;
+            text-decoration:none;transition:all .25s;
+        }
+        .dl-btn-primary{
+            background:var(--accent);color:#ffffff;
+            box-shadow:0 4px 16px var(--accent-glow-md);
+        }
+        .dl-btn-primary:hover{
+            background:var(--accent-dark);
+            box-shadow:0 6px 24px var(--accent-glow-strong);
+            transform:translateY(-1px);
+        }
+        .dl-btn-secondary{
+            background:rgba(10,22,40,.04);
+            border:1px solid var(--border-dim);
+            color:var(--text-muted);
+        }
+        .dl-btn-secondary:hover{
+            border-color:var(--border);
+            color:var(--accent);
+            background:var(--accent-glow);
+        }
+        .changelog-link{
+            text-align:center;
+            font-size:12px;
+            color:var(--text-dim);
+            text-decoration:none;
+            padding:4px;
+            transition:color .2s;
+        }
+        .changelog-link:hover{color:var(--accent);}
+
+        /* ── Support ── */
+        .support{
+            padding:100px 24px;
+            background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+        }
+        .support-wrap{max-width:1000px;margin:0 auto;}
+        .support-grid{
+            display:grid;grid-template-columns:repeat(3,1fr);
+            gap:20px;
+        }
+        .support-card{
+            background:var(--card-bg);
+            border:1px solid var(--border-dim);
+            border-radius:var(--radius);
+            padding:32px 24px;
+            text-align:center;
+            transition:all .3s;
+        }
+        .support-card:hover{
+            border-color:var(--border);
+            transform:translateY(-4px);
+        }
+        .support-icon{
+            font-size:40px;margin-bottom:16px;
+            display:block;
+            filter:drop-shadow(0 0 12px var(--accent-glow-md));
+        }
+        .support-title{
+            font-size:17px;font-weight:700;margin-bottom:8px;
+        }
+        .support-desc{
+            font-size:14px;color:var(--text-muted);
+            line-height:1.75;
+        }
+        .social-links{
+            display:flex;align-items:center;justify-content:center;
+            gap:16px;margin-top:48px;
+        }
+        .social-link{
+            display:flex;align-items:center;gap:8px;
+            padding:10px 20px;border-radius:100px;
+            border:1px solid var(--border-dim);
+            color:var(--text-muted);
+            text-decoration:none;font-size:14px;font-weight:600;
+            transition:all .25s;
+        }
+        .social-link img{width:20px;height:20px;border-radius:4px;}
+        .social-link:hover{
+            border-color:var(--border);
+            color:var(--accent);
+            background:var(--accent-glow);
+        }
+
+        /* ── Footer ── */
+        .footer{
+            background:var(--bg2);
+            border-top:1px solid var(--border-dim);
+            padding:40px 24px;
+        }
+        .footer-inner{
+            max-width:1200px;margin:0 auto;
+            display:flex;align-items:center;justify-content:space-between;
+            flex-wrap:wrap;gap:16px;
+        }
+        .footer-logo{
+            display:flex;align-items:center;gap:10px;
+            text-decoration:none;
+        }
+        .footer-logo-text{font-size:17px;font-weight:700;color:var(--text);}
+        .footer-copy{font-size:13px;color:var(--text-dim);}
+        .footer-links{
+            display:flex;gap:24px;
+        }
+        .footer-links a{
+            font-size:13px;color:var(--text-dim);text-decoration:none;
+            transition:color .2s;
+        }
+        .footer-links a:hover{color:var(--accent);}
+
+        /* ── Scroll reveal ── */
+        .reveal{
+            opacity:0;transform:translateY(30px);
+            transition:opacity .6s ease,transform .6s ease;
+        }
+        .reveal.visible{opacity:1;transform:translateY(0);}
+
+        /* ── Mobile nav ── */
+        .nav-menu-btn{
+            display:none;
+            background:none;border:none;
+            color:var(--text);cursor:pointer;
+            padding:8px;border-radius:8px;
+            transition:background .2s;
+            flex-direction:column;justify-content:center;align-items:center;
+            gap:5px;width:40px;height:40px;
+        }
+        .nav-menu-btn:hover{background:var(--card-bg);}
+        .icon-bar{
+            display:block;width:20px;height:2px;
+            background:var(--text);border-radius:2px;
+            transition:transform .28s ease,opacity .2s;
+        }
+        .nav-menu-btn.open .icon-bar:nth-child(1){transform:translateY(7px) rotate(45deg);}
+        .nav-menu-btn.open .icon-bar:nth-child(2){opacity:0;transform:scaleX(0);}
+        .nav-menu-btn.open .icon-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+        .mobile-nav{
+            display:none;
+            position:fixed;top:64px;left:0;right:0;bottom:0;
+            background:rgba(255,255,255,0.98);
+            backdrop-filter:blur(24px);
+            -webkit-backdrop-filter:blur(24px);
+            z-index:998;
+            padding:16px 24px 40px;
+            flex-direction:column;
+            overflow-y:auto;
+            border-top:1px solid var(--border-dim);
+        }
+        .mobile-nav.open{display:flex;}
+        .mobile-nav-link{
+            color:var(--text-muted);
+            text-decoration:none;
+            font-size:18px;font-weight:600;
+            padding:18px 0;
+            border-bottom:1px solid var(--border-dim);
+            display:flex;align-items:center;justify-content:space-between;
+            transition:color .2s;
+        }
+        .mobile-nav-link:hover{color:var(--accent);}
+        .mobile-nav-link::after{content:'→';font-size:14px;color:var(--text-dim);}
+        .mobile-nav-cta{
+            display:block;
+            background:var(--accent);color:#ffffff;
+            padding:16px;border-radius:var(--radius-sm);
+            text-align:center;font-size:17px;font-weight:700;
+            text-decoration:none;margin-top:24px;
+            box-shadow:0 0 30px var(--accent-glow-md);
+        }
+
+        /* ── Responsive: tablet ── */
+        @media(max-width:960px){
+            .features-grid{grid-template-columns:repeat(2,1fr);}
+            .coverage-inner{grid-template-columns:1fr;gap:40px;}
+            .coverage-globe{max-width:300px;margin:0 auto;}
+            .stats-inner{grid-template-columns:repeat(2,1fr);}
+            .stat-item:nth-child(2){border-right:none;}
+            .stat-item:nth-child(3){border-right:1px solid var(--border-dim);}
+            .stat-item:nth-child(1),.stat-item:nth-child(2){border-bottom:1px solid var(--border-dim);}
+            .support-grid{grid-template-columns:1fr 1fr;}
+            .features{padding:72px 24px;}
+            .coverage{padding:72px 24px;}
+            .download{padding:72px 24px;}
+            .support{padding:72px 24px;}
+        }
+
+        /* ── Responsive: mobile ── */
+        @media(max-width:640px){
+            /* Nav */
+            .nav-links{display:none;}
+            .nav-cta{display:none;}
+            .nav-menu-btn{display:flex;}
+
+            /* Hero */
+            .hero{padding:80px 20px 48px;min-height:100svh;}
+            .hero-badge{font-size:12px;padding:6px 14px;margin-bottom:24px;}
+            .hero-title{letter-spacing:-.5px;margin-bottom:20px;}
+            .hero-sub{font-size:14px;margin-bottom:32px;}
+            .hero-sub br{display:none;}
+            .hero-actions{flex-direction:column;gap:12px;margin-bottom:36px;}
+            .btn-primary{width:100%;justify-content:center;padding:16px 24px;}
+            .btn-ghost{width:100%;justify-content:center;padding:14px 24px;font-size:14px;}
+            .hero-trust{gap:10px;font-size:12px;}
+
+            /* Stats */
+            .stats{padding:32px 20px;}
+            .stats-inner{grid-template-columns:1fr 1fr;}
+            .stat-item{padding:20px 12px;}
+            .stat-item:nth-child(3){border-right:none;}
+
+            /* Sections */
+            .section-header{margin-bottom:40px;}
+            .section-title{font-size:clamp(24px,6vw,36px);}
+            .features{padding:56px 20px;}
+            .features-grid{grid-template-columns:1fr;gap:14px;}
+            .feature-card{padding:24px 22px;}
+            .feature-icon{width:46px;height:46px;font-size:22px;margin-bottom:14px;}
+
+            /* Coverage */
+            .coverage{padding:56px 20px;}
+            .coverage-globe{max-width:240px;}
+            .globe-core{width:90px;height:90px;font-size:36px;}
+            .coverage-item{padding:16px 18px;}
+            .cov-badge{font-size:11px;padding:3px 10px;}
+
+            /* Download */
+            .download{padding:56px 20px;}
+            .platform-grid{grid-template-columns:1fr;gap:14px;}
+            .platform-card{padding:24px 20px;}
+            .platform-name{font-size:16px;}
+            .dl-btn{min-height:48px;font-size:15px;}
+
+            /* Support */
+            .support{padding:56px 20px;}
+            .support-grid{grid-template-columns:1fr;gap:14px;}
+            .support-card{padding:28px 22px;}
+            .social-links{
+                flex-wrap:wrap;gap:10px;margin-top:36px;
+            }
+            .social-link{
+                flex:1 1 calc(50% - 5px);
+                justify-content:center;
+                padding:12px 16px;font-size:13px;
+                min-height:46px;
+            }
+
+            /* Detect banner */
+            .detect-banner{
+                left:12px;right:12px;
+                transform:none;
+                border-radius:var(--radius-sm);
+                white-space:normal;
+                flex-wrap:wrap;
+                justify-content:center;
+                gap:10px;
+                padding:14px 16px;
+                bottom:16px;
+            }
+            .detect-text{text-align:center;font-size:13px;}
+            .detect-btn{width:100%;text-align:center;padding:10px;}
+
+            /* Footer */
+            .footer{padding:32px 20px;}
+            .footer-inner{
+                flex-direction:column;
+                align-items:center;
+                text-align:center;
+                gap:16px;
+            }
+            .footer-links{flex-wrap:wrap;justify-content:center;gap:16px;}
+        }
+
+        /* ── Responsive: small phones ── */
+        @media(max-width:375px){
+            .hero-trust{flex-direction:column;gap:6px;align-items:center;}
+            .social-link{flex:1 1 100%;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ Navigation ═══ -->
+<nav class="nav" id="mainNav">
+    <div class="nav-inner">
+        <a href="#" class="logo">
+            <span class="logo-icon">🍊</span>
+            <span class="logo-text">西柚<span class="logo-accent">VPN</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="#features">功能特性</a>
+            <a href="#coverage">全球覆盖</a>
+            <a href="#download">立即下载</a>
+            <a href="#support">联系我们</a>
+        </div>
+        <a href="#download" class="nav-cta">免费下载</a>
+        <button class="nav-menu-btn" id="menuBtn" aria-label="菜单">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ═══ Mobile Nav Drawer ═══ -->
+<div class="mobile-nav" id="mobileNav">
+    <a href="#features" class="mobile-nav-link">功能特性</a>
+    <a href="#coverage" class="mobile-nav-link">全球覆盖</a>
+    <a href="#download" class="mobile-nav-link">下载中心</a>
+    <a href="#support" class="mobile-nav-link">联系我们</a>
+    <a href="#download" class="mobile-nav-cta">立即免费下载</a>
+</div>
+
+<!-- ═══ Smart detect banner ═══ -->
+<div class="detect-banner" id="detectBanner" style="display:none;">
+    <span class="detect-icon" id="detectIcon">💻</span>
+    <span class="detect-text" id="detectText">正在识别设备...</span>
+    <a href="#" class="detect-btn" id="detectBtn">立即下载</a>
+    <button class="detect-close" id="detectClose">×</button>
+</div>
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+        <div class="hero-badge">全球用户信赖 &nbsp;·&nbsp; 极速安全加密</div>
+        <h1 class="hero-title">
+            突破封锁<br>
+            <span class="gradient-text">畅享全球网络</span>
+        </h1>
+        <p class="hero-sub">
+            军用级 AES-256 加密 &nbsp;·&nbsp; 200+ 全球高速节点<br>
+            90+ 国家与地区覆盖 &nbsp;·&nbsp; 24/7 真人在线客服
+        </p>
+        <div class="hero-actions">
+            <a href="#download" class="btn-primary" id="heroPrimaryBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+                <span id="heroBtnText">立即免费下载</span>
+            </a>
+            <a href="#features" class="btn-ghost">
+                了解更多
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>
+        </div>
+        <div class="hero-trust">
+            <span>AES-256 军用加密</span>
+            <span>零日志承诺</span>
+            <span>无限速不限量</span>
+            <span>一键极速连接</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Stats ═══ -->
+<section class="stats">
+    <div class="stats-inner">
+        <div class="stat-item reveal">
+            <div class="stat-num" data-target="200" data-suffix="+">0</div>
+            <div class="stat-label">全球高速节点</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:.1s">
+            <div class="stat-num" data-target="90" data-suffix="+">0</div>
+            <div class="stat-label">覆盖国家与地区</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:.2s">
+            <div class="stat-num" data-target="1000" data-suffix="万+">0</div>
+            <div class="stat-label">全球活跃用户</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:.3s">
+            <div class="stat-num" data-target="99.9" data-suffix="%">0</div>
+            <div class="stat-label">稳定可用率</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Features ═══ -->
+<section class="features" id="features">
+    <div class="features-wrap">
+        <div class="section-header reveal">
+            <div class="section-tag">核心优势</div>
+            <h2 class="section-title">为什么选择<span class="gradient-text">西柚VPN</span></h2>
+            <p class="section-sub">专为突破网络封锁而生，为全球华人提供最稳定、最极速的网络体验</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">🔐</div>
+                <div class="feature-title">军用级加密保护</div>
+                <div class="feature-desc">AES-256-GCM 军事级加密算法，全球政府机构采用的最高安全标准。您的每一个数据包都经过完整加密，任何第三方绝对无法破解或监听。</div>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:.05s">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">极速无限速通道</div>
+                <div class="feature-desc">全线采用 10Gbps 骨干网线路，多线路聚合加速。峰值带宽无任何限制，4K / 8K 超高清视频秒开，低延迟游戏毫无卡顿。</div>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:.1s">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title">200+ 全球节点</div>
+                <div class="feature-desc">覆盖北美、欧洲、亚太、东南亚、中东等 90+ 个国家与地区，随时切换最优线路，智能路由自动选择最快节点。</div>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:.15s">
+                <div class="feature-icon">🎬</div>
+                <div class="feature-title">流媒体全面解锁</div>
+                <div class="feature-desc">Netflix、YouTube Premium、Disney+、HBO Max、Hulu、Amazon Prime、Spotify 全平台完美解锁，任意切换全球影音资源，无地区限制。</div>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:.2s">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">严格零日志政策</div>
+                <div class="feature-desc">我们从技术架构层面确保不存储任何用户活动日志。即使面对法律要求，也无任何数据可交出。您的隐私，连我们自己都不知道。</div>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:.25s">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-title">智能分流技术</div>
+                <div class="feature-desc">智能分流让国内、国外网站同时畅通访问，无需反复切换。国内应用正常使用，海外应用极速加速，鱼与熊掌同时兼得。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Coverage ═══ -->
+<section class="coverage" id="coverage">
+    <div class="coverage-wrap">
+        <div class="section-header reveal">
+            <div class="section-tag">全球布局</div>
+            <h2 class="section-title"><span class="gradient-text">全球覆盖</span>，无处不在</h2>
+            <p class="section-sub">遍布六大洲的服务器节点，无论您身处何地，始终享有极速稳定的连接</p>
+        </div>
+        <div class="coverage-inner">
+            <div class="coverage-globe reveal">
+                <div class="globe-ring"></div>
+                <div class="globe-ring"></div>
+                <div class="globe-ring"></div>
+                <div class="globe-core">🌍</div>
+                <!-- Animated node dots -->
+                <div class="node-dot" style="top:18%;left:28%;animation-delay:0s;"></div>
+                <div class="node-dot" style="top:22%;left:60%;animation-delay:.4s;"></div>
+                <div class="node-dot" style="top:40%;left:15%;animation-delay:.8s;"></div>
+                <div class="node-dot" style="top:35%;left:72%;animation-delay:.2s;"></div>
+                <div class="node-dot" style="top:58%;left:32%;animation-delay:1s;"></div>
+                <div class="node-dot" style="top:65%;left:55%;animation-delay:.6s;"></div>
+                <div class="node-dot" style="top:75%;left:45%;animation-delay:.3s;"></div>
+                <div class="node-dot" style="top:48%;left:82%;animation-delay:.7s;"></div>
+                <div class="node-dot" style="top:30%;left:44%;animation-delay:.9s;"></div>
+                <div class="node-dot" style="top:80%;left:22%;animation-delay:.1s;"></div>
+            </div>
+            <div class="coverage-list">
+                <div class="coverage-item reveal">
+                    <div class="cov-icon">🇺🇸</div>
+                    <div class="cov-info">
+                        <div class="cov-title">北美地区</div>
+                        <div class="cov-desc">美国、加拿大多个城市 · 顶级 BGP 线路</div>
+                    </div>
+                    <div class="cov-badge">500+ 节点</div>
+                </div>
+                <div class="coverage-item reveal" style="transition-delay:.1s">
+                    <div class="cov-icon">🇬🇧</div>
+                    <div class="cov-info">
+                        <div class="cov-title">欧洲地区</div>
+                        <div class="cov-desc">英国、德国、法国、荷兰等核心城市</div>
+                    </div>
+                    <div class="cov-badge">400+ 节点</div>
+                </div>
+                <div class="coverage-item reveal" style="transition-delay:.2s">
+                    <div class="cov-icon">🇯🇵</div>
+                    <div class="cov-info">
+                        <div class="cov-title">亚太地区</div>
+                        <div class="cov-desc">日本、韩国、新加坡、香港 · 超低延迟</div>
+                    </div>
+                    <div class="cov-badge">600+ 节点</div>
+                </div>
+                <div class="coverage-item reveal" style="transition-delay:.3s">
+                    <div class="cov-icon">🌏</div>
+                    <div class="cov-info">
+                        <div class="cov-title">更多地区持续扩展</div>
+                        <div class="cov-desc">东南亚、中东、南美、非洲全面覆盖</div>
+                    </div>
+                    <div class="cov-badge">500+ 节点</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Download ═══ -->
+<section class="download" id="download">
+    <div class="download-wrap">
+        <div class="section-header reveal">
+            <div class="section-tag">立即下载</div>
+            <h2 class="section-title">全平台<span class="gradient-text">极速体验</span></h2>
+            <p class="section-sub">支持 Windows、macOS、Android、iOS，一个账号五台设备同时在线</p>
+        </div>
+        <div class="platform-grid">
+
+            <!-- Windows -->
+            <div class="platform-card reveal" id="card-windows">
+                <div class="platform-header">
+                    <div class="platform-icon">
+                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 5.557L10.234 4.5V11.5H3V5.557zm0 12.886L10.234 19.5V12.5H3v5.943zm8.234 1.23L21 21V12.5h-9.766v7.173zm0-14.346L21 3V11.5h-9.766V5.327z" fill="#26ccc4"/>
+                        </svg>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">Windows</div>
+                        <div class="platform-version" id="windows-version">支持 Windows 10 / 11</div>
+                    </div>
+                </div>
+                <div class="platform-desc">完整桌面客户端，系统级加速，Kill Switch 保护，开机自启，后台静默运行。一键连接，即点即用。</div>
+                <div class="platform-actions">
+                    <a href="./file/xiyou-V2.3.0-53.exe" class="dl-btn dl-btn-primary" id="win-dl">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+                        <span id="win-dl-text">下载 Windows 版 v2.3.0</span>
+                    </a>
+                    <a href="./changelog/windows.html" class="changelog-link">查看更新日志 →</a>
+                </div>
+            </div>
+
+            <!-- macOS -->
+            <div class="platform-card reveal" id="card-macos" style="transition-delay:.1s">
+                <div class="platform-header">
+                    <div class="platform-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#26ccc4"/>
+                        </svg>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">macOS</div>
+                        <div class="platform-version" id="macos-version">支持 macOS 10.14+，M 系列芯片原生支持</div>
+                    </div>
+                </div>
+                <div class="platform-desc">原生 Apple Silicon 支持，系统菜单栏快捷操作，与 macOS 深度集成，极致流畅体验。</div>
+                <div class="platform-actions">
+                    <a href="./file/xiyou-v2.1.0-59.pkg" class="dl-btn dl-btn-primary" id="mac-dl">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+                        <span id="mac-dl-text">下载 macOS 版 v2.1.0</span>
+                    </a>
+                    <a href="./changelog/macos.html" class="changelog-link">查看更新日志 →</a>
+                </div>
+            </div>
+
+            <!-- Android -->
+            <div class="platform-card reveal" id="card-android" style="transition-delay:.2s">
+                <div class="platform-header">
+                    <div class="platform-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+                            <path d="M17.523 15.341a1 1 0 01-1 1H7.477a1 1 0 01-1-1V8.88a1 1 0 011-1h9.046a1 1 0 011 1v6.461zm-9.046-8.461l-1.2-2.16a.25.25 0 01.087-.342.25.25 0 01.342.087L8.9 6.66a5.518 5.518 0 013.1-.906c1.13 0 2.182.34 3.054.922l1.19-2.14a.25.25 0 01.43.26l-1.2 2.16a5.5 5.5 0 012.05 4.244H6.477a5.5 5.5 0 012.0-4.32zm2.773.82a.5.5 0 100-1 .5.5 0 000 1zm3.5 0a.5.5 0 100-1 .5.5 0 000 1zM6 9.63v4.71a1 1 0 002 0V9.63a1 1 0 00-2 0zm10 0v4.71a1 1 0 002 0V9.63a1 1 0 00-2 0z" fill="#26ccc4"/>
+                        </svg>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">Android</div>
+                        <div class="platform-version" id="android-version">支持 Android 5.0+</div>
+                    </div>
+                </div>
+                <div class="platform-desc">轻量高效，支持分应用代理，随时随地一键连接。完美适配手机与平板设备，稳定运行不掉线。</div>
+                <div class="platform-actions">
+                    <a href="./file/xiyou-latest.apk" class="dl-btn dl-btn-primary" id="apk-dl">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+                        <span id="apk-dl-text">下载 Android APK</span>
+                    </a>
+                    <a href="./changelog/android.html" class="changelog-link">查看更新日志 →</a>
+                </div>
+            </div>
+
+            <!-- iOS -->
+            <div class="platform-card reveal" id="card-ios" style="transition-delay:.3s">
+                <div class="platform-header">
+                    <div class="platform-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+                            <rect x="5" y="1" width="14" height="22" rx="3" stroke="#26ccc4" stroke-width="1.8"/>
+                            <circle cx="12" cy="18.5" r="1" fill="#26ccc4"/>
+                            <line x1="9" y1="4" x2="15" y2="4" stroke="#26ccc4" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="platform-info">
+                        <div class="platform-name">iPhone / iPad</div>
+                        <div class="platform-version" id="ios-version">支持 iOS 13.0+，iPhone & iPad</div>
+                    </div>
+                </div>
+                <div class="platform-desc">App Store 正式上架，苹果官方审核，安全可信赖。建议使用海外 Apple ID 下载获得完整功能。</div>
+                <div class="platform-actions">
+                    <a href="./help/index.html" class="dl-btn dl-btn-primary" id="ios-dl">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+                        <span id="ios-dl-text">AppStore下载入口</span>
+                    </a>
+                    <a href="./web/index.html" class="dl-btn dl-btn-secondary" id="ios-web-dl">
+                        <span id="ios-web-dl-text">📖 &nbsp;iOS web入口</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Support ═══ -->
+<section class="support" id="support">
+    <div class="support-wrap">
+        <div class="section-header reveal">
+            <div class="section-tag">售后保障</div>
+            <h2 class="section-title">永不失联，<span class="gradient-text">售后无忧</span></h2>
+            <p class="section-sub">真人客服全天候在线，响应时间不超过 30 秒，遇到任何问题立即解决</p>
+        </div>
+        <div class="support-grid">
+            <div class="support-card reveal">
+                <span class="support-icon">👨‍💻</span>
+                <div class="support-title">24/7 真人在线客服</div>
+                <div class="support-desc">全天候真人客服守候，30 秒内极速响应。不是机器人，不走工单，直接对话解决您的所有问题。</div>
+            </div>
+            <div class="support-card reveal" style="transition-delay:.1s">
+                <span class="support-icon">🔗</span>
+                <div class="support-title">永久有效联系方式</div>
+                <div class="support-desc">多平台备用联系渠道，Telegram 群组、官方频道、备用网址多重保障，任何情况下都能找到我们。</div>
+            </div>
+            <div class="support-card reveal" style="transition-delay:.2s">
+                <span class="support-icon">🛡️</span>
+                <div class="support-title">无忧售后承诺</div>
+                <div class="support-desc">连接问题 24 小时内解决，无法使用全额退款。我们对产品质量有绝对信心，让您零风险体验。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+    <div class="footer-inner">
+        <a href="#" class="footer-logo">
+            <span style="font-size:22px;">🍊</span>
+            <span class="footer-logo-text">西柚<span style="color:var(--accent)">VPN</span></span>
+        </a>
+        <div class="footer-copy">© 2025 XiYou VPN. All rights reserved.</div>
+        <div class="footer-links">
+            <a href="#features">功能介绍</a>
+            <a href="#download">下载中心</a>
+            <a href="#support">联系我们</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){
+    "use strict";
+
+    /* ── Canvas particle network ── */
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], animId;
+    const PARTICLE_COUNT = 55;
+    const ACCENT = '38,204,196';
+    const PARTICLE_ALPHA_MAX = 0.28;
+    const LINE_ALPHA_MAX = 0.07;
+
+    function resize(){
+        W = canvas.width = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+    }
+
+    function createParticle(){
+        return {
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - .5) * .4,
+            vy: (Math.random() - .5) * .4,
+            r: Math.random() * 2 + 1,
+            opacity: Math.random() * PARTICLE_ALPHA_MAX + .06
+        };
+    }
+
+    function initParticles(){
+        particles = [];
+        for(let i=0;i<PARTICLE_COUNT;i++) particles.push(createParticle());
+    }
+
+    function drawFrame(){
+        ctx.clearRect(0,0,W,H);
+        // Update and draw particles
+        particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy;
+            if(p.x < 0) p.x = W;
+            if(p.x > W) p.x = 0;
+            if(p.y < 0) p.y = H;
+            if(p.y > H) p.y = 0;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fillStyle = `rgba(${ACCENT},${p.opacity})`;
+            ctx.fill();
+        });
+        // Draw connections
+        for(let i=0;i<particles.length;i++){
+            for(let j=i+1;j<particles.length;j++){
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx*dx+dy*dy);
+                if(dist < 140){
+                    const alpha = (1 - dist/140) * LINE_ALPHA_MAX;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(${ACCENT},${alpha})`;
+                    ctx.lineWidth = .8;
+                    ctx.stroke();
+                }
+            }
+        }
+        animId = requestAnimationFrame(drawFrame);
+    }
+
+    function initCanvas(){
+        resize();
+        initParticles();
+        cancelAnimationFrame(animId);
+        drawFrame();
+    }
+
+    window.addEventListener('resize', ()=>{ resize(); initParticles(); });
+    initCanvas();
+
+    /* ── Nav scroll effect ── */
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', ()=>{
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    },{passive:true});
+
+    /* ── Hamburger menu ── */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    function toggleMenu(force){
+        const open = force !== undefined ? force : !mobileNav.classList.contains('open');
+        mobileNav.classList.toggle('open', open);
+        menuBtn.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    }
+    menuBtn.addEventListener('click', ()=> toggleMenu());
+    mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', ()=> toggleMenu(false));
+    });
+
+    /* ── OS detection ── */
+    function detectOS(){
+        const ua = navigator.userAgent;
+        if(/android/i.test(ua)) return 'android';
+        if(/iphone|ipad|ipod/i.test(ua)) return 'ios';
+        if(/windows/i.test(ua)) return 'windows';
+        if(/mac os x/i.test(ua)) return 'macos';
+        return 'unknown';
+    }
+
+    const platformTargets = {
+        windows: {
+            url: 'https://github.com/xiyou88/vpn/releases/download/xiyou-latest-exe/xiyou-V2.3.0-53.exe',
+            version: 'v2.3.0',
+            versionText: '支持 Windows 10 / 11',
+            buttonText: '下载 Windows 版'
+        },
+        macos: {
+            url: 'https://github.com/xiyou88/vpn/releases/download/xiyou-latest-pkg/xiyou-v2.1.0-59.pkg',
+            version: 'v2.1.0',
+            versionText: '支持 macOS 10.14+，M 系列芯片原生支持',
+            buttonText: '下载 macOS 版'
+        },
+        android: {
+            url: 'https://github.com/xiyou88/vpn/raw/refs/heads/main/file/xiyou-v4.1.0-16.apk',
+            version: 'v4.1.0',
+            versionText: '支持 Android 5.0+',
+            buttonText: '下载 Android APK'
+        },
+        'ios-appstore': {
+            url: './help/index.html',
+            version: '',
+            versionText: '支持 iOS 13.0+，iPhone & iPad',
+            buttonText: 'AppStore下载入口'
+        },
+        'ios-web': {
+            url: './web/index.html',
+            version: '',
+            buttonText: '📖 iOS web入口'
+        }
+    };
+
+    const os = detectOS();
+    const osMap = {
+        windows: {
+            icon:'💻', label:'Windows 电脑',
+            targetKey:'windows',
+            detectBtnText:'下载 Windows 版',
+            heroText:'下载 Windows 版',
+            cardId:'card-windows'
+        },
+        macos: {
+            icon:'🍎', label:'Mac 电脑',
+            targetKey:'macos',
+            detectBtnText:'下载 macOS 版',
+            heroText:'下载 macOS 版',
+            cardId:'card-macos'
+        },
+        android: {
+            icon:'📱', label:'Android 手机',
+            targetKey:'android',
+            detectBtnText:'下载 Android APK',
+            heroText:'下载 Android 版',
+            cardId:'card-android'
+        },
+        ios: {
+            icon:'📱', label:'iPhone / iPad',
+            targetKey:'ios-appstore',
+            detectBtnText:'前往 App Store',
+            heroText:'前往 App Store 下载',
+            cardId:'card-ios'
+        }
+    };
+
+    function formatVersionText(target){
+        if(!target) return '';
+        return target.version ? `最新版本 ${target.version} · ${target.versionText}` : target.versionText;
+    }
+
+    function formatDownloadText(target){
+        if(!target) return '';
+        return target.version ? `${target.buttonText} ${target.version}` : target.buttonText;
+    }
+
+    function applyPlatformTargets(){
+        const linkBindings = [
+            { id:'win-dl', textId:'win-dl-text', key:'windows' },
+            { id:'mac-dl', textId:'mac-dl-text', key:'macos' },
+            { id:'apk-dl', textId:'apk-dl-text', key:'android' },
+            { id:'ios-dl', textId:'ios-dl-text', key:'ios-appstore' },
+            { id:'ios-web-dl', textId:'ios-web-dl-text', key:'ios-web' }
+        ];
+        const versionBindings = [
+            { id:'windows-version', key:'windows' },
+            { id:'macos-version', key:'macos' },
+            { id:'android-version', key:'android' },
+            { id:'ios-version', key:'ios-appstore' }
+        ];
+
+        linkBindings.forEach(function(binding){
+            const element = document.getElementById(binding.id);
+            const textElement = document.getElementById(binding.textId);
+            const target = platformTargets[binding.key];
+            if(element && target){
+                element.href = target.url;
+            }
+            if(textElement && target){
+                textElement.textContent = formatDownloadText(target);
+            }
+        });
+
+        versionBindings.forEach(function(binding){
+            const element = document.getElementById(binding.id);
+            const target = platformTargets[binding.key];
+            if(element && target){
+                element.textContent = formatVersionText(target);
+            }
+        });
+    }
+
+    applyPlatformTargets();
+
+    const info = osMap[os];
+    if(info){
+        const target = platformTargets[info.targetKey];
+        const heroText = target && target.version ? `${info.heroText} ${target.version}` : info.heroText;
+        // Hero button
+        const heroBtnText = document.getElementById('heroBtnText');
+        const heroPrimaryBtn = document.getElementById('heroPrimaryBtn');
+        heroBtnText.textContent = heroText;
+        heroPrimaryBtn.href = target ? target.url : '#download';
+
+        // Smart banner
+        const banner = document.getElementById('detectBanner');
+        document.getElementById('detectIcon').textContent = info.icon;
+        document.getElementById('detectText').innerHTML =
+            `检测到 <strong>${info.label}</strong>，为您推荐`;
+        const detectBtn = document.getElementById('detectBtn');
+        detectBtn.textContent = info.detectBtnText;
+        detectBtn.href = target ? target.url : '#download';
+        banner.style.display = 'flex';
+
+        // Highlight recommended card
+        const card = document.getElementById(info.cardId);
+        if(card){
+            card.classList.add('recommended');
+            const badge = document.createElement('div');
+            badge.className = 'recommended-badge';
+            badge.textContent = '推荐';
+            card.appendChild(badge);
+        }
+    }
+
+    document.getElementById('detectClose').addEventListener('click', function(){
+        document.getElementById('detectBanner').style.display = 'none';
+    });
+
+    /* ── Counter animation ── */
+    function animateCounter(el){
+        const target = parseFloat(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const isDecimal = target % 1 !== 0;
+        const duration = 1800;
+        const start = performance.now();
+        function step(now){
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const val = target * eased;
+            el.textContent = (isDecimal ? val.toFixed(1) : Math.floor(val)) + suffix;
+            if(progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    /* ── Intersection Observer ── */
+    const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+                // Counter animation
+                const num = entry.target.querySelector('.stat-num');
+                if(num && !num.dataset.animated){
+                    num.dataset.animated = '1';
+                    animateCounter(num);
+                }
+                io.unobserve(entry.target);
+            }
+        });
+    }, {threshold:.15});
+
+    document.querySelectorAll('.reveal, .stat-item').forEach(el => io.observe(el));
+
+    // Also observe stat-num directly for counter
+    document.querySelectorAll('.stat-num').forEach(el => {
+        const parent = el.closest('.stat-item');
+        if(!parent) animateCounter(el);
+    });
+
+})();
+</script>
+</body>
+</html>

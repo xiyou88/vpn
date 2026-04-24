@@ -1,0 +1,1035 @@
+:root {
+    --sd-bg: #ffffff;
+    --sd-bg-soft: #f3fbfa;
+    --sd-panel: rgba(255, 255, 255, 0.94);
+    --sd-panel-strong: rgba(255, 255, 255, 0.98);
+    --sd-border: rgba(38, 204, 196, 0.16);
+    --sd-border-strong: rgba(38, 204, 196, 0.34);
+    --sd-text: #0a1628;
+    --sd-muted: #667989;
+    --sd-dim: #94a7b5;
+    --sd-accent: #26ccc4;
+    --sd-accent-deep: #1aa09a;
+    --sd-accent-soft: rgba(38, 204, 196, 0.08);
+    --sd-shadow: 0 24px 72px rgba(19, 137, 132, 0.12);
+    --sd-shadow-sm: 0 16px 36px rgba(19, 137, 132, 0.08);
+}
+
+html,
+body {
+    background:
+        radial-gradient(circle at 10% 10%, rgba(38, 204, 196, 0.14), transparent 26%),
+        radial-gradient(circle at 88% 18%, rgba(38, 204, 196, 0.08), transparent 22%),
+        linear-gradient(180deg, #ffffff 0%, #f8fdfd 52%, #ffffff 100%) !important;
+    color: var(--sd-text) !important;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+a {
+    color: var(--sd-text);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(38, 204, 196, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(38, 204, 196, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 42%, transparent 94%);
+    pointer-events: none;
+}
+
+.layui-layout-admin .layui-body,
+.layui-layout-admin .footer,
+.layuimini-container,
+.layuimini-page-anim,
+.mescroll,
+.layui-container {
+    background-color: transparent !important;
+}
+
+.index-header,
+.layui-header.header,
+.layui-layout-admin .footer,
+.layui-layout-admin .footer .nav,
+.layui-nav-tree,
+.layui-side-scroll,
+.layuimini-tool i {
+    background: transparent !important;
+}
+
+.layui-nav .layui-nav-item,
+.layui-nav .layui-nav-item a,
+.layui-layout-admin .footer .nav,
+.layui-layout-admin .footer div:last-child,
+.layuimini-tool i,
+.forgot-password {
+    color: var(--sd-muted) !important;
+}
+
+.layui-nav .layui-this a,
+.layui-nav .layui-this i,
+.layui-nav .layui-nav-item a:hover,
+.layui-layout-admin .footer .nav .select,
+.layui-layout-admin .footer .nav span:hover,
+.footer button:hover,
+.forgot-password:hover {
+    color: var(--sd-accent) !important;
+}
+
+.layui-nav-bar,
+.layui-tab-brief > .layui-tab-title .layui-this:after,
+.layuimini-main-feedback-list .layui-tab-brief > .layui-tab-title .layui-this:after {
+    border-bottom-color: var(--sd-accent) !important;
+}
+
+.layui-form input,
+.layui-input,
+.layui-textarea,
+.login-form .layui-form-item input,
+.layuimini-modify-password .input,
+.layuimini-main-feedback .body textarea {
+    background: rgba(255, 255, 255, 0.92) !important;
+    color: var(--sd-text) !important;
+    border: 1px solid rgba(38, 204, 196, 0.14) !important;
+    border-radius: 16px !important;
+    box-shadow: none !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9cb0bc !important;
+}
+
+.box {
+    background: rgba(38, 204, 196, 0.08);
+    border: 1px solid var(--sd-border);
+    color: var(--sd-accent) !important;
+}
+
+.box div,
+.box span,
+.box i {
+    color: inherit !important;
+}
+
+.page-title,
+.layui-colla-title,
+.layuimini-main-user .section-title,
+.layuimini-main-buy .content .title,
+.layuimini-main-buy .payment .title,
+.layuimini-main-feedback .body .feedback-type .title,
+.layuimini-main-feedback .body .content .title,
+.layuimini-main-broadcast .title,
+.layuimini-main-contact .title,
+.layuimini-main-help .title,
+.layuimini-main-guide .body ul > div,
+.warning-container .title,
+.broadcast-container .title,
+.feedback-container .title,
+.login-warning-show .warning-container .title {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-buy .desc .common .title,
+.layuimini-main-buy .payment ul li span,
+.layuimini-main-route .show .title,
+.layuimini-main-route .show .sign,
+.layuimini-main-buy .show .title,
+.layuimini-main-buy .show .desc,
+.layuimini-main-contact .body,
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li .time,
+.layuimini-main-broadcast .content ul li div.desc,
+.layuimini-main-broadcast .content ul li div.time,
+.layuimini-main-contact .body .content .mainland ul li > div div:last-child,
+.layuimini-main-help .change > div div:last-child,
+.layuimini-main-feedback .content .num,
+.layuimini-main-order .section-desc,
+.layuimini-main-order .hero-desc,
+.layuimini-main-question .empty-desc {
+    color: var(--sd-muted) !important;
+}
+
+.layui-collapse,
+.layui-colla-item {
+    background: linear-gradient(180deg, var(--sd-panel), var(--sd-panel-strong)) !important;
+    border-color: var(--sd-border) !important;
+    color: var(--sd-text) !important;
+    box-shadow: none !important;
+}
+
+.layuimini-main-feedback .body .feedback-type ul li,
+.layuimini-main-contact .body > button,
+.layuimini-main-buy .top .title button,
+.layuimini-main-route .switch-tabs button,
+.layuimini-main-contact .body .content .mainland ul li,
+.layuimini-main-help .change > div,
+.layuimini-main-route .toHelp,
+.layuimini-main-route .route-detail,
+.layuimini-main-route .show .download-outline,
+.layuimini-main-buy .desc-toggle,
+.layuimini-main-user .info-action,
+.layuimini-main-user .member-action,
+.layuimini-main-broadcast .hero-badge,
+.layuimini-main-broadcast .item-index,
+.layuimini-main-order .hero-badge,
+.layuimini-main-order .hero-stat,
+.layuimini-main-order .order-status.done,
+.layuimini-main-order .order-item,
+.layuimini-main-question .question-index,
+.layuimini-main-question .question-arrow,
+.layuimini-main-help .content .appstore .step .btns,
+.login-form .input div.captcha {
+    border: none;
+    color: var(--sd-accent) !important;
+}
+
+div.login,
+.layuimini-main-buy .payment .pay,
+.layuimini-main-feedback .body .post,
+.layuimini-main-route .show .copy,
+.layuimini-main-contact .body > button.select,
+.layuimini-main-buy .top .title .select,
+.layuimini-main-route .switch-tabs .select,
+.layuimini-main-user .info-action.primary,
+.layuimini-main-user .member-card.is-valid .member-action,
+.layuimini-modify-password .update,
+.warning-container .toHelp,
+.login-warning-show .toLoginHelp,
+.layuimini-main-help .content .appstore .layui-colla-content button {
+    background: linear-gradient(135deg, var(--sd-accent), var(--sd-accent-deep)) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+div.login button,
+.layuimini-main-buy .payment .pay span,
+.layuimini-main-feedback .body .post,
+.layuimini-main-route .show .copy {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+.layuimini-main-feedback .body .feedback-type ul li.selected,
+.layuimini-main-contact .body > button.select,
+.layuimini-main-buy .content ul li.selected,
+.layuimini-main-help .change .select,
+.layuimini-main-route .switch-tabs .select,
+.layuimini-main-buy .top .title .select {
+    border-color: var(--sd-border-strong) !important;
+    background: rgba(38, 204, 196, 0.1) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-question .page-back,
+.layuimini-main-order .page-back,
+.layuimini-main-broadcast .page-back,
+.layuimini-main-feedback .page-back,
+.layuimini-main-help .page-back,
+.layuimini-modify-password .page-back {
+    border: 1px solid var(--sd-border) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    box-shadow: none !important;
+}
+
+.layuimini-main-question .page-back .back-icon,
+.layuimini-main-order .page-back .back-icon,
+.layuimini-main-broadcast .page-back .back-icon,
+.layuimini-main-feedback .page-back .back-icon,
+.layuimini-main-help .page-back .back-icon,
+.layuimini-modify-password .page-back .back-icon {
+    border-left-color: var(--sd-accent) !important;
+    border-bottom-color: var(--sd-accent) !important;
+}
+
+.layuimini-main-route {
+    color: var(--sd-text);
+}
+
+.layuimini-main-route .route-hero {
+    background:
+        radial-gradient(circle at top right, rgba(38, 204, 196, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(243, 251, 250, 0.98)) !important;
+}
+
+.layuimini-main-route .hero-kicker,
+.layuimini-main-buy .hero-kicker,
+.layuimini-main-buy .switch-title,
+.layuimini-main-route .switch-title {
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-route .hero-title,
+.layuimini-main-buy .hero-title,
+.layuimini-main-help .content > div .title,
+.layuimini-main-question .question-title,
+.layuimini-main-broadcast .hero-title,
+.layuimini-main-order .hero-title {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-route .hero-desc,
+.layuimini-main-buy .hero-desc,
+.layuimini-main-help .page-intro,
+.layuimini-main-help .appstore-intro,
+.layuimini-main-help .content .appstore .warning,
+.layuimini-main-user .info-label,
+.layuimini-main-user .member-expire,
+.layuimini-main-user .service-desc,
+.layuimini-main-buy .feature-desc,
+.layuimini-main-broadcast .hero-desc,
+.layuimini-main-broadcast .item-time,
+.layuimini-main-order .hero-stat-label,
+.layuimini-main-order .amount-label,
+.layuimini-main-question .question-tag,
+.layuimini-main-question .question-answer-inner,
+.layuimini-main-guide .body ul li div {
+    color: var(--sd-muted) !important;
+}
+
+.layuimini-main-route .body ul li .route-meta .name,
+.layuimini-main-user .info-value,
+.layuimini-main-user .member-name,
+.layuimini-main-user .service-title,
+.layuimini-main-buy .desc-title,
+.layuimini-main-buy .feature-title,
+.layuimini-main-broadcast .panel-head,
+.layuimini-main-order .section-title,
+.layuimini-main-order .order-title,
+.layuimini-main-order .hero-stat-value,
+.layuimini-main-question .empty-title,
+.layuimini-main-feedback .page-title,
+.layuimini-main-guide .body ul > div {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-route .body ul li .fixed.use {
+    background: rgba(38, 204, 196, 0.12) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-route .body ul li {
+    border-radius: 0 !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(38, 204, 196, 0.1) !important;
+    box-shadow: none !important;
+}
+
+.layuimini-main-route .body ul li + li {
+    margin-top: -1px;
+}
+
+.layuimini-main-route .body ul li .route-body {
+    padding: 18px 16px !important;
+}
+
+.layuimini-main-route .show,
+.layuimini-main-buy .show {
+    background: rgba(10, 22, 40, 0.24) !important;
+}
+
+.layuimini-main-route .show .dialog-icon,
+.layuimini-main-buy .show .dialog-icon {
+    background: linear-gradient(135deg, rgba(38, 204, 196, 0.16), rgba(38, 204, 196, 0.06)) !important;
+}
+
+.layuimini-main-route .show .sign {
+    background: rgba(38, 204, 196, 0.05) !important;
+    border: 1px solid rgba(38, 204, 196, 0.12) !important;
+}
+
+.layuimini-main-route .show .download-outline {
+    background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.layuimini-main-help .page-intro,
+.layuimini-main-help .change,
+.layuimini-main-help .content {
+    background:
+        radial-gradient(circle at top left, rgba(38, 204, 196, 0.1), transparent 38%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(243, 251, 250, 0.98)) !important;
+}
+
+.layuimini-main-help .page-intro::before {
+    background: linear-gradient(135deg, var(--sd-accent), var(--sd-accent-deep)) !important;
+    box-shadow: none !important;
+}
+
+.layuimini-main-help .change .select {
+    box-shadow: none !important;
+}
+
+.layuimini-main-help .change .fuli {
+    background: linear-gradient(135deg, var(--sd-accent), var(--sd-accent-deep)) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.layuimini-main-help .content .outline .step,
+.layuimini-main-help .layui-colla-title {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-help .content .outline .step-desc,
+.layuimini-main-help .content .appstore .step,
+.layuimini-main-help .content .appstore .warning {
+    background: rgba(255, 255, 255, 0.9) !important;
+}
+
+.layuimini-main-help .content .outline .step-desc span,
+.layuimini-main-help .content .appstore .step span,
+.layuimini-main-help .content .appstore a {
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-help .content .appstore .step img,
+.layuimini-main-help .content .outline .step-desc img,
+.layuimini-main-guide .body ul li img {
+    box-shadow: none !important;
+}
+
+.layuimini-main-help .layui-colla-title::after {
+    border-right-color: var(--sd-accent) !important;
+    border-bottom-color: var(--sd-accent) !important;
+}
+
+.layuimini-main-help text[style*="#DD2828"],
+.layuimini-main-help span[style*="#DD2828"],
+.layuimini-main-help div[style*="#DD2828"] {
+    color: #ef7c6b !important;
+}
+
+.layuimini-main-user .info-card,
+.layuimini-main-user .membership-panel,
+.layuimini-main-user .service-panel {
+    background:
+        radial-gradient(circle at top left, rgba(38, 204, 196, 0.08), transparent 36%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 251, 250, 0.98)) !important;
+}
+
+.layuimini-main-user .info-row,
+.layuimini-main-user .service-item {
+    border-bottom: 1px solid rgba(38, 204, 196, 0.08) !important;
+}
+
+.layuimini-main-user .info-icon,
+.layuimini-main-user .member-badge,
+.layuimini-main-user .service-icon {
+    background: rgba(38, 204, 196, 0.08) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-user .member-card.is-valid {
+    box-shadow: none !important;
+}
+
+.layuimini-main-user .member-card.is-expired {
+    background: linear-gradient(180deg, rgba(249, 252, 252, 0.98), rgba(240, 246, 245, 0.98)) !important;
+    border-color: rgba(167, 189, 186, 0.32) !important;
+}
+
+.layuimini-main-user .member-card.is-expired .member-badge,
+.layuimini-main-user .member-card.is-expired .member-action {
+    background: rgba(170, 188, 186, 0.18) !important;
+    color: #6d7f86 !important;
+}
+
+.layuimini-main-user .member-card.is-valid .member-status {
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-user .service-dot {
+    background: #ff8679 !important;
+}
+
+.layuimini-main-user .info-card,
+.layuimini-main-user .membership-panel,
+.layuimini-main-user .service-panel {
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.layuimini-main-user .info-row,
+.layuimini-main-user .service-item {
+    border-bottom-color: rgba(38, 204, 196, 0.08) !important;
+}
+
+.layuimini-main-user .service-icon {
+    background: rgba(38, 204, 196, 0.08) !important;
+    color: #26ccc4 !important;
+}
+
+.layuimini-main-user .member-card {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.layuimini-main-user .vip-card {
+    background: #ecb365 url("../images/vip-bg-select.png") center center no-repeat !important;
+    background-size: cover !important;
+}
+
+.layuimini-main-user .vip-card .member-badge-text,
+.layuimini-main-user .vip-card .member-name,
+.layuimini-main-user .vip-card .member-expire {
+    color: #62291c !important;
+}
+
+.layuimini-main-user .svip-card {
+    background: #62291c url("../images/svip-bg-select.png") center center no-repeat !important;
+    background-size: cover !important;
+}
+
+.layuimini-main-user .svip-card .member-badge-text,
+.layuimini-main-user .svip-card .member-name,
+.layuimini-main-user .svip-card .member-expire {
+    color: #ecb365 !important;
+}
+
+.layuimini-main-user .vip-card.is-expired,
+.layuimini-main-user .vip-card.is-valid {
+    background: #ecb365 url("../images/vip-bg-select.png") center center no-repeat !important;
+    background-size: cover !important;
+}
+
+.layuimini-main-user .svip-card.is-expired,
+.layuimini-main-user .svip-card.is-valid {
+    background: #62291c url("../images/svip-bg-select.png") center center no-repeat !important;
+    background-size: cover !important;
+}
+
+.layuimini-main-user .member-card.is-expired,
+.layuimini-main-user .vip-card.is-expired,
+.layuimini-main-user .svip-card.is-expired {
+    background: linear-gradient(135deg, #e2e4e7 0%, #cbcfd4 100%) !important;
+}
+
+.layuimini-main-user .member-card.is-expired .member-badge-text,
+.layuimini-main-user .member-card.is-expired .member-name,
+.layuimini-main-user .member-card.is-expired .member-expire {
+    color: #7f8790 !important;
+}
+
+.layuimini-main-user .member-action {
+    background: rgba(88, 46, 22, 0.88) !important;
+    color: #fff7ee !important;
+    border: none !important;
+}
+
+.layuimini-main-user .member-card.is-valid .member-action,
+.layuimini-main-user .member-card.is-expired .member-action {
+    color: #ffffff !important;
+}
+
+.layuimini-main-user .vip-card.is-valid .member-action,
+.layuimini-main-user .vip-card.is-expired .member-action {
+    background: rgba(88, 46, 22, 0.88) !important;
+}
+
+.layuimini-main-user .svip-card .member-action {
+    background: rgba(255, 242, 220, 0.16) !important;
+    color: #fff2dc !important;
+}
+
+.layuimini-main-user .svip-card.is-valid .member-action,
+.layuimini-main-user .svip-card.is-expired .member-action {
+    background: rgba(255, 242, 220, 0.16) !important;
+}
+
+.layuimini-main-user .member-card.is-expired .member-action,
+.layuimini-main-user .vip-card.is-expired .member-action,
+.layuimini-main-user .svip-card.is-expired .member-action {
+    background: #8d939b !important;
+    color: #ffffff !important;
+}
+
+.layuimini-main-user .signin-action {
+    background: #26ccc4 !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+.layuimini-main-buy .buy-hero,
+.layuimini-main-buy .top,
+.layuimini-main-buy .desc,
+.layuimini-main-buy .content,
+.layuimini-main-buy .payment {
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.layuimini-main-buy .top .title {
+    padding: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    gap: 0 !important;
+}
+
+.layuimini-main-buy .top .title button {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    color: inherit !important;
+}
+
+.layuimini-main-buy .top .title .normal {
+    background-image: url("../images/vip-bg.png") !important;
+    color: #783827 !important;
+}
+
+.layuimini-main-buy .top .title .normal.select {
+    background-image: url("../images/vip-bg-select.png") !important;
+}
+
+.layuimini-main-buy .top .title .super {
+    background-image: url("../images/svip-bg.png") !important;
+    color: #f0b45d !important;
+}
+
+.layuimini-main-buy .top .title .super.select {
+    background-image: url("../images/svip-bg-select.png") !important;
+}
+
+.layuimini-main-buy .content ul li.selected {
+    border-color: #edb15a !important;
+    background: #fff8ec !important;
+    color: inherit !important;
+}
+
+.layuimini-main-buy .content ul li .plan-badge,
+.layuimini-main-buy .content ul li .price-line,
+.layuimini-main-buy .content ul li .plan-note {
+    color: #c9892f !important;
+}
+
+.layuimini-main-buy .payment .line {
+    background: #f0ece6 !important;
+}
+
+.layuimini-main-buy .payment ul li.selected {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+.layuimini-main-buy .payment ul li.selected span {
+    color: #2c2c2c !important;
+}
+
+.layuimini-main-buy .payment .pay {
+    background: #262626 !important;
+    color: #f0b45d !important;
+}
+
+.layuimini-main-buy .payment .pay span {
+    color: #f0b45d !important;
+}
+
+.layuimini-main-buy .privilege-banner {
+    background: #333b5a !important;
+    color: #f0b45d !important;
+}
+
+.layuimini-main-buy .privilege-table thead th {
+    background: #fff6e9 !important;
+}
+
+.layuimini-main-question .page-title,
+.layuimini-main-question .question-title,
+.layuimini-main-question .empty-title {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-question .question-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 251, 250, 0.96)) !important;
+}
+
+.layuimini-main-question .question-card::before,
+.layuimini-main-broadcast .broadcast-item::before,
+.layuimini-main-order .order-card::before {
+    background: linear-gradient(180deg, var(--sd-accent) 0%, var(--sd-accent-deep) 100%) !important;
+}
+
+.layuimini-main-question .question-card.open .question-index,
+.layuimini-main-question .question-card.open .question-arrow {
+    background: linear-gradient(135deg, var(--sd-accent), var(--sd-accent-deep)) !important;
+    color: #ffffff !important;
+}
+
+.layuimini-main-question .question-answer-inner {
+    border-top: 1px solid rgba(38, 204, 196, 0.08) !important;
+}
+
+.layuimini-main-broadcast .broadcast-hero,
+.layuimini-main-order .order-hero {
+    background:
+        radial-gradient(circle at top left, rgba(38, 204, 196, 0.12), transparent 38%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(243, 251, 250, 0.98)) !important;
+}
+
+.layuimini-main-broadcast .broadcast-hero::after {
+    background: rgba(38, 204, 196, 0.08) !important;
+}
+
+.layuimini-main-broadcast .meta-chip strong,
+.layuimini-main-order .hero-badge,
+.layuimini-main-order .amount-value {
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-order .order-icon {
+    background: linear-gradient(180deg, rgba(38, 204, 196, 0.1), rgba(38, 204, 196, 0.06)) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-order .order-card.pending .order-status {
+    background: rgba(255, 191, 84, 0.18) !important;
+    color: #b87400 !important;
+}
+
+.layuimini-main-order .order-card.unpaid .order-status {
+    background: rgba(255, 134, 121, 0.14) !important;
+    color: #b35d52 !important;
+}
+
+.layuimini-main-feedback .reply {
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-feedback .body .feedback-type ul li {
+    border-radius: 14px;
+}
+
+
+.layuimini-main-feedback .body .content2 {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(38, 204, 196, 0.12) !important;
+    border-radius: 18px !important;
+}
+
+.layuimini-main-feedback .body .picture #upload-picture,
+.layuimini-main-feedback .body .picture #show-picture {
+    border-radius: 18px;
+}
+
+.layuimini-main-feedback .body .picture .txt,
+.layuimini-main-feedback .body .content .num {
+    color: var(--sd-muted) !important;
+}
+
+.layuimini-main-feedback-list .layui-tab-title li,
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li {
+    border-color: rgba(38, 204, 196, 0.08) !important;
+}
+
+.layui-layout-admin .broadcast-show,
+.layui-layout-admin .feedback-show,
+.layui-layout-admin .warning-show,
+.login-warning-show,
+.layuimini-main-route .show,
+.layuimini-main-buy .show {
+    background: rgba(10, 22, 40, 0.24) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container,
+.layui-layout-admin .feedback-show .feedback-container,
+.layui-layout-admin .warning-show .warning-container,
+.login-warning-show .warning-container,
+.layuimini-main-route .show .dialog-card,
+.layuimini-main-buy .show .dialog-card {
+    background:
+        radial-gradient(circle at top left, rgba(38, 204, 196, 0.1), transparent 38%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 251, 250, 0.98)) !important;
+    border: 1px solid rgba(38, 204, 196, 0.16) !important;
+    box-shadow: none !important;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-badge,
+.layui-layout-admin .feedback-show .feedback-badge,
+.layui-layout-admin .warning-show .warning-container .toHelp,
+.login-warning-show .toLoginHelp,
+.layuimini-main-route .show .copy,
+.layuimini-main-buy .show .bottom button:not(:first-child) {
+    background: linear-gradient(135deg, #26ccc4, #1aa09a) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.layui-layout-admin .broadcast-show .show-more,
+.layui-layout-admin .feedback-show .show-more,
+.layuimini-main-route .show .download-outline,
+.layuimini-main-buy .show .bottom button:first-child {
+    background: rgba(38, 204, 196, 0.08) !important;
+    color: #26ccc4 !important;
+    border: 1px solid rgba(38, 204, 196, 0.16) !important;
+    box-shadow: none !important;
+}
+
+.layui-layout-admin .broadcast-show .desc-wrap,
+.layui-layout-admin .feedback-show .desc-wrap,
+.layui-layout-admin .warning-show .warning-container .desc,
+.login-warning-show .warning-container .desc,
+.layuimini-main-route .show .sign,
+.layuimini-main-buy .show .desc {
+    background: rgba(38, 204, 196, 0.05) !important;
+    border: 1px solid rgba(38, 204, 196, 0.12) !important;
+}
+
+.layui-layout-admin .broadcast-show .close,
+.layui-layout-admin .feedback-show .close,
+.layui-layout-admin .warning-show .close,
+.login-warning-show .close,
+.layuimini-main-route .show .close,
+.layuimini-main-buy .show .close {
+    background: rgba(38, 204, 196, 0.08) !important;
+    border: 1px solid rgba(38, 204, 196, 0.12) !important;
+    border-radius: 999px !important;
+}
+
+.layuimini-main-buy .show {
+    background: rgba(0, 0, 0, 0.26) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.layuimini-main-buy .show .dialog-card {
+    background: #ffffff !important;
+    border: 1px solid #ece3d6 !important;
+}
+
+.layuimini-main-buy .show .dialog-icon {
+    background: #fff5e8 !important;
+}
+
+.layuimini-main-buy .show .desc {
+    background: #faf7f2 !important;
+    border: 1px solid #eee6dc !important;
+}
+
+.layuimini-main-buy .show .close {
+    background: #ffffff !important;
+    border: 1px solid #ece3d6 !important;
+    border-radius: 0 !important;
+}
+
+.layuimini-main-buy .show .bottom button:first-child {
+    background: #ffffff !important;
+    color: #666d77 !important;
+    border: 1px solid #d6cec2 !important;
+}
+
+.layuimini-main-buy .show .bottom button:not(:first-child) {
+    background: #262626 !important;
+    color: #f0b45d !important;
+    border: 1px solid #262626 !important;
+}
+
+.layui-layout-admin .broadcast-show .close .close-icon::before,
+.layui-layout-admin .broadcast-show .close .close-icon::after,
+.layui-layout-admin .feedback-show .close .close-icon::before,
+.layui-layout-admin .feedback-show .close .close-icon::after,
+.layuimini-main-route .show .close .close-icon::before,
+.layuimini-main-route .show .close .close-icon::after,
+.layuimini-main-buy .show .close .close-icon::before,
+.layuimini-main-buy .show .close .close-icon::after {
+    background: #7fa2a7 !important;
+}
+
+.layui-layer {
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(38, 204, 196, 0.16) !important;
+    box-shadow: none !important;
+}
+
+.layui-body .layuimini-content-page > *,
+.layuimini-main-feedback > div.title,
+.layuimini-main-feedback-list > div.title,
+.layuimini-main-feedback-list .top,
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li,
+.layuimini-main-feedback .body,
+.layuimini-main-feedback .body .picture,
+.layuimini-main-broadcast .broadcast-hero,
+.layuimini-main-broadcast .broadcast-panel,
+.layuimini-main-broadcast .broadcast-item,
+.layuimini-main-broadcast .broadcast-empty,
+.layuimini-main-buy .buy-hero,
+.layuimini-main-buy .top,
+.layuimini-main-buy .desc,
+.layuimini-main-buy .content,
+.layuimini-main-buy .payment,
+.layuimini-main-buy .show .dialog-card,
+.layuimini-main-help .page-intro,
+.layuimini-main-help .change,
+.layuimini-main-help .content,
+.layuimini-main-help .layui-colla-item,
+.layuimini-main-order .order-hero,
+.layuimini-main-order .order-section,
+.layuimini-main-order .order-empty,
+.layuimini-main-order .order-card,
+.layuimini-main-order .order-item,
+.layuimini-main-question .question-card,
+.layuimini-main-question .question-empty,
+.layuimini-main-route .route-hero,
+.layuimini-main-route .body ul li,
+.layuimini-main-route .show .dialog-card,
+.layuimini-main-user .info-card,
+.layuimini-main-user .membership-panel,
+.layuimini-main-user .service-panel,
+.layuimini-main-user .member-card,
+.layuimini-main-contact .body,
+.layuimini-main-guide .body,
+.layuimini-main-guide .body ul li,
+.help .container,
+.broadcast-container,
+.feedback-container,
+.warning-container,
+.login-warning-show .warning-container,
+.layuimini-modify-password .logo-title,
+.layui-layout-admin,
+.layui-layout-admin .footer,
+.login-form {
+    box-shadow: none !important;
+}
+
+.layui-layer-page .layui-layer-content,
+.layui-layer-content,
+.layui-layer-black,
+.layui-layer-dialog,
+.layui-layer-msg {
+    background:
+        radial-gradient(circle at top left, rgba(38, 204, 196, 0.1), transparent 38%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 251, 250, 0.98)) !important;
+    color: #0a1628 !important;
+}
+
+.layui-layer-title,
+.layui-layer-black .layui-layer-title {
+    background: rgba(38, 204, 196, 0.08) !important;
+    color: #0a1628 !important;
+    border-bottom: 1px solid rgba(38, 204, 196, 0.12) !important;
+}
+
+.layui-layer-setwin .layui-layer-close1,
+.layui-layer-setwin .layui-layer-close2 {
+    filter: hue-rotate(125deg) saturate(0.8);
+}
+
+.layui-layer-btn {
+    border-top: 1px solid rgba(38, 204, 196, 0.12) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.layui-layer-btn a,
+.layui-layer-black .layui-layer-btn a {
+    border-radius: 999px !important;
+    border: 1px solid rgba(38, 204, 196, 0.16) !important;
+    background: rgba(38, 204, 196, 0.08) !important;
+    color: #26ccc4 !important;
+}
+
+.layui-layer-btn .layui-layer-btn0 {
+    background: linear-gradient(135deg, #26ccc4, #1aa09a) !important;
+    border-color: transparent !important;
+    color: #ffffff !important;
+}
+
+.layui-layer-dialog .layui-layer-content,
+.layui-layer-msg .layui-layer-content {
+    color: #0a1628 !important;
+}
+
+.layui-layer-loading .layui-layer-content {
+    background-color: rgba(255, 255, 255, 0.96) !important;
+}
+
+
+    .layuimini-main-question .question-card,
+    .layuimini-main-buy .buy-hero,
+    .layuimini-main-route .route-hero,
+    .layuimini-main-help .content,
+    .layuimini-main-order .order-card,
+    .layuimini-main-broadcast .broadcast-item,
+    .layuimini-main-user .info-card,
+    .layuimini-main-user .membership-panel,
+    .layuimini-main-user .service-panel {
+        border-radius: 12px !important;
+    }
+
+    .layuimini-main-user .info-card,
+    .layuimini-main-user .membership-panel,
+    .layuimini-main-user .service-panel,
+    .layuimini-main-user .member-card {
+        border-radius: 0 !important;
+    }
+
+
+.layuimini-main-broadcast {
+    background: #ffffff !important;
+}
+
+.layuimini-main-broadcast .page-header,
+.layuimini-main-broadcast .broadcast-summary,
+.layuimini-main-broadcast .broadcast-panel,
+.layuimini-main-broadcast .broadcast-item,
+.layuimini-main-broadcast .broadcast-empty {
+    background: #ffffff !important;
+    border-color: #e8edf2 !important;
+    box-shadow: none !important;
+}
+
+.layuimini-main-broadcast .page-header {
+    border-bottom-color: #eef1f4 !important;
+}
+
+.layuimini-main-broadcast .page-title,
+.layuimini-main-broadcast .summary-title,
+.layuimini-main-broadcast .panel-head {
+    color: #111827 !important;
+}
+
+.layuimini-main-broadcast .summary-meta,
+.layuimini-main-broadcast .item-time,
+.layuimini-main-broadcast .empty-desc {
+    color: #9ca3af !important;
+}
+
+.layuimini-main-broadcast .summary-count,
+.layuimini-main-broadcast .summary-note,
+.layuimini-main-broadcast .item-content {
+    color: #374151 !important;
+}
+
+.layuimini-main-broadcast .summary-count em {
+    color: #26ccc4 !important;
+}
+
+.layuimini-main-broadcast .broadcast-item::before {
+    display: none !important;
+}
+
+.layuimini-main-broadcast .broadcast-item {
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.layuimini-main-broadcast .broadcast-item:last-child {
+    border-bottom: none !important;
+}
+
+.layuimini-main-broadcast .empty-icon {
+    background: #f3f4f6 !important;
+    color: #26ccc4 !important;
+    border: none !important;
+}

@@ -1,0 +1,209 @@
+.layuimini-main-feedback > div.title{position: relative;height: 50px;text-align: center;color: #393D41;line-height: 50px;background-color: white;}
+.layuimini-main-feedback > div.title .page-title{display: inline-block;
+    line-height: 50px;
+    color: var(--sd-text, #f7f2e8);
+    font-size: 16px;
+    font-weight: 700;}
+.layuimini-main-feedback > div.title .reply{position: absolute;top: 0;right: 15px;color: #2468F2;cursor: pointer;}
+.layuimini-main-feedback > div.title .page-back{position: absolute;top: 8px;left: 8px;display: flex;align-items: center;justify-content: center;width: 34px;height: 34px;border: 1px solid rgba(123,47,242,0.14);border-radius: 999px;background: rgba(255,255,255,0.92);text-align: left;cursor: pointer;}
+.layuimini-main-feedback > div.title .page-back .back-icon{display: block;width: 10px;height: 10px;margin-left: 3px;border-left: 2px solid #7B2FF2;border-bottom: 2px solid #7B2FF2;transform: rotate(45deg);}
+.layuimini-main-feedback .body{width: 334px;margin: 21px auto;}
+.layuimini-main-feedback .body .feedback-type .title{line-height: 19px;font-weight: bold;color: #393D41;}
+.layuimini-main-feedback .body .feedback-type ul{margin-top: 11px;display: flex;}
+.layuimini-main-feedback .body .feedback-type ul li{display: inline-table;text-align: center;margin: 0 15px 18px 0;width: 101px;height: 36px;background-color: #BEBEBE;line-height: 36px;color: #FFFFFF;cursor: pointer;}
+.layuimini-main-feedback .body .feedback-type ul li:nth-child(3n){margin-right: 0;}
+.layuimini-main-feedback .body .feedback-type ul li.selected{background-color: #2468F2;}
+.layuimini-main-feedback .body .content .title{margin-bottom: 7px;line-height: 19px;color: #393D41;font-weight: bold;}
+.layuimini-main-feedback .body .content .content2{position: relative;}
+.layuimini-main-feedback .body .content .content2 textarea{height: 175px;}
+.layuimini-main-feedback .body .content .content2 .num{font-size: 15px;color: #B7B7B7;line-height: 19px;position: absolute;right: 12px;bottom: 7px;}
+.layuimini-main-feedback .body .picture{position: relative;width: 68px;height: 65px;background-color: white;margin-top: 11px;text-align: center;}
+.layuimini-main-feedback .body .picture img{width: 20px;}
+.layuimini-main-feedback .body .picture .txt{margin-top: 5px;font-size: 9px;color: #B7B7B7;}
+.layuimini-main-feedback .body .picture div.cancel-picture{position: absolute;top: 0;right: 0;margin-top: 0;width: 10px;height: 10px;line-height: 10px;cursor: pointer;}
+.layuimini-main-feedback .body .post{margin: 21px auto 33px auto;width: 320px;height: 45px;background-color: #2468F2;text-align: center;line-height: 45px;color: white;font-size: 15px;cursor: pointer;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #B7B7B7;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #B7B7B7;}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {color: #B7B7B7;}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {color: #B7B7B7;}
+
+.layuimini-main-feedback-list{
+    background: #FFFFFF;
+    min-height: 100%;
+    padding-bottom: 20px;
+}
+.layuimini-main-feedback-list > div.title{
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: 52px;
+    text-align: center;
+    line-height: 52px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #EEF1F4;
+}
+.layuimini-main-feedback-list > div.title .page-title{
+    display: inline-block;
+    color: #1F2937;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+.layuimini-main-feedback-list > div.title .page-back{
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    background: #FFFFFF;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: none;
+}
+.layuimini-main-feedback-list > div.title .page-back .back-icon{
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin-left: 3px;
+    border-left: 2px solid #26CCC4;
+    border-bottom: 2px solid #26CCC4;
+    transform: rotate(45deg);
+}
+.layuimini-main-feedback-list .record-list{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+}
+.layuimini-main-feedback-list .record-card{
+    padding: 14px;
+    border: 1px solid #E8EDF2;
+    border-radius: 14px;
+    background: #FFFFFF;
+    box-shadow: none;
+}
+.layuimini-main-feedback-list .record-head{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.layuimini-main-feedback-list .record-time{
+    color: #6B7280;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.layuimini-main-feedback-list .record-status{
+    flex: 0 0 auto;
+    min-width: 64px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    font-weight: 600;
+}
+.layuimini-main-feedback-list .record-status.replied{
+    color: #138F89;
+    background: rgba(38,204,196,0.12);
+}
+.layuimini-main-feedback-list .record-status.waiting{
+    color: #6B7280;
+    background: #F3F4F6;
+}
+.layuimini-main-feedback-list .record-section{
+    padding-top: 12px;
+    border-top: 1px solid #F1F5F9;
+}
+.layuimini-main-feedback-list .record-section + .record-section{
+    margin-top: 12px;
+}
+.layuimini-main-feedback-list .section-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.layuimini-main-feedback-list .section-label{
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+.layuimini-main-feedback-list .section-time{
+    color: #9CA3AF;
+    font-size: 12px;
+    line-height: 1.4;
+}
+.layuimini-main-feedback-list .section-body{
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.75;
+    word-break: break-word;
+}
+.layuimini-main-feedback-list .feedback-text{
+    background: #F8FAFC;
+    color: #374151;
+}
+.layuimini-main-feedback-list .reply-text{
+    background: rgba(38,204,196,0.08);
+    color: #1F2937;
+}
+.layuimini-main-feedback-list .pending-text{
+    background: #F9FAFB;
+    color: #6B7280;
+}
+.layuimini-main-feedback-list .record-empty{
+    margin: 16px 14px 0;
+    padding: 32px 20px;
+    border: 1px solid #E8EDF2;
+    border-radius: 14px;
+    background: #FFFFFF;
+    text-align: center;
+    box-shadow: none;
+}
+.layuimini-main-feedback-list .record-empty .empty-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 12px;
+    border-radius: 999px;
+    background: #F3F4F6;
+    color: #26CCC4;
+    font-size: 24px;
+}
+.layuimini-main-feedback-list .record-empty .empty-title{
+    color: #374151;
+    font-size: 16px;
+    font-weight: 600;
+}
+.layuimini-main-feedback-list .record-empty .empty-desc{
+    margin-top: 8px;
+    color: #9CA3AF;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media screen and (max-width: 480px){
+    .layuimini-main-feedback-list .record-head,
+    .layuimini-main-feedback-list .section-top{
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .layuimini-main-feedback-list .record-status{
+        min-width: 0;
+    }
+}

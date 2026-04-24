@@ -1,0 +1,329 @@
+<div class="layuimini-container layuimini-page-anim">
+  <div class="layuimini-main-user">
+    <div class="info-card">
+      <div class="profile-avatar"></div>
+      <div class="profile-main">
+        <div class="info-row">
+          <div class="info-copy">
+            <div class="info-line">
+              <span class="info-label">ID：</span>
+              <span class="info-value uid"></span>
+            </div>
+          </div>
+          <button class="copy-icon action-copy-uid" type="button" aria-label="复制ID"><img src="images/copy.png" alt=""></button>
+        </div>
+        <div class="info-row">
+          <div class="info-copy">
+            <div class="info-line">
+              <span class="info-label">手机号：</span>
+              <span class="info-value phone-value"></span>
+            </div>
+          </div>
+          <button class="copy-icon action-copy-phone" type="button" aria-label="复制手机号"><img src="images/copy.png" alt=""></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="membership-panel">
+      <div class="member-card vip-card" data-plan="vip">
+        <div class="member-main">
+          <div class="member-head">
+            <span class="member-name">VIP会员</span>
+          </div>
+          <div class="member-status vip-status" style="display: none;">未开通</div>
+          <div class="member-expire vip-time">-</div>
+        </div>
+        <button class="member-action go-buy" data-plan="vip" type="button">续费</button>
+      </div>
+
+      <div class="member-card svip-card" data-plan="svip">
+        <div class="member-main">
+          <div class="member-head">
+            <span class="member-name">SVIP会员</span>
+          </div>
+          <div class="member-status svip-status" style="display: none;">未开通</div>
+          <div class="member-expire svip-time">开通享多项特权</div>
+        </div>
+        <button class="member-action go-buy" data-plan="svip" type="button">开通</button>
+      </div>
+    </div>
+
+    <div class="section-title">更多服务</div>
+    <div class="service-panel">
+      <div class="service-item modify-password-entry">
+        <div class="service-left">
+          <div class="service-icon"><i class="fa fa-lock"></i></div>
+          <div class="service-copy">
+            <div class="service-title">修改密码</div>
+          </div>
+        </div>
+        <i class="fa fa-angle-right service-arrow"></i>
+      </div>
+
+      <div class="service-item order-list">
+        <div class="service-left">
+          <div class="service-icon"><i class="fa fa-users"></i></div>
+          <div class="service-copy">
+            <div class="service-title">我的订单</div>
+          </div>
+        </div>
+        <i class="fa fa-angle-right service-arrow"></i>
+      </div>
+
+      <div class="service-item broadcast-list">
+        <div class="service-left">
+          <div class="service-icon"><i class="fa fa-bullhorn"></i></div>
+          <div class="service-copy">
+            <div class="service-title">公告列表</div>
+          </div>
+        </div>
+        <div class="service-tail">
+          <span class="service-dot broadcast-dot" id="broadcast-service-dot" style="display: none;"></span>
+          <i class="fa fa-angle-right service-arrow"></i>
+        </div>
+      </div>
+
+      <div class="service-item faq">
+        <div class="service-left">
+          <div class="service-icon"><i class="fa fa-question-circle-o"></i></div>
+          <div class="service-copy">
+            <div class="service-title">常见问题</div>
+          </div>
+        </div>
+        <i class="fa fa-angle-right service-arrow"></i>
+      </div>
+
+      <div class="service-item feedback">
+        <div class="service-left">
+          <div class="service-icon"><i class="fa fa-commenting-o"></i></div>
+          <div class="service-copy">
+            <div class="service-title">问题反馈</div>
+          </div>
+        </div>
+        <div class="service-tail">
+          <span class="service-dot feedback-dot" id="feedback-service-dot" style="display: none;"></span>
+          <i class="fa fa-angle-right service-arrow"></i>
+        </div>
+      </div>
+    </div>
+
+    <button class="logout-btn" type="button">退出登录</button>
+  </div>
+</div>
+
+<script src="js/utils.js" charset="utf-8"></script>
+<script>
+  layui.use(['form', 'table', 'miniPage'], function () {
+    var $ = layui.jquery,
+      form = layui.form,
+      table = layui.table,
+      miniPage = layui.miniPage;
+
+    function goPage(page) {
+      let now = parseInt(new Date().getTime() / 1000);
+      miniPage.hashChange(page );
+    }
+
+    function showSoon(text) {
+      layer.msg(text || '功能即将上线');
+    }
+
+    function logout() {
+      try {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      } catch (e) {}
+
+      try {
+        layui.data('user', { key: "userInfo", remove: true });
+        layui.data('token', { key: "info", remove: true });
+      } catch (e) {}
+
+      window.location = 'login.html';
+    }
+
+    function copyPlainText(text) {
+      if (!text) {
+        layer.msg('暂无可复制内容');
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          layer.msg('已复制');
+        }, function () {
+          fallbackCopy(text);
+        });
+        return;
+      }
+
+      fallbackCopy(text);
+    }
+
+    function fallbackCopy(text) {
+      var textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', 'readonly');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        layer.msg('已复制');
+      } catch (err) {
+        layer.msg('复制失败，请手动复制');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function syncServiceDotsFromCache() {
+      var badgeInfo = layui.data('badge') || {};
+      if (Number(badgeInfo.broadcast) === 1) {
+        $(".layuimini-main-user #broadcast-service-dot").show();
+      } else {
+        $(".layuimini-main-user #broadcast-service-dot").hide();
+      }
+
+      if (Number(badgeInfo.feedback) === 1) {
+        $(".layuimini-main-user #feedback-service-dot").show();
+      } else {
+        $(".layuimini-main-user #feedback-service-dot").hide();
+      }
+    }
+
+    let request = GetRequestParams(layui.router().href);
+    if (request["channel"] != undefined && request["channel"] != "") {
+      layui.data('channel', { key: "info", value: request["channel"] });
+    }
+
+    var userInfo = layui.data('user').userInfo;
+
+    if (userInfo == undefined || userInfo.username == undefined) {
+      var loadIndex = layer.load(2, {
+        shade: [0.2, '#000000']
+      });
+      getUserInfo(loadIndex);
+      return false;
+    } else {
+      let isReset = false;
+      let timestamp = parseInt(new Date().getTime() / 1000);
+      if (timestamp - userInfo.cache_ts > 60) {
+        isReset = true;
+        getUserInfo();
+      }
+
+      if (!isReset) {
+        resetUser(userInfo);
+      }
+    }
+
+    function setCardState(selector, statusSelector, expireTime, timestamp) {
+      const card = $(selector);
+      const status = $(statusSelector);
+      const isValid = expireTime > timestamp;
+      const expireNode = card.find('.member-expire');
+      const isSvipCard = card.hasClass('svip-card');
+      card.removeClass('is-valid is-expired').addClass(isValid ? 'is-valid' : 'is-expired');
+      status.text(isValid ? '已开通' : '未开通');
+      card.find('.member-action').text(isValid ? '续费' : '开通');
+      if (!isValid) {
+        expireNode.text(isSvipCard ? '开通享多项特权' : '开通享基础特权');
+      }
+    }
+
+    function resetUser(userInfo) {
+      let timestamp = parseInt(new Date().getTime() / 1000);
+
+      if (userInfo.vip_expire_time == 0) {
+        userInfo.vip_expire_time = userInfo.created;
+      }
+      if (userInfo.expire_time == 0) {
+        userInfo.expire_time = userInfo.created;
+      }
+
+      let phoneValue = userInfo.mobile || userInfo.phone || userInfo.username || '-';
+      let uidValue = userInfo.uid || userInfo.id || '-';
+
+      $(".layuimini-main-user .uid").text(uidValue);
+      $(".layuimini-main-user .phone-value").text(phoneValue);
+      $(".layuimini-main-user .vip-time").text(dateUnixFormat(userInfo.expire_time));
+      $(".layuimini-main-user .svip-time").text(dateUnixFormat(userInfo.vip_expire_time));
+
+      setCardState(".layuimini-main-user .vip-card", ".layuimini-main-user .vip-status", userInfo.expire_time, timestamp);
+      setCardState(".layuimini-main-user .svip-card", ".layuimini-main-user .svip-status", userInfo.vip_expire_time, timestamp);
+    }
+
+    function getUserInfo(loadIndex) {
+      axios({
+        "method": "GET",
+        "url": `${API_URL}/user/info`,
+      }).then((json) => {
+        if (loadIndex != undefined) {
+          layer.close(loadIndex);
+        }
+        if (json.code == 200) {
+          let timestamp = parseInt(new Date().getTime() / 1000);
+          json.data.cache_ts = timestamp;
+          layui.data('user', { key: "userInfo", value: json.data });
+          resetUser(json.data);
+        } else if (json.code == 4003) {
+          layer.msg(json.msg, {
+            time: 1000
+          }, function () {
+            layui.data('user', { key: "userInfo", remove: true })
+            window.location = 'login.html';
+          });
+        } else {
+          layer.msg(json.msg);
+        }
+      }, (e) => {
+        if (loadIndex != undefined) {
+          layer.close(loadIndex);
+        }
+        layer.msg(e.errorType);
+      });
+    }
+
+    $(".layuimini-main-user .go-buy").on('click', function () {
+      let isSvip = $(this).data('plan') === 'svip' ? 1 : 0;
+      layui.sessionData('buy_tab', { key: "is_svip", value: isSvip });
+      miniPage.hashChange('buy.html');
+    });
+
+    $(".layuimini-main-user .action-copy-uid").on('click', function () {
+      copyPlainText($(".layuimini-main-user .uid").text());
+    });
+
+    $(".layuimini-main-user .action-copy-phone").on('click', function () {
+      copyPlainText($(".layuimini-main-user .phone-value").text());
+    });
+
+    $(".layuimini-main-user .modify-password-entry").on('click', function () {
+      miniPage.hashChange("update_password.html");
+    });
+
+    $(".layuimini-main-user .order-list").on('click', function () {
+      goPage('order.html');
+    });
+
+    $(".layuimini-main-user .broadcast-list").on('click', function () {
+      goPage('broadcast.html');
+    });
+
+    $(".layuimini-main-user .faq").on('click', function () {
+      goPage('question.html');
+    });
+
+    $(".layuimini-main-user .feedback").on('click', function () {
+      goPage('feedback.html');
+    });
+
+    $(".layuimini-main-user .logout-btn").on('click', function () {
+      logout();
+    });
+
+    syncServiceDotsFromCache();
+    form.render();
+  });
+</script>

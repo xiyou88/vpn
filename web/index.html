@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title class="icon-title">西柚VPN</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="lib/layui-v2.6.7/css/layui.css" media="all">
+    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="css/layuimini.css" media="all">
+    <link rel="stylesheet" href="css/themes/default.css" media="all">
+    <link rel="stylesheet" href="css/public.css" media="all">
+    <link rel="stylesheet" href="css/index.css" media="all">
+    <link rel="stylesheet" type="text/css" href="./css/user.css">
+    <link rel="stylesheet" type="text/css" href="./css/broadcast.css">
+    <link rel="stylesheet" type="text/css" href="./css/buy.css">
+    <link rel="stylesheet" type="text/css" href="./css/contact.css">
+    <link rel="stylesheet" type="text/css" href="./css/feedback.css">
+    <link rel="stylesheet" type="text/css" href="./css/feedback_list.css">
+    <link rel="stylesheet" type="text/css" href="./css/route.css">
+    <link rel="stylesheet" type="text/css" href="./css/update-password.css">
+    <link rel="stylesheet" href="./css/theme-tech.css" media="all">
+    <link rel="stylesheet" href="./css/theme-refresh.css" media="all">
+    <link rel="apple-touch-icon" sizes="108x108" href="./images/icon-cp.png">
+    <link rel="icon" href="./favicon.ico">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+<body class="layui-layout-body layuimini-all">
+<div class="layui-layout layui-layout-admin">
+    <div>
+        <div class="layui-body">
+            <div class="mescroll">
+                <div class="layuimini-content-page">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="z-index: 900;">
+        <div class="footer">
+            <div class="nav">
+                <span class="route select">
+                    <span class="tab-icon tab-icon-route" aria-hidden="true"></span>
+                    <em class="tab-label">线路</em>
+                </span>
+                <span class="guide">
+                    <span class="tab-icon tab-icon-guide" aria-hidden="true"></span>
+                    <em class="tab-label">使用教程</em>
+                </span>
+                <span class="buy">
+                    <span class="tab-icon tab-icon-buy" aria-hidden="true"></span>
+                    <em class="tab-label">购买</em>
+                </span>
+                <span class="mine">
+                    <span class="tab-icon tab-icon-mine" aria-hidden="true"></span>
+                    <em class="tab-label">我的</em>
+                </span>
+            </div>
+
+            <div></div>
+        </div>
+    </div>
+
+    <div class="help">
+        <div class="container">
+            <div class="title">
+                <span>使用指南</span>
+                <div class="skip-help">跳过指南</div>
+            </div>
+            <div class="body">
+                <div class="desc"></div>
+                <div>
+                    <img src="" />
+                    <div class="next"><span>下一步</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="broadcast-show">
+        <div class="broadcast-container">
+            <div class="broadcast-card">
+                <button class="close" type="button" aria-label="关闭公告">
+                    <span class="close-icon" aria-hidden="true"></span>
+                </button>
+                <div class="broadcast-badge">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    <span>平台公告</span>
+                </div>
+                <div class="title">最新公告</div>
+                <div class="time"></div>
+                <div class="id"></div>
+                <div class="desc-wrap">
+                    <div class="desc"></div>
+                </div>
+                <div class="broadcast-actions">
+                    <button class="show-more" type="button">查看完整公告</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="feedback-show">
+        <div class="feedback-container">
+            <div class="feedback-card">
+                <button class="close" type="button" aria-label="关闭反馈提醒">
+                    <span class="close-icon" aria-hidden="true"></span>
+                </button>
+                <div class="feedback-badge">
+                    <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                    <span>反馈回复</span>
+                </div>
+                <div class="title">你收到了新的处理结果</div>
+                <div class="id"></div>
+                <div class="desc-wrap">
+                    <div class="desc"></div>
+                </div>
+                <div class="feedback-actions">
+                    <button class="show-more" type="button">查看回复详情</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="lib/layui-v2.6.7/layui.js" charset="utf-8"></script>
+<script src="js/lay-config.js" charset="utf-8"></script>
+<script src="js/utils.js" charset="utf-8"></script>
+<script src="js/md5.min.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['jquery', 'layer','miniAdmin','miniPage'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            miniAdmin = layui.miniAdmin,
+            miniPage = layui.miniPage;
+ 
+
+        var index = 0;
+        var options = {
+            renderPageVersion: false,    // 初始化页面是否加版本号
+            bgColorDefault: false,      // 主题默认配置
+            multiModule: false,          // 是否开启多模块
+            menuChildOpen: false,       // 是否默认展开菜单
+            loadingTime: 0,             // 初始化加载时间
+            pageAnim: true,             // 切换菜单动画
+        };
+
+        var channel = "";
+        let request = GetRequestParams(layui.router().href);
+        console.log(request["channel"]);
+        if (request["channel"] != undefined && request["channel"] != ""){
+            channel = request["channel"];
+            layui.data('channel',{key:"info",value: request["channel"]});
+        }
+        options.channel = channel;
+
+        let deviceOs = layui.data('deviceInfo').device_os;
+        if(deviceOs != undefined && deviceOs == "ios") {
+            postMessage(JSON.stringify({type: "barColor", data: "\\#FFFFFF"}));
+            postMessage(JSON.stringify({type: "statusBarStyle", data:"darkContent"}));
+        }
+
+        function syncFooterTab(page) {
+            var currentPage = page || (((window.location.hash || '').replace(/^#\/?/, '')).split('?')[0] || 'route.html');
+            var tabMap = {
+                "route.html": ".route",
+                "help.html": ".guide",
+                "buy.html": ".buy",
+                "user.html": ".mine",
+                "order.html": ".mine",
+                "broadcast.html": ".mine",
+                "feedback.html": ".mine",
+                "feedback_list.html": ".mine",
+                "question.html": ".mine",
+                "update_password.html": ".mine"
+            };
+
+            $(".footer .nav span").removeClass('select');
+            if (tabMap[currentPage] != undefined) {
+                $(".footer " + tabMap[currentPage]).addClass('select');
+            } else {
+                $(".footer .route").addClass('select');
+            }
+        }
+
+        miniAdmin.render(options);
+        syncFooterTab();
+        $(window).on('hashchange', function () {
+            syncFooterTab();
+        });
+
+        var warning = layui.data('warning').info;
+        if(warning == undefined || warning != 1){
+            // $(".warning-show").show();
+            // layui.data('warning',{key:"info",value: 1});
+        }
+
+        let uid = 0;
+        if(layui.data('user').userInfo!=undefined && layui.data('user').userInfo.uid != undefined){
+            uid = layui.data('user').userInfo.uid;
+        }
+        if(uid==0){
+            uid = layui.data('uid').uid;
+        }
+
+        $('.login-out').on("click", function () {
+            layui.data("token",null);
+            layui.sessionData('route',null);
+            layui.data('user',null);
+            layer.msg('退出登录成功', function () {
+                window.location = 'login.html';
+            });
+        });
+        $('.skip-help').on('click', function () {
+            layui.data('help',{key:"info",value: 1});
+            $(".help").toggle();
+        });
+        function switchFooterTab(target, page) {
+            $(".footer .nav span").removeClass('select');
+            $(target).addClass('select');
+            
+            miniPage.hashChange(page);
+        }
+
+        $('.footer .route').on('click', function () {
+            switchFooterTab(this, "route.html");
+        });
+        $('.footer .guide').on('click', function () {
+            switchFooterTab(this, "help.html");
+        });
+        $('.footer .buy').on('click', function () {
+            switchFooterTab(this, "buy.html");
+        });
+        $('.footer .mine').on('click', function () {
+            switchFooterTab(this, "user.html");
+        });
+
+        $('.footer .contact').on('click', function () {
+            miniPage.hashChange("contact.html");
+        });
+        $('.footer .broadcast').on('click', function () {
+            miniPage.hashChange("broadcast.html");
+        });
+        $('.footer .feedback').on('click', function () {
+            miniPage.hashChange("feedback.html");
+        });
+        $(".footer .tohelp").on('click', function (){
+            miniPage.hashChange("help.html");
+        })
+        $('.footer .help-question').on('click', function () {
+            startHelp();
+        });
+        
+        $('.broadcast-show .show-more').on('click', function () {
+            $('.broadcast-show').hide();
+            miniPage.hashChange('broadcast.html');
+        });
+
+        $('.feedback-show .show-more').on('click', function () {
+            $('.feedback-show').hide();
+            let id = $('.feedback-show .feedback-container .id').text();
+            $('#feedback-id').removeClass("layui-badge-dot");
+            $('#feedback-service-dot').hide();
+            layui.data('badge',{key:"feedback",value: 0});
+            layui.data('feedback',{key:"last",value: id});
+            miniPage.hashChange('feedback_list.html');
+        });
+
+        $('.broadcast-show .broadcast-container .close').on('click', function () {
+            $('.broadcast-show').toggle();
+            let id = $('.broadcast-show .broadcast-container .id').text();
+            $('#broadcast-id').removeClass("layui-badge-dot");
+            $('#broadcast-service-dot').hide();
+            layui.data('badge',{key:"broadcast",value: 0});
+            layui.data('broadcast',{key:"last",value: id});
+        });
+        $('.feedback-show .feedback-container .close').on('click', function () {
+            $('.feedback-show').hide();
+            let id = $('.feedback-show .feedback-container .id').text();
+            $('#feedback-id').removeClass("layui-badge-dot");
+            $('#feedback-service-dot').hide();
+            layui.data('badge',{key:"feedback",value: 0});
+            layui.data('feedback',{key:"last",value: id});
+        });
+        $('.warning-show .warning-container .close').on('click', function () {
+            $('.warning-show').toggle();
+            layui.data('warning',{key:"info",value: 1});
+        });
+        $('.warning-show .toHelp').on('click', function () {
+            layui.data('warning',{key:"info",value: 1});
+            $('.warning-show').hide();
+            miniPage.hashChange('help.html');
+        });
+    });
+
+    function outlineDownload(){
+        var outlineUrl = "https://apps.apple.com/app/id1356177741";
+        let deviceOs = layui.data('deviceInfo').device_os;
+        if(deviceOs != undefined && deviceOs == "ios") {
+            postMessage(JSON.stringify({type: "outWeb", data: outlineUrl}));
+        }else {
+            window.location.href = outlineUrl;
+        }
+        // var winOpen = window.open("","_blank");
+        // setTimeout(function() {  //这里使用setTimeout非常重要，没有将无法实现
+        //     //原因是window.open会中断正在执行的进程，这样能保证其它代码执行完成再执行这个。
+        //     winOpen.location = outlineUrl; //改变页面的location
+        // }, 500);
+    }
+</script>
+<script src="js/common.js" charset="utf-8"></script>
+</body>
+</html>

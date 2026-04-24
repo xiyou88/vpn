@@ -1,0 +1,284 @@
+<link rel="stylesheet" type="text/css" href="./css/question.css">
+<link rel="stylesheet" type="text/css" href="./css/theme-tech.css">
+<link rel="stylesheet" type="text/css" href="./css/theme-refresh.css">
+
+<div class="layuimini-container layuimini-page-anim">
+  <div class="layuimini-main-question">
+    <div class="page-header">
+      <button type="button" class="page-back" aria-label="返回">
+        <span class="back-icon" aria-hidden="true"></span>
+      </button>
+      <div class="page-title">常见问题</div>
+    </div>
+
+    <div class="question-list"></div>
+
+    <div class="question-empty" style="display: none;">
+      <div class="empty-icon"><i class="fa fa-question-circle-o" aria-hidden="true"></i></div>
+      <div class="empty-title">暂无常见问题</div>
+      <div class="empty-desc">当前还没有需要展示的问答内容，后续整理完成后会在这里更新。</div>
+    </div>
+  </div>
+</div>
+
+<script src="js/utils.js" charset="utf-8"></script>
+<script>
+  layui.use(['form', 'miniPage'], function () {
+    var $ = layui.jquery,
+      layer = layui.layer,
+      miniPage = layui.miniPage,
+      form = layui.form;
+
+    function goBack(defaultPage) {
+      if (window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+      let now = parseInt(new Date().getTime() / 1000);
+      miniPage.hashChange(defaultPage );
+    }
+
+    function escapeHtml(text) {
+      return String(text == null ? '' : text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function sanitizeHtmlContent(content) {
+      var rawHtml = content == null ? '' : String(content);
+      var template = document.createElement('template');
+      var allowedTags = {
+        a: true,
+        b: true,
+        blockquote: true,
+        button: true,
+        br: true,
+        code: true,
+        div: true,
+        em: true,
+        i: true,
+        li: true,
+        ol: true,
+        p: true,
+        pre: true,
+        span: true,
+        strong: true,
+        u: true,
+        ul: true
+      };
+      var blockedTags = {
+        base: true,
+        embed: true,
+        form: true,
+        iframe: true,
+        img: true,
+        input: true,
+        link: true,
+        math: true,
+        meta: true,
+        object: true,
+        script: true,
+        style: true,
+        svg: true,
+        textarea: true
+      };
+
+      function isSafeUrl(url) {
+        if (!url) {
+          return false;
+        }
+
+        var trimmed = String(url).replace(/[\u0000-\u001F\u007F\s]+/g, '').toLowerCase();
+        return /^(https?:|mailto:|tel:|\/|#)/.test(trimmed);
+      }
+
+      function decodeHtmlEntities(text) {
+        return String(text || '')
+          .replace(/&lt;/gi, '<')
+          .replace(/&gt;/gi, '>')
+          .replace(/&quot;/gi, '"')
+          .replace(/&#39;/gi, "'")
+          .replace(/&amp;/gi, '&');
+      }
+
+      function sanitizeNode(node) {
+        var child;
+        var children;
+        var clone;
+        var attrName;
+        var attrValue;
+        var sanitizedChild;
+        var i;
+
+        if (node.nodeType === Node.TEXT_NODE) {
+          return document.createTextNode(node.textContent || '');
+        }
+
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+          return document.createDocumentFragment();
+        }
+
+        var tagName = node.tagName.toLowerCase();
+
+        if (blockedTags[tagName]) {
+          return document.createDocumentFragment();
+        }
+
+        if (!allowedTags[tagName]) {
+          children = document.createDocumentFragment();
+          for (i = 0; i < node.childNodes.length; i += 1) {
+            sanitizedChild = sanitizeNode(node.childNodes[i]);
+            children.appendChild(sanitizedChild);
+          }
+          return children;
+        }
+
+        clone = document.createElement(tagName);
+
+        for (i = 0; i < node.attributes.length; i += 1) {
+          attrName = node.attributes[i].name.toLowerCase();
+          attrValue = node.attributes[i].value || '';
+
+          if (attrName.indexOf('on') === 0) {
+            continue;
+          }
+
+          if (tagName === 'a') {
+            if (attrName === 'href' && isSafeUrl(attrValue)) {
+              clone.setAttribute('href', attrValue);
+              continue;
+            }
+
+            if (attrName === 'title') {
+              clone.setAttribute('title', attrValue);
+              continue;
+            }
+
+            if (attrName === 'target' && (attrValue === '_blank' || attrValue === '_self')) {
+              clone.setAttribute('target', attrValue);
+              continue;
+            }
+          }
+
+          if (tagName === 'button') {
+            if (attrName === 'type' && /^(button|submit|reset)$/i.test(attrValue)) {
+              clone.setAttribute('type', attrValue);
+              continue;
+            }
+
+            if (attrName === 'class' || attrName === 'title' || attrName.indexOf('data-') === 0) {
+              clone.setAttribute(attrName, attrValue);
+              continue;
+            }
+          }
+        }
+
+        if (tagName === 'a') {
+          if (!clone.getAttribute('href')) {
+            clone.removeAttribute('target');
+          } else if (clone.getAttribute('target') === '_blank') {
+            clone.setAttribute('rel', 'noopener noreferrer');
+          }
+        }
+
+        for (i = 0; i < node.childNodes.length; i += 1) {
+          child = sanitizeNode(node.childNodes[i]);
+          clone.appendChild(child);
+        }
+
+        return clone;
+      }
+
+      template.innerHTML = decodeHtmlEntities(rawHtml);
+      children = document.createDocumentFragment();
+      for (var index = 0; index < template.content.childNodes.length; index += 1) {
+        children.appendChild(sanitizeNode(template.content.childNodes[index]));
+      }
+
+      var wrapper = document.createElement('div');
+      wrapper.appendChild(children);
+      return wrapper.innerHTML;
+    }
+
+    function formatContent(content) {
+      return sanitizeHtmlContent(content);
+    }
+
+    function renderQuestion(item, index) {
+      var openClass = index === 0 ? ' open' : '';
+      var order = String(index + 1).padStart(2, '0');
+
+      return `
+        <div class="question-card${openClass}">
+          <button class="question-button" type="button">
+            <div class="question-main">
+              <div class="question-index">${order}</div>
+              <div class="question-copy">
+                <div class="question-tag">常见问题</div>
+                <div class="question-title">${escapeHtml(item.title)}</div>
+              </div>
+            </div>
+            <div class="question-arrow" aria-hidden="true">
+              <i class="fa fa-angle-up"></i>
+            </div>
+          </button>
+          <div class="question-answer">
+            <div class="question-answer-inner">${formatContent(item.content)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    $(".layuimini-main-question .page-back").on('click', function () {
+      goBack('user.html');
+    });
+
+    $(".layuimini-main-question").on('click', '.question-button', function () {
+      var card = $(this).closest('.question-card');
+      if (!card.length) {
+        return;
+      }
+      $('.layuimini-main-question .question-card').not(card).removeClass('open');
+      card.toggleClass('open');
+    });
+
+    var loadIndex = layer.load(2, {shade: [0.2, '#000000']});
+    axios({
+      "method": "GET",
+      "url": `${API_URL}/common/question/list`
+    }).then((json) => {
+      layer.close(loadIndex);
+      if (json.code == 200) {
+        var list = (json.data && Array.isArray(json.data.list)) ? json.data.list.slice() : [];
+        var htmlList = [];
+
+        if (list.length > 0) {
+          layui.each(list, function (index, item) {
+            htmlList.push(renderQuestion(item, index));
+          });
+          $('.layuimini-main-question .question-list').html(htmlList.join('')).show();
+          $('.layuimini-main-question .question-empty').hide();
+        } else {
+          $('.layuimini-main-question .question-list').empty().hide();
+          $('.layuimini-main-question .question-empty').show();
+        }
+      } else if (json.code == 4003) {
+        layer.msg(json.msg, {
+          time: 1000
+        }, function () {
+          window.location = 'login.html';
+        });
+      } else {
+        layer.msg(json.msg);
+      }
+    }, (e) => {
+      layer.close(loadIndex);
+      layer.msg(e.errorType);
+    });
+
+    form.render();
+  });
+</script>

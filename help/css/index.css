@@ -1,0 +1,33 @@
+.layui-header div.logo{width:51px;height:21px;margin:14px 0 auto 19px;}
+.layui-layout-admin .layui-body{padding-bottom:0;}
+.layui-layout-admin{height:100%;position:relative;}
+.layui-layout-admin .layui-body{left:0;}
+.layui-layout-admin .index-header{height:64px;width:100%;position:relative;}
+.layui-nav .layui-nav-item{width:33%;line-height:64px;color:rgba(10,22,40,0.45);}
+.layui-nav-item.layui-this{background:rgba(38,204,196,0.08);}
+.layui-nav-item.layui-this a{color:#26ccc4 !important;}
+.layui-body{margin-bottom:64px;background:transparent;}
+.layuimini-content-page{
+    height:100%;max-width:420px;margin:0 auto;
+    scrollbar-width:none;-ms-overflow-style:none;
+    background:rgba(255,255,255,0.92);
+}
+.layui-layout-admin .footer{
+    font-size:17px;position:absolute;bottom:0;left:0;
+    height:64px;line-height:64px;width:100%;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-top:1px solid rgba(38,204,196,0.15);
+    box-shadow:0 -1px 20px rgba(38,204,196,0.08);
+    color:rgba(10,22,40,0.45);text-align:center;
+}
+.layui-layout-admin .footer .nav{display:flex;flex-direction:row;text-align:center;}
+.layui-layout-admin .footer .nav span{flex:1;cursor:pointer;transition:color .2s;}
+.layui-layout-admin .footer .nav i{width:1px;height:15px;margin-top:3px;background:rgba(10,22,40,0.10);}
+.layui-layout-admin .footer div:last-child{font-size:12px;line-height:16px;color:rgba(10,22,40,0.3);margin-top:20px;}
+.layui-layout-admin .footer .select{color:#26ccc4;}
+.layui-nav .layui-nav-item a{color:rgba(10,22,40,0.45) !important;}
+.layui-nav .layui-nav-item a span{font-size:17px;}
+
+.intercom-lightweight-app-launcher{bottom:100px !important;}
+.intercom-namespace .intercom-with-namespace-52k34s{bottom:100px !important;}

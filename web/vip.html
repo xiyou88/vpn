@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>套餐</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: #fff;
+  color: #212121;
+  -webkit-font-smoothing: antialiased;
+  padding: 0 20px 30px;
+  max-width: 660px;
+  margin: 0 auto;
+}
+@media (min-width: 600px) {
+  body { padding: 0 40px 30px; }
+  .tab-bar { max-width: 400px; margin: 16px auto; }
+  .feature-row { min-height: 52px; }
+  .price-card { padding: 16px 20px; }
+}
+
+/* ---- SVG 图标（内联，兼容所有设备） ---- */
+.icon-svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ---- Tab ---- */
+.tab-bar {
+  display: flex;
+  background: #F5F5F5;
+  border-radius: 12px;
+  padding: 3px;
+  margin: 16px 0;
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.tab-item.active-vip {
+  background: linear-gradient(135deg, #7B2FF2, #5B1FD4);
+  color: #fff;
+}
+.tab-item.active-svip {
+  background: linear-gradient(135deg, #9B59B6, #7D3C98);
+  color: #fff;
+}
+.tab-icon { width: 14px; height: 14px; }
+.tab-item .tab-icon path { fill: #666; }
+.tab-item.active-vip .tab-icon path { fill: #fff; }
+.tab-item.active-svip .tab-icon path { fill: #fff; }
+
+/* ---- 权益卡片（含顶部横幅） ---- */
+.feature-card {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 0.5px solid #eee;
+}
+.feature-card.vip {
+  border-color: #D5CDF5;
+}
+.feature-card.svip {
+  border-color: #D7BDE2;
+}
+.feature-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+.feature-card.vip .feature-header {
+  background: linear-gradient(135deg, #F0ECFF, #E5DEFA);
+}
+.feature-card.svip .feature-header {
+  background: linear-gradient(135deg, #F5EEFB, #EDE0F5);
+}
+.feature-header-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.feature-card.vip .feature-header-icon { background: rgba(123,47,242,0.12); }
+.feature-card.svip .feature-header-icon { background: rgba(155,89,182,0.12); }
+.feature-header-icon svg { width: 20px; height: 20px; }
+.feature-header-title { font-size: 15px; font-weight: 700; }
+.feature-card.vip .feature-header-title { color: #5B1FD4; }
+.feature-card.svip .feature-header-title { color: #7D3C98; }
+.feature-header-desc { font-size: 11px; margin-top: 2px; }
+.feature-card.vip .feature-header-desc { color: rgba(91,31,212,0.5); }
+.feature-card.svip .feature-header-desc { color: rgba(125,60,152,0.5); }
+.feature-body {
+  background: #fff;
+}
+.feature-row { display: flex; }
+.feature-row + .feature-row { border-top: 0.5px solid #eee; }
+.feature-card.vip .feature-row + .feature-row { border-color: #eee; }
+.feature-card.svip .feature-row + .feature-row { border-color: #eee; }
+.feature-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 14px;
+}
+.feature-item + .feature-item { border-left: 0.5px solid #eee; }
+.feature-card.vip .feature-item + .feature-item { border-color: #eee; }
+.feature-card.svip .feature-item + .feature-item { border-color: #eee; }
+.feature-title { font-size: 13px; font-weight: 600; line-height: 1.3; }
+.feature-desc { font-size: 10px; color: #999; line-height: 1.4; }
+
+/* ---- 价格卡片 ---- */
+.price-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.price-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+.price-card.recommended { border: 1.5px solid #7B2FF2; }
+.price-card.recommended.svip { border: 1.5px solid #9B59B6; }
+.price-left { display: flex; flex-direction: column; justify-content: center; }
+.price-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.price-days { font-size: 18px; font-weight: 800; color: #212121; }
+.price-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  color: #fff;
+  vertical-align: middle;
+}
+.price-tag.hot { background: #FF6B35; }
+.price-tag.gift { background: #4CAF50; }
+.price-original { font-size: 11px; color: #bbb; text-decoration: line-through; margin-top: 4px; }
+.price-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; }
+.price-value { display: flex; align-items: baseline; }
+.price-symbol { font-size: 13px; font-weight: 700; color: #7B2FF2; }
+.price-number { font-size: 26px; font-weight: 800; line-height: 1; color: #7B2FF2; }
+.price-card.svip .price-symbol,
+.price-card.svip .price-number { color: #9B59B6; }
+.price-per-day { font-size: 11px; color: #999; margin-top: 4px; }
+
+/* ---- 支付方式 ---- */
+.pay-section { margin-top: 20px; }
+.pay-title { font-size: 13px; font-weight: 600; color: #999; margin-bottom: 10px; }
+.pay-list { display: flex; flex-direction: column; gap: 10px; }
+.pay-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.pay-item.selected { border-color: #7B2FF2; }
+.pay-item.selected.svip-pay { border-color: #9B59B6; }
+.pay-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+.pay-icon.alipay { background: #E8F4FD; }
+.pay-icon.wechat { background: #E8F8E8; }
+.pay-icon svg { width: 18px; height: 18px; }
+.pay-name { font-size: 14px; font-weight: 500; color: #212121; flex: 1; }
+.pay-radio {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #ddd;
+  display: flex; align-items: center; justify-content: center;
+}
+.pay-item.selected .pay-radio { border-color: #7B2FF2; }
+.pay-item.selected.svip-pay .pay-radio { border-color: #9B59B6; }
+.pay-radio-inner {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: transparent;
+}
+.pay-item.selected .pay-radio-inner { background: #7B2FF2; }
+.pay-item.selected.svip-pay .pay-radio-inner { background: #9B59B6; }
+
+/* ---- 按钮 ---- */
+.buy-btn {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.buy-btn:active { opacity: 0.85; }
+.buy-btn.vip { background: linear-gradient(135deg, #7B2FF2, #5B1FD4); }
+.buy-btn.svip { background: linear-gradient(135deg, #9B59B6, #7D3C98); }
+.buy-btn svg { width: 18px; height: 18px; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ---- Toast ---- */
+.toast {
+  position: fixed;
+  left: 50%;
+  top: 60%;
+  transform: translateX(-50%) translateY(-20px);
+  background: linear-gradient(135deg, #7B2FF2, #5B1FD4);
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9999;
+}
+.toast.svip { background: linear-gradient(135deg, #9B59B6, #7D3C98); }
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- Tab -->
+<div class="tab-bar">
+  <div class="tab-item active-vip" id="tabVip">VIP 会员</div>
+  <div class="tab-item" id="tabSvip">
+    <svg class="tab-icon" viewBox="0 0 24 24"><path d="M19 3H5L2 9l10 13L22 9l-3-6zm-7 14.5L5.5 9H18.5L12 17.5z"/></svg>
+    SVIP 会员
+  </div>
+</div>
+
+<!-- VIP 内容 -->
+<div class="tab-content active" id="contentVip">
+  <div class="feature-card vip" id="vipFeatures"></div>
+  <div class="price-list" id="vipPrices"></div>
+  <div class="pay-section" id="vipPay"></div>
+  <button class="buy-btn vip" id="btnVip">开通会员</button>
+</div>
+
+<!-- SVIP 内容 -->
+<div class="tab-content" id="contentSvip">
+  <div class="feature-card svip" id="svipFeatures"></div>
+  <div class="price-list" id="svipPrices"></div>
+  <div class="pay-section" id="svipPay"></div>
+  <button class="buy-btn svip" id="btnSvip">
+    <svg viewBox="0 0 24 24"><path fill="#fff" d="M19 3H5L2 9l10 13L22 9l-3-6zm-7 14.5L5.5 9H18.5L12 17.5z"/></svg>
+    开通SVIP，立享尊贵服务
+  </button>
+</div>
+
+<script>
+// ---- 内联 SVG 图标 ----
+var icons = {
+  globe: '<svg class="icon-svg" viewBox="0 0 24 24"><path fill="CUR_COLOR" d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 01-5.29-2.01c.15-.06.48-.14.84-.23.74-.19 1.67-.42 1.98-.65.3-.22.5-.67.5-1.11v-1c0-.44-.45-1-1-1h-2c-.55 0-1-.45-1-1v-1.5c0-.55.45-1 1-1 .55 0 1-.45 1-1s.45-1 1-1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1-.45-1-1a8 8 0 016-1.97V5c0 .55.45 1 1 1s1 .45 1 1-.45 1-1 1h-1c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1h2c.55 0 1 .45 1 1v1c0 .55.45 1 1 1s1-.45 1-1 .45-1 1-1c.55 0 1 .45 1 1v1a8 8 0 01-6 7.73V20z"/></svg>',
+  devices: '<svg class="icon-svg" viewBox="0 0 24 24"><path fill="CUR_COLOR" d="M4 6h18V4H2v13H0v3h14v-3H4V6zm20 2h-8v12h8V8zm-2 9h-4v-7h4v7z"/></svg>',
+  lock: '<svg class="icon-svg" viewBox="0 0 24 24"><path fill="CUR_COLOR" d="M18 8h-1V6A5 5 0 007 6v2H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V10a2 2 0 00-2-2zM9 6a3 3 0 016 0v2H9V6zm9 14H6V10h12v10zm-6-3a2 2 0 100-4 2 2 0 000 4z"/></svg>',
+  route: '<svg class="icon-svg" viewBox="0 0 24 24"><path fill="CUR_COLOR" d="M9.78 11.16l-1.42 1.42a7.462 7.462 0 01-1.06-1.88l1.76-.7c.18.47.43.91.72 1.16zM11 6l1.25-1.25c.41.2.77.46 1.09.77l-1.42 1.42A3.933 3.933 0 0011 6zm2 0a4 4 0 014 4c0 .78-.22 1.5-.6 2.11L18 13.7A6 6 0 0013 4.05V6zm-6 4c0-.78.22-1.5.6-2.11L6 6.3A5.955 5.955 0 005 10c0 1.27.39 2.44 1.06 3.42l1.42-1.42C7.16 11.5 7 11.25 7 10zm5 10a8 8 0 110-16 8 8 0 010 16z"/></svg>',
+  bolt: '<svg class="icon-svg" viewBox="0 0 24 24"><path fill="CUR_COLOR" d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C12.97 17.55 11 21 11 21z"/></svg>',
+  hd: '<svg class="icon-svg" viewBox="0 0 24 24"><path fill="CUR_COLOR" d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-8 12H9.5v-2h-2v2H6V9h1.5v2.5h2V9H11v6zm7-1a1 1 0 01-1 1h-3a1 1 0 01-1-1v-4a1 1 0 011-1h3a1 1 0 011 1v4zm-3.5-.5h2v-3h-2v3z"/></svg>',
+  block: '<svg class="icon-svg" viewBox="0 0 24 24"><path fill="CUR_COLOR" d="M12 2a10 10 0 100 20 10 10 0 000-20zM4 12a8 8 0 0112.9-6.31L6.31 16.9A7.96 7.96 0 014 12zm8 8a7.96 7.96 0 01-4.9-1.69L17.69 7.1A8 8 0 0112 20z"/></svg>',
+  star: '<svg class="icon-svg" viewBox="0 0 24 24"><path fill="CUR_COLOR" d="M12 2l2.4 7.2H22l-6 4.8 2.4 7.2L12 16.4 5.6 21.2 8 14l-6-4.8h7.6L12 2z"/></svg>'
+};
+
+function makeIcon(key, color) {
+  return (icons[key] || '').replace(/CUR_COLOR/g, color);
+}
+
+// ---- 数据 ----
+var vipColor = '#7B2FF2';
+var svipColor = '#9B59B6';
+
+var vipFeatures = [
+  ['globe', '全球多条线路', '全球节点覆盖，自由切换'],
+  ['devices', '多设备在线', '3台登录/1台在线'],
+  ['lock', '网络隐私保护', '军事级加密，隐私无忧'],
+  ['route', '路由模式切换', '多种路由模式可切换'],
+];
+
+var svipFeatures = [
+  ['bolt', '极速稳定连接', 'SVIP专属高速通道'],
+  ['hd', '4K 流媒体支持', '高清无卡顿'],
+  ['devices', '多设备在线', '6台登录(可扩容)/2台同时在线'],
+  ['globe', '全球多条线路', '全球节点覆盖，自由切换'],
+  ['lock', '网络隐私保护', '军事级加密，隐私无忧'],
+  ['route', '路由模式切换', '多种路由模式可切换'],
+  ['block', '全程无广告', '纯净体验零打扰'],
+  ['star', '解锁未来功能', '支持自定义DNS等能力'],
+];
+
+var vipPrices = [
+{{range .Data.List}}
+  { id: '{{.Id}}', days: '{{.Day}}天', day: '{{.Day}}', price: '{{.MoneyStr}}', originalPrice: '{{.RealMoneyStr}}', perDay: '¥{{.Rate}}/天', tags: ['{{.DescHtml}}'] },
+{{end}}
+];
+
+var svipPrices = [
+{{range .Data.VipList}}
+  { id: '{{.Id}}', days: '{{.Day}}天', day: '{{.Day}}', price: '{{.MoneyStr}}', originalPrice: '{{.RealMoneyStr}}', perDay: '¥{{.Rate}}/天', tags: ['{{.DescHtml}}'] },
+{{end}}
+];
+
+
+// ---- 渲染 ----
+var headerData = {
+  vipFeatures: {
+    icon: '<svg viewBox="0 0 24 24"><path fill="' + vipColor + '" d="M12 1l3.22 6.94L22.4 9.1l-5.52 5.04L18.18 21 12 17.27 5.82 21l1.3-6.86L1.6 9.1l7.18-1.16L12 1z"/></svg>',
+    title: 'VIP 会员特权',
+    desc: '解锁全球节点，安全加速一键启动'
+  },
+  svipFeatures: {
+    icon: '<svg viewBox="0 0 24 24"><path fill="' + svipColor + '" d="M19 3H5L2 9l10 13L22 9l-3-6zm-7 14.5L5.5 9H18.5L12 17.5z"/></svg>',
+    title: 'SVIP 尊享特权',
+    desc: '畅享全部高级功能，尊贵服务专属体验'
+  }
+};
+
+function renderFeatures(containerId, features, color) {
+  var hd = headerData[containerId];
+  var html = '';
+  // 头部横幅
+  html += '<div class="feature-header">';
+  html += '<div class="feature-header-icon">' + hd.icon + '</div>';
+  html += '<div><div class="feature-header-title">' + hd.title + '</div>';
+  html += '<div class="feature-header-desc">' + hd.desc + '</div></div>';
+  html += '</div>';
+  // 权益网格
+  html += '<div class="feature-body">';
+  for (var r = 0; r < Math.ceil(features.length / 2); r++) {
+    html += '<div class="feature-row">';
+    for (var c = 0; c < 2; c++) {
+      var idx = r * 2 + c;
+      if (idx < features.length) {
+        var f = features[idx];
+        html += '<div class="feature-item">' + makeIcon(f[0], color) +
+          '<div><div class="feature-title">' + f[1] + '</div>' +
+          '<div class="feature-desc">' + f[2] + '</div></div></div>';
+      } else {
+        html += '<div class="feature-item" style="visibility:hidden"></div>';
+      }
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  document.getElementById(containerId).innerHTML = html;
+}
+
+var selectedId = { vip: null, svip: null };
+
+function renderPrices(containerId, prices, isSvip) {
+  var html = '';
+  var tabType = isSvip ? 'svip' : 'vip';
+  if (selectedId[tabType] === null && prices.length > 0) {
+    var def = null;
+    for (var j = 0; j < prices.length; j++) {
+      if (prices[j].day == 90) { def = prices[j].id; break; }
+    }
+    selectedId[tabType] = def !== null ? def : prices[0].id;
+  }
+  for (var i = 0; i < prices.length; i++) {
+    var p = prices[i];
+    var isSelected = p.id == selectedId[tabType];
+    var cls = 'price-card' + (isSelected ? ' recommended' : '') + (isSvip ? ' svip' : '');
+    var showOriginal = p.originalPrice;
+    html += '<div class="' + cls + '" data-id="' + p.id + '" data-container="' + containerId + '" data-tab="' + tabType + '">';
+    // 左侧：天数+标签 + 原价
+    html += '<div class="price-left">';
+    html += '<div class="price-top">';
+    html += '<span class="price-days">' + p.days + '</span>';
+    if (p.tags) {
+      for (var t = 0; t < p.tags.length; t++) {
+        var tag = p.tags[t];
+        if(tag.length>0){
+          var tagCls = tag.indexOf('送') >= 0 ? 'gift' : 'hot';
+          html += '<span class="price-tag ' + tagCls + '">' + tag + '</span>';
+        }
+      }
+    }
+    html += '</div>';
+    if (showOriginal) {
+      html += '<div class="price-original">原价¥' + p.originalPrice + '</div>';
+    }
+    html += '</div>';
+    // 右侧：价格 + 均价
+    html += '<div class="price-right">';
+    html += '<div class="price-value"><span class="price-symbol">¥</span><span class="price-number">' + p.price + '</span></div>';
+    html += '<div class="price-per-day">' + p.perDay + '</div>';
+    html += '</div>';
+    html += '</div>';
+  }
+  document.getElementById(containerId).innerHTML = html;
+}
+
+// ---- 支付方式 ----
+var selectedPayment = '';
+var payments = {{.Data.Payments}};
+
+function renderPaySection(containerId, isSvip) {
+  var svipCls = isSvip ? ' svip-pay' : '';
+  var html = '<div class="pay-title">选择支付方式</div><div class="pay-list">';
+  
+  for (var i = 0; i < payments.length; i++) {
+    var payment = payments[i]
+    if(payment.indexOf('ALIPAY')>-1){
+      // 支付宝
+      html += '<div class="pay-item selected' + svipCls + '" data-pay="'+payment+'" data-container="' + containerId + '">';
+      html += '<div class="pay-icon alipay"><svg viewBox="0 0 24 24"><path fill="#1677FF" d="M21.4 14.2c-.6-.3-3.1-1.3-4.6-1.9.5-1.1.8-2.3.9-3.7h-3.5v-1.2h4.2V6.2h-4.2V4H12.6v2.2H8.5v1.2h4.1v1.2H8.9v1.2h6.6c-.1.9-.3 1.7-.7 2.4-1.5-.6-3.2-1-4.2-1-2.4 0-4.1 1.2-4.1 3 0 2 1.9 3.2 4.4 3.2 1.8 0 3.5-.8 4.8-2.2 1.9.9 4 1.8 4.5 2.1.4.2.6.1.7-.1.2-.5.7-2.3.8-2.7.1-.3 0-.4-.3-.3zM10.7 16.4c-1.5 0-2.4-.6-2.4-1.5 0-.8.8-1.5 2.2-1.5.9 0 2.1.3 3.3.8-1 1.3-2 2.2-3.1 2.2z"/></svg></div>';
+      html += '<span class="pay-name">支付宝支付</span>';
+      html += '<div class="pay-radio"><div class="pay-radio-inner"></div></div>';
+      html += '</div>';
+      selectedPayment = payment;
+    }else if(payment.indexOf('WXPAY')>-1){
+      // 微信
+      html += '<div class="pay-item' + svipCls + '" data-pay="'+payment+'" data-container="' + containerId + '">';
+      html += '<div class="pay-icon wechat"><svg viewBox="0 0 24 24"><path fill="#07C160" d="M9.5 4C5.4 4 2 6.7 2 10c0 1.9 1.1 3.5 2.8 4.7l-.7 2.1 2.5-1.3c.9.3 1.9.4 2.9.4.3 0 .7 0 1-.1-.2-.6-.3-1.2-.3-1.8 0-3.6 3.4-6.5 7.6-6.5.3 0 .5 0 .8 0C17.7 5.8 13.9 4 9.5 4zm-3 4.5c-.6 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.4 1-1 1zm5.5 0c-.6 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.4 1-1 1zm5.8 2c-3.5 0-6.3 2.4-6.3 5.3s2.8 5.3 6.3 5.3c.7 0 1.4-.1 2.1-.3l1.9 1-.5-1.6c1.3-1 2.2-2.4 2.2-4 0-2.9-2.8-5.3-6.3-5.3h.6zm-2.3 3.5c-.5 0-.8-.4-.8-.8s.4-.8.8-.8.8.4.8.8-.3.8-.8.8zm4.5 0c-.5 0-.8-.4-.8-.8s.4-.8.8-.8.8.4.8.8-.3.8-.8.8z"/></svg></div>';
+      html += '<span class="pay-name">微信支付</span>';
+      html += '<div class="pay-radio"><div class="pay-radio-inner"></div></div>';
+      html += '</div>';
+    }
+  }
+  html += '</div>';
+  document.getElementById(containerId).innerHTML = html;
+}
+
+renderFeatures('vipFeatures', vipFeatures, vipColor);
+renderFeatures('svipFeatures', svipFeatures, svipColor);
+renderPrices('vipPrices', vipPrices, false);
+renderPrices('svipPrices', svipPrices, true);
+renderPaySection('vipPay', false);
+renderPaySection('svipPay', true);
+
+// ---- 套餐 + 支付方式选中 ----
+document.addEventListener('click', function(e) {
+  // 套餐选中
+  var priceCard = e.target.closest('.price-card');
+  if (priceCard) {
+    var id = priceCard.dataset.id;
+    var tab = priceCard.dataset.tab;
+    var containerId = priceCard.dataset.container;
+    if (!id || !tab || !containerId) return;
+    var isSvip = tab === 'svip';
+    selectedId[tab] = id;
+    renderPrices(containerId, isSvip ? svipPrices : vipPrices, isSvip);
+    return;
+  }
+  // 支付方式选中
+  var payItem = e.target.closest('.pay-item');
+  if (payItem) {
+    var container = payItem.dataset.container;
+    var section = document.getElementById(container);
+    var items = section.querySelectorAll('.pay-item');
+    items.forEach(function(item) { item.classList.remove('selected'); });
+    payItem.classList.add('selected');
+    selectedPayment = payItem.dataset.pay;
+    return;
+  }
+  var btn = e.target.closest('.btn-copy');
+  if (btn) { copyText(btn.dataset.url); return; }
+  btn = e.target.closest('.btn-open');
+  if (btn) { openUrl(btn.dataset.url); return; }
+  btn = e.target.closest('.btn-save');
+  if (btn) { saveQrCode(); return; }
+});
+
+// ---- Tab 切换 ----
+function switchTab(type) {
+  document.getElementById('tabVip').className = 'tab-item' + (type === 'vip' ? ' active-vip' : '');
+  document.getElementById('tabSvip').className = 'tab-item' + (type === 'svip' ? ' active-svip' : '');
+  document.getElementById('contentVip').className = 'tab-content' + (type === 'vip' ? ' active' : '');
+  document.getElementById('contentSvip').className = 'tab-content' + (type === 'svip' ? ' active' : '');
+}
+
+function onBuy(type) {
+  var prices = type === 'svip' ? svipPrices : vipPrices;
+  var id = selectedId[type];
+  var selected = null;
+  for (var i = 0; i < prices.length; i++) {
+    if (prices[i].id == id) { selected = prices[i]; break; }
+  }
+  console.log(selected.id)
+  if (!selected || !selected.id) {
+    showToast('请先选择套餐',type);
+    return;
+  }
+  if (!selectedPayment) {
+    showToast('请先选择支付方式',type);
+    return;
+  }
+
+  window.postMessage(JSON.stringify({"type": "buy",  "data": {"id": parseInt(selected.id), "pay_type": selectedPayment}}), '*');
+}
+
+// ---- 绑定事件（兼容移动端 WebView） ----
+function bindTap(id, fn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var fired = false;
+  el.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    fired = true;
+    fn();
+  }, { passive: false });
+  el.addEventListener('click', function() {
+    if (!fired) fn();
+    fired = false;
+  });
+}
+bindTap('tabVip', function() { switchTab('vip'); });
+bindTap('tabSvip', function() { switchTab('svip'); });
+bindTap('btnVip', function() { onBuy('vip'); });
+bindTap('btnSvip', function() { onBuy('svip'); });
+
+var _toastTimer = null;
+function showToast(msg,type) {
+  var el = document.getElementById('globalToast');
+  el.classList.toggle('svip', type === 'svip');
+  el.textContent = msg;
+  el.classList.add('show');
+  if (_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2000);
+}
+</script>
+<div class="toast" id="globalToast"></div>
+</body>
+</html>

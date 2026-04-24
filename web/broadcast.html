@@ -1,0 +1,111 @@
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main-broadcast">
+        <div class="page-header">
+            <button type="button" class="page-back" aria-label="返回">
+                <span class="back-icon" aria-hidden="true"></span>
+            </button>
+            <div class="page-title">公告</div>
+        </div>
+
+        <div class="broadcast-panel">
+            <div class="panel-head">
+                <span>公告列表</span>
+            </div>
+            <div class="content">
+                <ul class="broadcast-list">
+                </ul>
+                <div class="broadcast-empty" style="display: none;">
+                    <div class="empty-icon"><i class="fa fa-bell-o"></i></div>
+                    <div class="empty-title">暂无公告</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/utils.js" charSet="utf-8"></script>
+<script>
+    layui.use(['form', 'table', 'miniPage'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            miniPage = layui.miniPage;
+
+        function goBack(defaultPage) {
+            if (window.history.length > 1) {
+                window.history.back();
+                return;
+            }
+            miniPage.hashChange(defaultPage );
+        }
+
+        $(".layuimini-main-broadcast .page-back").on('click', function () {
+            goBack('user.html');
+        });
+
+        function formatBroadcastContent(content) {
+            return $('<div></div>').text(content || '').html().replace(/\n/g, '<br>');
+        }
+
+        function renderBroadcastList(list) {
+            var html = "";
+            var data = (list || []).slice().sort(function (a, b) {
+                return Number(b.created || 0) - Number(a.created || 0);
+            });
+
+            $('.broadcast-count').text(data.length);
+
+            if (data.length === 0) {
+                $('.layuimini-main-broadcast .broadcast-list').empty();
+                $('.layuimini-main-broadcast .broadcast-empty').show();
+                return;
+            }
+
+            $('.layuimini-main-broadcast .broadcast-empty').hide();
+            layui.each(data, function (index, item) {
+                html += `
+                    <li class="broadcast-item" style="padding: 12px;">
+                        <div class="item-top">
+                            <div class="item-time">${dateUnixFormat(item.created)}</div>
+                        </div>
+                        <div class="item-body">
+                            <div class="item-content">${formatBroadcastContent(item.content)}</div>
+                        </div>
+                    </li>`;
+            });
+
+            $('.layuimini-main-broadcast .broadcast-list').html(html);
+        }
+
+        var loadIndex = layer.load(2, {shade: [0.2,'#000000']});
+        axios({
+            "method": "GET",
+            "url": `${API_URL}/common/broadcast/list`
+        }).then((json) => {
+            layer.close(loadIndex);
+            if (json.code == 200) {
+                var list = (json.data && json.data.list) || [];
+                $('#broadcast-id').removeClass("layui-badge-dot");
+                $('#broadcast-service-dot').hide();
+                layui.data('badge',{key:"broadcast",value: 0});
+                layui.each(list, function (index, item) {
+                    if (index == 0) {
+                        layui.data('broadcast',{key:"last",value: item.id});
+                    }
+                });
+                renderBroadcastList(list);
+            } else if(json.code == 4003){
+                layer.msg(json.msg, {
+                    time: 1000
+                }, function() {
+                    window.location = 'login.html';
+                });
+            }else {
+                layer.msg(json.msg);
+            }
+        }, (e) => {
+            layer.close(loadIndex);
+            layer.msg(e.errorType);
+        });
+
+        form.render();
+    });
+</script>

@@ -1,0 +1,310 @@
+.layuimini-main-route {
+    display: flow-root;
+    padding: 18px 16px 28px;
+    color: #111111;
+}
+
+.layuimini-main-route .route-hero {
+    padding: 18px 20px 20px;
+    border-radius: 28px;
+    border: 1px solid rgba(123, 47, 242, 0.14);
+    background:
+        radial-gradient(circle at top right, rgba(123, 47, 242, 0.12), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 244, 255, 0.98));
+    box-shadow: none;
+}
+
+.layuimini-main-route .hero-kicker {
+    color: #7b2ff2;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.layuimini-main-route .hero-title {
+    margin-top: 10px;
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #111111;
+}
+
+.layuimini-main-route .hero-desc {
+    margin-top: 14px;
+    color: #6f6a83;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.layuimini-main-route .hero-desc div + div {
+    margin-top: 8px;
+}
+
+.layuimini-main-route .toHelp {
+    margin-top: 18px;
+    min-width: 154px;
+    height: 42px;
+    padding: 0 18px;
+    border: 1px solid rgba(123, 47, 242, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #7b2ff2;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.layuimini-main-route .route-switch {
+    margin-top: 20px;
+}
+
+.layuimini-main-route .switch-title {
+    margin-bottom: 10px;
+    color: #7d7890;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+}
+
+.layuimini-main-route .switch-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.layuimini-main-route .switch-tabs button {
+    height: 44px;
+    border-radius: 16px;
+    border: 1px solid rgba(123, 47, 242, 0.14);
+    background: rgba(255, 255, 255, 0.92);
+    color: #7d7890;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.layuimini-main-route .switch-tabs .select {
+    background: rgba(123, 47, 242, 0.1);
+    color: #7b2ff2;
+    border-color: rgba(123, 47, 242, 0.24);
+    box-shadow: none;
+}
+
+.layuimini-main-route .body {
+    margin: 18px auto 0;
+}
+
+.layuimini-main-route .body ul li {
+    position: relative;
+    margin-bottom: 14px;
+    border-radius: 0;
+    background: #ffffff;
+    border: 1px solid rgba(123, 47, 242, 0.08);
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.layuimini-main-route .body ul li .fixed {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    min-width: 76px;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: transparent;
+    color: transparent;
+    font-size: 12px;
+    line-height: 28px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.layuimini-main-route .body ul li .fixed.use {
+    background: rgba(123, 47, 242, 0.1);
+    color: #7b2ff2;
+    font-weight: 700;
+}
+
+.layuimini-main-route .body ul li .route-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 22px 18px;
+}
+
+.layuimini-main-route .body ul li .route-meta {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 14px;
+}
+
+.layuimini-main-route .body ul li .route-meta img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.layuimini-main-route .body ul li .route-meta .name {
+    color: #18161f;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.layuimini-main-route .body ul li .route-detail {
+    min-width: 96px;
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: rgba(123, 47, 242, 0.08);
+    border: 1px solid rgba(123, 47, 242, 0.18);
+    color: #7b2ff2;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.layuimini-main-route .svip {
+    display: none;
+}
+
+.layuimini-main-route .vip {
+    display: block;
+}
+
+.layuimini-main-route .show {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(92, 68, 130, 0.14);
+    display: none;
+    backdrop-filter: blur(6px);
+}
+
+.layuimini-main-route .show .dialog-card {
+    width: 300px;
+    margin: 120px auto 0;
+    padding: 22px 20px 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(123, 47, 242, 0.14);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 244, 255, 0.98));
+    text-align: center;
+    position: relative;
+    box-shadow: none;
+}
+
+.layuimini-main-route .show .dialog-icon {
+    width: 72px;
+    height: 72px;
+    margin: -44px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(123, 47, 242, 0.16), rgba(123, 47, 242, 0.06));
+}
+
+.layuimini-main-route .show .dialog-icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.layuimini-main-route .show .title {
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #111111;
+}
+
+.layuimini-main-route .show .sign {
+    margin: 12px auto 0;
+    padding: 14px 12px;
+    border-radius: 16px;
+    background: rgba(123, 47, 242, 0.05);
+    color: #6f6a83;
+    font-size: 14px;
+    line-height: 1.8;
+    text-align: left;
+    border: 1px solid rgba(123, 47, 242, 0.12);
+}
+
+.layuimini-main-route .show .sign span {
+    word-break: break-all;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+.layuimini-main-route .show .close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.layuimini-main-route .show .close img {
+    width: 13px;
+    height: 14px;
+    margin-top: 10px;
+}
+
+.layuimini-main-route .show .download-outline,
+.layuimini-main-route .show .copy {
+    display: block;
+    width: 100%;
+    height: 44px;
+    margin-top: 14px;
+    border-radius: 16px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.layuimini-main-route .show .download-outline {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(123, 47, 242, 0.16);
+    color: #7b2ff2;
+}
+
+.layuimini-main-route .show .copy {
+    background: linear-gradient(135deg, #7b2ff2, #9d63ff);
+    color: #ffffff;
+    border: none;
+}
+
+@media (max-width: 420px) {
+    .layuimini-main-route {
+        padding: 16px 14px 24px;
+    }
+
+    .layuimini-main-route .hero-title {
+        font-size: 24px;
+    }
+
+    .layuimini-main-route .body ul li .route-body {
+        padding: 18px 16px;
+    }
+
+    .layuimini-main-route .body ul li .route-detail {
+        min-width: 88px;
+        font-size: 13px;
+        padding: 0 12px;
+    }
+
+    .layuimini-main-route .show .dialog-card {
+        width: calc(100% - 28px);
+    }
+}

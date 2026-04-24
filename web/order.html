@@ -1,0 +1,183 @@
+<link rel="stylesheet" type="text/css" href="./css/order.css">
+<link rel="stylesheet" type="text/css" href="./css/theme-tech.css">
+<link rel="stylesheet" type="text/css" href="./css/theme-refresh.css">
+<div class="layuimini-container layuimini-page-anim">
+    <div class="layuimini-main-order">
+        <div class="page-header">
+            <button type="button" class="page-back" aria-label="返回">
+                <span class="back-icon" aria-hidden="true"></span>
+            </button>
+            <div class="page-title">我的订单</div>
+        </div>
+
+        <div class="order-section">
+            <div class="section-title">订单列表</div>
+            <div class="section-desc">默认按下单时间倒序展示，方便快速查看最新订单状态。</div>
+            <div class="order-list"></div>
+        </div>
+
+        <div class="order-empty">
+            <div class="empty-icon"><i class="fa fa-file-text-o"></i></div>
+            <div class="empty-title">暂无订单记录</div>
+            <div class="empty-desc">当前还没有可展示的订单信息，完成购买后这里会自动同步你的支付记录。</div>
+        </div>
+    </div>
+</div>
+
+<script src="js/utils.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'miniPage'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer,
+            miniPage = layui.miniPage;
+
+        function goBack(defaultPage) {
+            if (window.history.length > 1) {
+                window.history.back();
+                return;
+            }
+            
+            miniPage.hashChange(defaultPage );
+        }
+
+        function resolveOrderState(item, now) {
+            var state = Number(item.state);
+            var created = Number(item.created || 0);
+
+            if (state === 9) {
+                return { text: '支付成功', className: 'done' };
+            }
+            if (state === 0 && now > created + 300) {
+                return { text: '未支付', className: 'unpaid' };
+            }
+            return { text: '待支付', className: 'pending' };
+        }
+
+        function formatOrderTimeToMinute(unix) {
+            var text = dateUnixFormat(Number(unix || 0));
+            return text && text.length >= 16 ? text.slice(0, 16) : text;
+        }
+
+        function renderSummary(list) {
+            var now = parseInt(new Date().getTime() / 1000);
+            var success = 0;
+            var pending = 0;
+
+            layui.each(list, function (_, item) {
+                var stateInfo = resolveOrderState(item, now);
+                if (stateInfo.className === 'done') {
+                    success++;
+                } else {
+                    pending++;
+                }
+            });
+
+            $('.layuimini-main-order .total-count').text(list.length);
+            $('.layuimini-main-order .success-count').text(success);
+            $('.layuimini-main-order .pending-count').text(pending);
+        }
+
+        function renderOrders(list) {
+            var now = parseInt(new Date().getTime() / 1000);
+            var html = '';
+
+            if (!list || list.length === 0) {
+                $('.layuimini-main-order .order-section').hide();
+                $('.layuimini-main-order .order-empty').show();
+                renderSummary([]);
+                return;
+            }
+
+            $('.layuimini-main-order .order-empty').hide();
+            $('.layuimini-main-order .order-section').show();
+
+            layui.each(list, function (_, item) {
+                var stateInfo = resolveOrderState(item, now);
+                var amount = CentToYuan(Number(item.real_money || 0));
+                var createdText = formatOrderTimeToMinute(item.created);
+                html += `
+                    <div class="order-card ${stateInfo.className}">
+                        <div class="order-head">
+                            <div class="order-main">
+                                <div class="order-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px;height: 20px;">
+                                      <path d="M7 3h10a2 2 0 012 2v14l-4-2-4 2-4-2-4 2V5a2 2 0 012-2h2zm1 4v2h8V7H8zm0 4v2h6v-2H8z"></path>
+                                    </svg>
+                                </div>
+                                <div class="order-meta">
+                                    <div class="order-badges">
+                                        <span class="order-status ${stateInfo.className}">${stateInfo.text}</span>
+                                        <span class="order-paytype">${item.pay_type || '未知方式'}</span>
+                                    </div>
+                                    <div class="order-title">${Number(item.day || 0)}天套餐</div>
+                                    <div class="order-subtitle">下单后若支付结果有延迟，可稍后重新进入本页查看。</div>
+                                </div>
+                            </div>
+                            <div class="order-amount">
+                                <div class="amount-label">实付金额</div>
+                                <div class="amount-value">¥${amount}</div>
+                            </div>
+                        </div>
+                        <div class="order-body">
+                            <div class="order-grid">
+                                <div class="order-item">
+                                    <div class="item-label">下单时间</div>
+                                    <div class="item-value">${createdText}</div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="item-label">支付方式</div>
+                                    <div class="item-value">${item.pay_type || '-'}</div>
+                                </div>
+            
+                                <div class="order-item full">
+                                    <div class="item-label">订单号</div>
+                                    <div class="item-value">${item.order_id || '-'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            $('.layuimini-main-order .order-list').html(html);
+            renderSummary(list);
+        }
+
+        function loadOrders() {
+            var loadIndex = layer.load(2, { shade: [0.2, '#000000'] });
+            axios({
+                "method": "GET",
+                "url": `${API_URL}/order/info`
+            }).then((json) => {
+                layer.close(loadIndex);
+                if (json.code == 200) {
+                    var list = (json.data && json.data.list) || [];
+                    list.sort(function (a, b) {
+                        return Number(b.created || 0) - Number(a.created || 0);
+                    });
+                    renderOrders(list);
+                } else if (json.code == 4003) {
+                    layer.msg(json.msg, {
+                        time: 1000
+                    }, function () {
+                        window.location = 'login.html';
+                    });
+                } else {
+                    layer.msg(json.msg);
+                    renderOrders([]);
+                }
+            }, (e) => {
+                layer.close(loadIndex);
+                layer.msg(e.errorType);
+                renderOrders([]);
+            });
+        }
+
+        $('.layuimini-main-order .page-back').on('click', function () {
+            goBack('user.html');
+        });
+
+        loadOrders();
+        form.render();
+    });
+</script>

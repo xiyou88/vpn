@@ -1,0 +1,1436 @@
+:root {
+    --sd-bg: #ffffff;
+    --sd-bg-soft: #f3fbfa;
+    --sd-panel: rgba(255, 255, 255, 0.94);
+    --sd-panel-soft: rgba(244, 252, 251, 0.98);
+    --sd-border: rgba(38, 204, 196, 0.16);
+    --sd-border-strong: rgba(38, 204, 196, 0.34);
+    --sd-text: #0a1628;
+    --sd-muted: #68798a;
+    --sd-dim: #98a9b8;
+    --sd-accent: #26ccc4;
+    --sd-accent-deep: #1aa09a;
+    --sd-accent-soft: rgba(38, 204, 196, 0.08);
+    --sd-shadow: 0 24px 72px rgba(19, 137, 132, 0.12);
+}
+
+html,
+body {
+    background:
+        radial-gradient(circle at 10% 10%, rgba(38, 204, 196, 0.14), transparent 26%),
+        radial-gradient(circle at 88% 18%, rgba(38, 204, 196, 0.08), transparent 22%),
+        linear-gradient(180deg, #ffffff 0%, #f8fdfd 52%, #ffffff 100%) !important;
+    color: var(--sd-text);
+}
+
+body,
+button,
+input,
+select,
+textarea,
+a {
+    color: var(--sd-text);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(38, 204, 196, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(38, 204, 196, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 42%, transparent 94%);
+    pointer-events: none;
+}
+
+.layui-layout-admin .layui-body,
+.layui-layout-admin .footer,
+.layuimini-container,
+.layuimini-page-anim,
+.mescroll,
+.layui-container {
+    background-color: transparent !important;
+}
+
+.index-header,
+.layui-header.header,
+.layui-layout-admin .footer,
+.layui-layout-admin .footer .nav,
+.layui-nav-tree,
+.layui-side-scroll,
+.layuimini-tool i {
+    background: transparent !important;
+}
+
+.layui-nav .layui-nav-item,
+.layui-nav .layui-nav-item a,
+.layui-layout-admin .footer .nav,
+.layui-layout-admin .footer div:last-child,
+.layuimini-tool i {
+    color: var(--sd-muted) !important;
+}
+
+.layui-nav .layui-this a,
+.layui-nav .layui-this i,
+.layui-nav .layui-nav-item a:hover,
+.layui-layout-admin .footer .nav .select,
+.layui-layout-admin .footer .nav span:hover,
+.footer button:hover,
+.forgot-password:hover {
+    color: var(--sd-accent) !important;
+}
+
+.layui-nav-bar,
+.layui-tab-brief > .layui-tab-title .layui-this:after,
+.layuimini-main-feedback-list .layui-tab-brief > .layui-tab-title .layui-this:after {
+    border-bottom-color: var(--sd-accent) !important;
+}
+
+.layuimini-main-feedback > div.title,
+.layuimini-main-feedback-list > div.title,
+.layuimini-main-feedback-list .top,
+.layuimini-main-broadcast .title,
+.layuimini-main-broadcast .content ul li,
+.layuimini-main-contact .body,
+.layuimini-main-guide .body,
+.help .container,
+.broadcast-container,
+.warning-container,
+.login-warning-show .warning-container,
+.layuimini-main-feedback .body .picture,
+.layuimini-main-feedback .body textarea,
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li {
+    background: linear-gradient(180deg, var(--sd-panel), var(--sd-panel-soft)) !important;
+    border: 1px solid var(--sd-border) !important;
+    box-shadow: var(--sd-shadow);
+}
+
+.layui-collapse,
+.layui-colla-item,
+.layuimini-main-guide .body ul li {
+    background: linear-gradient(180deg, var(--sd-panel), var(--sd-panel-soft)) !important;
+    border-color: var(--sd-border) !important;
+    color: var(--sd-text) !important;
+    box-shadow: 0 18px 40px rgba(19, 137, 132, 0.08);
+}
+
+.layui-colla-title,
+.layuimini-main-user .section-title,
+.layuimini-main-buy .content .title,
+.layuimini-main-buy .payment .title,
+.layuimini-main-feedback .body .feedback-type .title,
+.layuimini-main-feedback .body .content .title,
+.layuimini-main-broadcast .title,
+.layuimini-main-contact .title,
+.layuimini-main-help .title,
+.layuimini-main-guide .body ul > div,
+.warning-container .title,
+.broadcast-container .title,
+.login-warning-show .warning-container .title {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-buy .desc .common .title,
+.layuimini-main-buy .payment ul li span,
+.layuimini-main-route .body ul li .route-body,
+.layuimini-main-route .show .title,
+.layuimini-main-route .show .sign,
+.layuimini-main-buy .show .title,
+.layuimini-main-buy .show .desc,
+.layuimini-main-contact .body,
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li .time,
+.layuimini-main-broadcast .content ul li div.desc,
+.layuimini-main-broadcast .content ul li div.time,
+.layuimini-main-contact .body .content .mainland ul li > div div:last-child,
+.layuimini-main-help .change > div div:last-child {
+    color: var(--sd-muted) !important;
+}
+
+.login-form .logo-title h1,
+.layuimini-modify-password .logo-title h1 {
+    color: var(--sd-text) !important;
+}
+
+.box {
+    background: rgba(38, 204, 196, 0.08);
+    border: 1px solid var(--sd-border);
+    color: var(--sd-accent) !important;
+}
+
+.box div,
+.box span,
+.box i {
+    color: inherit !important;
+}
+
+.layui-form input,
+.layui-input,
+.login-form .layui-form-item input,
+.layuimini-modify-password .input,
+.layuimini-main-feedback .body textarea {
+    background: rgba(255, 255, 255, 0.92) !important;
+    color: var(--sd-text) !important;
+    border: 1px solid rgba(38, 204, 196, 0.14) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 12px 28px rgba(19, 137, 132, 0.06);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9cb0bc !important;
+}
+
+div.login,
+.layuimini-main-buy .payment .pay,
+.layuimini-main-feedback .body .post,
+.layuimini-main-route .show .copy,
+.layuimini-main-contact .body > button.select,
+.layuimini-main-buy .top .title .select,
+.layuimini-main-route .switch-tabs .select,
+.layuimini-main-user .info-action.primary,
+.layuimini-main-user .member-card.is-valid .member-action,
+.layuimini-modify-password .update,
+.warning-container .toHelp,
+.login-warning-show .toLoginHelp,
+.layuimini-main-help .content .appstore .layui-colla-content button {
+    background: linear-gradient(135deg, var(--sd-accent), var(--sd-accent-deep)) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 14px 30px rgba(38, 204, 196, 0.2);
+}
+
+div.login button,
+.layuimini-main-buy .payment .pay span,
+.layuimini-main-feedback .body .post,
+.layuimini-main-route .show .copy {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+.layuimini-main-buy .top .title button,
+.layuimini-main-route .switch-tabs button,
+.layuimini-main-feedback > div.title div,
+.layuimini-main-feedback-list .layui-tab-brief > .layui-tab-title .layui-this,
+.layuimini-main-contact .body .content .oveas div span,
+.footer button,
+.forgot-password,
+.login-form .input div.captcha,
+.layuimini-main-route .toHelp,
+.layuimini-main-route .route-detail,
+.layuimini-main-help .content .outline .step-desc span,
+.layuimini-main-help .content .appstore .step span,
+.layuimini-main-help .content .appstore a,
+.layuimini-main-user .member-card.is-valid .member-status {
+    color: var(--sd-accent) !important;
+}
+
+.login-form .input div.captcha,
+.layuimini-main-route .toHelp,
+.layuimini-main-route .route-detail,
+.layuimini-main-route .show .download-outline,
+.layuimini-main-help .change > div,
+.layuimini-main-help .content .outline .step-desc,
+.layuimini-main-help .content .appstore .step,
+.layuimini-main-help .content .appstore .warning,
+.layuimini-main-help .layui-colla-item,
+.layuimini-main-user .info-card,
+.layuimini-main-user .membership-panel,
+.layuimini-main-user .service-panel,
+.layuimini-main-user .member-card,
+.layuimini-main-buy .desc,
+.layuimini-main-buy .content,
+.layuimini-main-buy .payment,
+.layuimini-main-buy .top,
+.layuimini-main-buy .feature-card,
+.layuimini-main-buy .content ul li,
+.layuimini-main-route .route-hero,
+.layuimini-main-route .body ul li,
+.layuimini-main-route .show .dialog-card,
+.layuimini-main-buy .show .dialog-card,
+.layuimini-main-help .page-intro,
+.layuimini-main-help .change,
+.layuimini-main-help .content,
+.layuimini-modify-password .logo-title {
+    border: 1px solid var(--sd-border) !important;
+    background: linear-gradient(180deg, var(--sd-panel), var(--sd-panel-soft)) !important;
+    box-shadow: var(--sd-shadow);
+}
+
+.layuimini-main-feedback .body .feedback-type ul li,
+.layuimini-main-contact .body > button,
+.layuimini-main-buy .top .title button,
+.layuimini-main-route .switch-tabs button,
+.layuimini-main-contact .body .content .mainland ul li,
+.layuimini-main-buy .content ul li.selected,
+.layuimini-main-help .change .select {
+    background: rgba(38, 204, 196, 0.04) !important;
+    border: 1px solid rgba(38, 204, 196, 0.12) !important;
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-feedback .body .feedback-type ul li.selected,
+.layuimini-main-contact .body > button.select,
+.layuimini-main-buy .content ul li.selected,
+.layuimini-main-help .change .select,
+.layuimini-main-route .switch-tabs .select {
+    border-color: var(--sd-border-strong) !important;
+    background: rgba(38, 204, 196, 0.1) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-route {
+    color: var(--sd-text);
+}
+
+.layuimini-main-route .route-hero {
+    background:
+        radial-gradient(circle at top right, rgba(38, 204, 196, 0.12), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(243, 251, 250, 0.98)) !important;
+}
+
+.layuimini-main-route .hero-kicker,
+.layuimini-main-buy .hero-kicker,
+.layuimini-main-buy .switch-title,
+.layuimini-main-route .switch-title {
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-route .hero-title,
+.layuimini-main-buy .hero-title {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-route .hero-desc,
+.layuimini-main-buy .hero-desc,
+.layuimini-main-help .page-intro,
+.layuimini-main-help .appstore-intro,
+.layuimini-main-help .content .appstore .warning,
+.layuimini-main-user .info-label,
+.layuimini-main-user .member-expire,
+.layuimini-main-user .service-desc,
+.layuimini-main-buy .feature-desc {
+    color: var(--sd-muted) !important;
+}
+
+.layuimini-main-route .body ul li .fixed.use {
+    background: rgba(38, 204, 196, 0.12) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-route .body ul li .route-meta .name,
+.layuimini-main-user .info-value,
+.layuimini-main-user .member-name,
+.layuimini-main-user .service-title,
+.layuimini-main-buy .desc-title,
+.layuimini-main-buy .feature-title {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-route .show {
+    background: rgba(10, 22, 40, 0.22) !important;
+}
+
+.layuimini-main-route .show .dialog-icon,
+.layuimini-main-buy .show .dialog-icon {
+    background: linear-gradient(135deg, rgba(38, 204, 196, 0.16), rgba(38, 204, 196, 0.06)) !important;
+}
+
+.layuimini-main-route .show .sign {
+    background: rgba(38, 204, 196, 0.05) !important;
+}
+
+.layuimini-main-route .show .download-outline {
+    background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.layuimini-main-help .page-intro,
+.layuimini-main-help .change,
+.layuimini-main-help .content {
+    background:
+        radial-gradient(circle at top left, rgba(38, 204, 196, 0.1), transparent 38%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(243, 251, 250, 0.98) 100%) !important;
+}
+
+.layuimini-main-help .page-intro::before {
+    background: linear-gradient(135deg, var(--sd-accent), var(--sd-accent-deep)) !important;
+    box-shadow: 0 0 0 6px rgba(38, 204, 196, 0.1) !important;
+}
+
+.layuimini-main-help .change .select {
+    box-shadow: 0 14px 30px rgba(38, 204, 196, 0.12) !important;
+}
+
+.layuimini-main-help .change .fuli,
+.layuimini-main-help .content .appstore .step .btns {
+    background: rgba(38, 204, 196, 0.08) !important;
+    border: 1px solid rgba(38, 204, 196, 0.14) !important;
+    color: var(--sd-accent) !important;
+    box-shadow: none !important;
+}
+
+.layuimini-main-help .layui-colla-title::after {
+    border-right-color: var(--sd-accent) !important;
+    border-bottom-color: var(--sd-accent) !important;
+}
+
+.layuimini-main-help .content .outline .step,
+.layuimini-main-help .content > div .title,
+.layuimini-main-help .layui-colla-title {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-help .content .appstore .step img,
+.layuimini-main-help .content .outline .step-desc img {
+    box-shadow: 0 14px 28px rgba(19, 137, 132, 0.12) !important;
+}
+
+.layuimini-main-help text[style*="#DD2828"],
+.layuimini-main-help span[style*="#DD2828"],
+.layuimini-main-help div[style*="#DD2828"] {
+    color: #ef7c6b !important;
+}
+
+.layuimini-main-user .info-card,
+.layuimini-main-user .membership-panel,
+.layuimini-main-user .service-panel {
+    background:
+        radial-gradient(circle at top left, rgba(38, 204, 196, 0.08), transparent 36%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(243, 251, 250, 0.98) 100%) !important;
+}
+
+.layuimini-main-user .info-row,
+.layuimini-main-user .service-item {
+    border-bottom: 1px solid rgba(38, 204, 196, 0.08) !important;
+}
+
+.layuimini-main-user .info-icon,
+.layuimini-main-user .member-badge,
+.layuimini-main-user .service-icon {
+    background: rgba(38, 204, 196, 0.08) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-user .info-action,
+.layuimini-main-user .member-action {
+    background: rgba(38, 204, 196, 0.08) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-user .member-card.is-valid {
+    box-shadow: 0 14px 28px rgba(38, 204, 196, 0.08) !important;
+}
+
+.layuimini-main-user .member-card.is-expired {
+    background: linear-gradient(180deg, rgba(249, 252, 252, 0.98) 0%, rgba(240, 246, 245, 0.98) 100%) !important;
+    border-color: rgba(167, 189, 186, 0.32) !important;
+}
+
+.layuimini-main-user .member-card.is-expired .member-badge {
+    background: rgba(170, 188, 186, 0.18) !important;
+    color: #6d7f86 !important;
+}
+
+.layuimini-main-user .member-card.is-expired .member-action {
+    background: rgba(170, 188, 186, 0.18) !important;
+    color: #6d7f86 !important;
+}
+
+.layuimini-main-user .service-dot {
+    background: #ff8679 !important;
+}
+
+.layuimini-main-buy .buy-hero,
+.layuimini-main-buy .top,
+.layuimini-main-buy .desc,
+.layuimini-main-buy .content,
+.layuimini-main-buy .payment {
+    background:
+        radial-gradient(circle at top left, rgba(38, 204, 196, 0.14), transparent 36%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(243, 251, 250, 0.98) 100%) !important;
+}
+
+.layuimini-main-buy .top .title {
+    background: rgba(38, 204, 196, 0.06) !important;
+}
+
+.layuimini-main-buy .feature-card.vip .feature-header {
+    background: linear-gradient(135deg, #effcfb, #e3f8f6) !important;
+}
+
+.layuimini-main-buy .feature-card.svip .feature-header {
+    background: linear-gradient(135deg, #eefaf9, #def5f2) !important;
+}
+
+.layuimini-main-buy .feature-card.vip .feature-header-icon,
+.layuimini-main-buy .feature-card.svip .feature-header-icon {
+    background: rgba(38, 204, 196, 0.12) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-buy .feature-card.vip .feature-header-title,
+.layuimini-main-buy .feature-card.svip .feature-header-title,
+.layuimini-main-buy .content ul li .right,
+.layuimini-main-buy .content ul li div.selected {
+    color: var(--sd-accent) !important;
+}
+
+.layuimini-main-buy .feature-card.vip .feature-header-desc,
+.layuimini-main-buy .feature-card.svip .feature-header-desc,
+.layuimini-main-buy .content ul li .middle,
+.layuimini-main-buy .content ul li span.middle {
+    color: var(--sd-muted) !important;
+}
+
+.layuimini-main-buy .feature-row + .feature-row,
+.layuimini-main-buy .feature-item + .feature-item,
+.layuimini-main-buy .payment .line {
+    border-color: rgba(38, 204, 196, 0.08) !important;
+    background: linear-gradient(90deg, rgba(38, 204, 196, 0), rgba(38, 204, 196, 0.18), rgba(38, 204, 196, 0)) !important;
+}
+
+.layuimini-main-buy .show {
+    background: rgba(10, 22, 40, 0.22) !important;
+}
+
+.layuimini-main-broadcast .content ul li div.time,
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li .time {
+    color: var(--sd-dim) !important;
+}
+
+
+.layuimini-modify-password .logo-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    margin-bottom: 0 !important;
+}
+
+.layuimini-modify-password .logo-title .page-back {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--sd-border) !important;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.layuimini-modify-password .logo-title .page-back .back-icon {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin-left: 3px;
+    border-left: 2px solid var(--sd-accent);
+    border-bottom: 2px solid var(--sd-accent);
+    transform: rotate(45deg);
+}
+
+.layuimini-modify-password .form-body {
+    margin-top: 10px;padding: 0 48px;
+}
+
+.layuimini-modify-password .form-body .layui-form-item {
+    position: relative;
+    margin-bottom: 0 !important;
+}
+
+.layuimini-modify-password .form-body .layui-form-item + .layui-form-item {
+    margin-top: 10px;
+}
+
+.layuimini-modify-password .input {
+    min-height: 52px;
+}
+
+.layuimini-modify-password .input .icon {
+    position: absolute;
+    top: 50%;
+    left: 17px;
+    width: 22px;
+    height: 22px;
+    transform: translateY(-50%);
+}
+
+.layuimini-modify-password .input input {
+    height: 52px;
+    padding-left: 56px;
+    padding-right: 18px;
+    font-size: 15px;
+}
+
+.layuimini-modify-password .update {
+    width: 100%;
+    margin: 22px auto 0;
+    min-height: 48px;
+    line-height: 48px;
+    text-align: center;
+}
+
+.layuimini-modify-password .update button {
+    width: 100%;
+    height: 48px;
+}
+
+.layui-layer,
+.layui-layer-page .layui-layer-content,
+.layui-layer-black,
+.layui-layer-black .layui-layer-title,
+.layui-layer-black .layui-layer-btn,
+.layui-layer-black .layui-layer-btn a {
+    background: linear-gradient(180deg, var(--sd-panel), var(--sd-panel-soft)) !important;
+    color: var(--sd-text) !important;
+    border-color: var(--sd-border) !important;
+}
+
+.icon-cp {
+    box-shadow: 0 18px 40px rgba(123, 47, 242, 0.18);
+}
+
+html,
+body {
+    background:
+        radial-gradient(circle at 8% 12%, rgba(123, 47, 242, 0.14), transparent 26%),
+        radial-gradient(circle at 92% 18%, rgba(123, 47, 242, 0.08), transparent 20%),
+        linear-gradient(180deg, #ffffff 0%, #fbf9ff 52%, #ffffff 100%) !important;
+    color: var(--sd-text) !important;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+a,
+span,
+div {
+    color: inherit;
+}
+
+body::before {
+    background-image:
+        linear-gradient(rgba(123, 47, 242, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123, 47, 242, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 42%, transparent 94%);
+    opacity: 0.72;
+}
+
+.layui-layout-admin .layui-body,
+.layui-layout-admin .footer,
+.layuimini-container,
+.layuimini-page-anim,
+.mescroll,
+.layui-container {
+    background: transparent !important;
+}
+
+.layui-layout-admin .layui-body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mescroll {
+    /* height: calc(100vh - 76px); */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.index-header,
+.layui-header.header,
+.layui-layout-admin .footer,
+.layui-layout-admin .footer .nav,
+.layui-nav-tree,
+.layui-side-scroll,
+.layuimini-tool i {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(18px);
+}
+
+.layui-layout-admin .footer,
+.index-header {
+    border-top: 1px solid var(--sd-border) !important;
+    border-bottom: 1px solid rgba(123, 47, 242, 0.06) !important;
+    box-shadow: 0 -12px 32px rgba(71, 32, 133, 0.08);
+}
+
+.layui-nav .layui-nav-item,
+.layui-nav .layui-nav-item a,
+.layui-layout-admin .footer .nav,
+.layui-layout-admin .footer div:last-child,
+.layuimini-tool i,
+.layuimini-main-user .top .title div,
+.layuimini-main-user .top .opera,
+.layuimini-main-broadcast .content ul li div.desc,
+.layuimini-main-broadcast .content ul li div.time,
+.layuimini-main-feedback-list .layui-tab-content .layui-tab-item ul li .time,
+.layuimini-main-contact .body .content .mainland ul li > div div:last-child,
+.layuimini-main-help .change > div div:last-child {
+    color: var(--sd-muted) !important;
+}
+
+.layui-nav .layui-this a,
+.layui-nav .layui-this i,
+.layui-nav .layui-nav-item a:hover,
+.layui-layout-admin .footer .nav .select,
+.layui-layout-admin .footer .nav span:hover,
+.footer button:hover,
+.forgot-password:hover,
+.layuimini-main-feedback > div.title div,
+.layuimini-main-feedback-list .layui-tab-brief > .layui-tab-title .layui-this,
+.layuimini-main-contact .body .content .oveas div span,
+.login-form .input div.captcha,
+.forgot-password,
+div.footer button,
+div.footer span {
+    color: var(--sd-accent) !important;
+}
+
+.layui-nav-bar,
+.layui-tab-brief > .layui-tab-title .layui-this:after,
+.layuimini-main-feedback-list .layui-tab-brief > .layui-tab-title .layui-this:after {
+    border-bottom-color: var(--sd-accent) !important;
+}
+
+
+.layuimini-main-user .top,
+.layuimini-main-user .body,
+.layuimini-main-buy .desc,
+.layuimini-main-buy .content,
+.layuimini-main-buy .payment,
+.layuimini-main-feedback > div.title,
+.layuimini-main-feedback-list > div.title,
+.layuimini-main-feedback-list .top,
+.layuimini-main-broadcast .title,
+.layuimini-main-broadcast .content ul li,
+.layuimini-main-contact .body,
+.layuimini-main-help .content,
+.layuimini-main-help .change > div,
+.layuimini-main-guide .body,
+.help .container,
+.broadcast-container,
+.warning-container,
+.login-warning-show .warning-container,
+.layuimini-main-route .top .title,
+.layuimini-main-route .body ul li,
+.layuimini-main-route .show > div,
+.layuimini-main-buy .show > div,
+.layuimini-main-buy .content ul li,
+.layuimini-main-contact .body .content .mainland ul li,
+.layuimini-modify-password .logo-title,
+.layuimini-main-feedback .body .picture {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--sd-text) !important;
+}
+
+.layuimini-content-page {
+    height: auto !important;
+    min-height: 100%;
+    max-width: 440px;
+    overflow: visible !important;
+}
+
+.layui-collapse,
+.layui-colla-item,
+.layuimini-main-help .step,
+.layuimini-main-guide .body ul li {
+    background: rgba(255, 255, 255, 0.82) !important;
+    border-color: var(--sd-border) !important;
+    color: var(--sd-text) !important;
+    border-radius: 18px !important;
+}
+
+.layui-colla-title,
+.layuimini-main-user .body .title,
+.layuimini-main-buy .content .title,
+.layuimini-main-buy .payment .title,
+.layuimini-main-feedback .body .feedback-type .title,
+.layuimini-main-feedback .body .content .title,
+.layuimini-main-broadcast .title,
+.layuimini-main-contact .title,
+.layuimini-main-help .title,
+.layuimini-main-guide .body ul > div,
+.warning-container .title,
+.broadcast-container .title,
+.login-warning-show .warning-container .title,
+.login-form .logo-title h1,
+.layuimini-modify-password .logo-title h1 {
+    color: var(--sd-text) !important;
+}
+
+.layuimini-main-buy .desc .common .title,
+.layuimini-main-buy .payment ul li span,
+.layuimini-main-route .body ul li .route-body,
+.layuimini-main-route .show div .title,
+.layuimini-main-route .show div .sign,
+.layuimini-main-buy .show div .title,
+.layuimini-main-buy .show div .desc,
+.layuimini-main-contact .body,
+.layuimini-main-help .change > div div:last-child,
+.layuimini-main-contact .body .content .mainland ul li > div div:last-child,
+.box,
+.box div,
+.box span,
+.box i {
+    color: var(--sd-muted) !important;
+}
+
+.layuimini-main-help .title,
+.layuimini-main-contact .title,
+.box {
+    background: rgba(123, 47, 242, 0.08) !important;
+    border: 1px solid var(--sd-border) !important;
+    border-radius: 18px !important;
+}
+
+.box {
+    color: var(--sd-accent) !important;
+}
+
+.layui-form input,
+.layui-input,
+.login-form .layui-form-item input,
+.layuimini-modify-password .input,
+.layuimini-main-feedback .body textarea {
+    background: rgba(255, 255, 255, 0.88) !important;
+    color: var(--sd-text) !important;
+    border: 1px solid var(--sd-border) !important;
+    border-radius: 16px !important;
+    box-shadow: inset 0 1px 0 rgba(123, 47, 242, 0.04);
+}
+
+.layui-form input:focus,
+.layui-input:focus,
+.layuimini-main-feedback .body textarea:focus {
+    border-color: var(--sd-border-strong) !important;
+    box-shadow: 0 0 0 4px rgba(123, 47, 242, 0.08) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #8b87a1 !important;
+}
+
+div.login,
+.layuimini-main-buy .payment .pay,
+.layuimini-main-feedback .body .post,
+.layuimini-main-route .show div .copy,
+.layuimini-main-contact .body > button.select,
+.layuimini-main-buy .top .title .select,
+.layuimini-main-route .top .title .select,
+.layuimini-main-user .body .content button,
+.layuimini-main-user .body .vip-content button,
+.layuimini-modify-password .update,
+.warning-container .toHelp,
+.login-warning-show .toLoginHelp,
+.layui-layout-admin .help .container .body div div.next {
+    background: linear-gradient(135deg, var(--sd-accent), #9d63ff) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none;
+    border-radius: 16px !important;
+}
+
+div.login button,
+.layuimini-main-buy .payment .pay span,
+.layuimini-main-feedback .body .post,
+.layuimini-main-route .show div .copy,
+.warning-container .toHelp,
+.login-warning-show .toLoginHelp,
+.layui-layout-admin .help .container .body div div.next,
+.layui-layout-admin .help .container .body div div.next span {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+.layuimini-main-buy .top .title button,
+.layuimini-main-route .top .title button,
+.layuimini-main-contact .body > button,
+.layuimini-main-feedback .body .feedback-type ul li,
+.layuimini-main-buy .content ul li.selected,
+.layuimini-main-contact .body .content .mainland ul li {
+    background: rgba(255, 255, 255, 0.84) !important;
+    border: 1px solid var(--sd-border) !important;
+    color: var(--sd-text) !important;
+    border-radius: 16px !important;
+}
+
+.layuimini-main-feedback .body .feedback-type ul li.selected,
+.layuimini-main-contact .body > button.select,
+.layuimini-main-buy .content ul li.selected,
+.layuimini-main-help .change .select,
+.layuimini-main-buy .top .title .select,
+.layuimini-main-route .top .title .select {
+    border-color: var(--sd-border-strong) !important;
+    background: rgba(123, 47, 242, 0.1) !important;
+    color: var(--sd-accent-deep) !important;
+}
+
+.layuimini-main-user .body .vip-content .left .title span,
+.layuimini-main-user .body .vip-content .left .time,
+.layuimini-main-user .body .vip-content .left .title .font-valid {
+    color: var(--sd-accent) !important;
+}
+
+.layui-layer,
+.layui-layer-page .layui-layer-content,
+.layui-layer-black,
+.layui-layer-black .layui-layer-title,
+.layui-layer-black .layui-layer-btn,
+.layui-layer-black .layui-layer-btn a {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 244, 255, 0.98)) !important;
+    color: var(--sd-text) !important;
+    border-color: var(--sd-border) !important;
+}
+
+.layui-layer {
+    border-radius: 24px !important;
+    box-shadow: var(--sd-shadow) !important;
+}
+
+.admin-login-background {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 16px 72px;
+}
+
+.login-form {
+    width: min(100%, 420px);
+    padding: 30px 24px 24px;
+}
+
+.login-form .logo-title {
+    margin-bottom: 28px;
+}
+
+.login-form .logo-title h1 {
+    font-size: 26px !important;
+    line-height: 1.35 !important;
+}
+
+div.footer {
+    margin-top: 24px !important;
+    width: min(100%, 420px);
+    text-align: center;
+}
+
+div.footer button {
+    text-decoration: none;
+    font-weight: 700;
+}
+
+div.forgot-password {
+    color: var(--sd-muted) !important;
+}
+
+.login-form .input div.captcha {
+    background: rgba(123, 47, 242, 0.08) !important;
+    border: 1px solid var(--sd-border-strong) !important;
+    border-radius: 12px !important;
+}
+
+.login-form .input div.countdown {
+    background: rgba(123, 47, 242, 0.12) !important;
+    color: var(--sd-accent) !important;
+}
+
+.layui-layout-admin .footer {
+    height: 76px;
+}
+
+.layui-layout-admin .footer .nav span {
+    gap: 7px;
+    margin: 0 4px;
+    border-radius: 14px;
+    color: var(--sd-muted) !important;
+}
+
+.layui-layout-admin .footer .nav span .tab-icon {
+    font-size: 17px;
+}
+
+.layui-layout-admin .footer .nav span.select {
+    background: transparent !important;
+    color: var(--sd-accent) !important;
+    box-shadow: none !important;
+}
+
+.layui-layout-admin .help,
+.layui-layout-admin .broadcast-show,
+.layui-layout-admin .warning-show,
+.login-warning-show {
+    background: rgba(92, 68, 130, 0.14) !important;
+    backdrop-filter: blur(6px);
+}
+
+.layui-layout-admin .help .container,
+.layui-layout-admin .broadcast-show .broadcast-container,
+.layui-layout-admin .warning-show .warning-container,
+.login-warning-show .warning-container {
+    border: 1px solid var(--sd-border) !important;
+    border-radius: 28px !important;
+    overflow: hidden;
+    box-shadow: var(--sd-shadow) !important;
+}
+
+.layui-layout-admin .help .container .title .skip-help,
+.layui-layout-admin .broadcast-show .broadcast-container div .time {
+    color: var(--sd-muted) !important;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .desc,
+.layui-layout-admin .warning-show .warning-container div .desc,
+.login-warning-show .warning-container div .desc,
+.layui-layout-admin .help .container .body {
+    color: var(--sd-muted) !important;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .show-more {
+    color: var(--sd-accent) !important;
+    font-weight: 700;
+}
+
+.layui-layout-admin .broadcast-show {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background: none !important;
+    backdrop-filter: blur(2px);
+}
+
+.layui-layout-admin .broadcast-show[style*="display: block"] {
+    display: flex !important;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container {
+    width: min(100%, 372px) !important;
+    margin: 0 !important;
+    background:
+        radial-gradient(circle at top right, rgba(123, 47, 242, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 243, 255, 0.98) 100%) !important;
+    border: 1px solid rgba(123, 47, 242, 0.14) !important;
+    border-radius: 30px !important;
+    box-shadow: 0 28px 70px rgba(88, 48, 165, 0.22) !important;
+    text-align: left;
+    overflow: hidden;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container > .broadcast-card {
+    position: relative;
+    padding: 24px 24px 22px !important;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(123, 47, 242, 0.12);
+    border-radius: 999px;
+    background: rgba(123, 47, 242, 0.08);
+    color: #7B2FF2;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-badge i {
+    font-size: 13px;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .title {
+    margin-top: 16px;
+    padding-right: 44px;
+    color: #1E1A2B;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .time {
+    display: inline-flex;
+    align-items: center;
+    min-height: 18px;
+    margin: 12px 0 0;
+    padding: 0;
+    color: #9B91B7 !important;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .id {
+    display: none;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid rgba(123, 47, 242, 0.12);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .close:hover,
+.layui-layout-admin .broadcast-show .broadcast-container div .close:active {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(123, 47, 242, 0.12);
+    background: #FFFFFF;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .close img {
+    display: none;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .close .close-icon {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .close .close-icon::before,
+.layui-layout-admin .broadcast-show .broadcast-container div .close .close-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    border-radius: 999px;
+    background: #7B2FF2;
+    transform-origin: center;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .close .close-icon::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .close .close-icon::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.layui-layout-admin .broadcast-show .desc-wrap {
+    margin-top: 16px;
+    padding: 18px 18px 8px;
+    border: 1px solid rgba(123, 47, 242, 0.1);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .desc {
+    margin: 0;
+    color: #625A77 !important;
+    font-size: 15px;
+    line-height: 1.9;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 6;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+
+.layui-layout-admin .broadcast-show .broadcast-container div .show-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 132px;
+    height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #8138F5 0%, #5B1FDB 100%);
+    color: #FFFFFF !important;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 16px 30px rgba(123, 47, 242, 0.22);
+}
+
+@media screen and (max-width: 420px) {
+    .layui-layout-admin .broadcast-show {
+        padding: 16px;
+    }
+
+    .layui-layout-admin .broadcast-show .broadcast-container {
+        width: 100% !important;
+        border-radius: 26px !important;
+    }
+
+    .layui-layout-admin .broadcast-show .broadcast-container > .broadcast-card {
+        padding: 20px 18px 18px !important;
+    }
+
+    .layui-layout-admin .broadcast-show .broadcast-container div .title {
+        font-size: 21px;
+    }
+
+    .layui-layout-admin .broadcast-show .desc-wrap {
+        padding: 16px 16px 6px;
+        border-radius: 18px;
+    }
+
+    .layui-layout-admin .broadcast-show .broadcast-container div .desc {
+        font-size: 14px;
+        line-height: 1.85;
+    }
+
+    .layui-layout-admin .broadcast-show .broadcast-container div .show-more {
+        width: 100%;
+    }
+
+    .layui-layout-admin .broadcast-show .broadcast-actions {
+        justify-content: stretch;
+    }
+}
+
+.layui-layout-admin .feedback-show {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background: none !important;
+    backdrop-filter: blur(2px);
+    z-index: 999;
+}
+
+.layui-layout-admin .feedback-show[style*="display: block"] {
+    display: flex !important;
+}
+
+.layui-layout-admin .feedback-show .feedback-container {
+    width: min(100%, 372px) !important;
+    margin: 0 !important;
+    background:
+        radial-gradient(circle at top right, rgba(123, 47, 242, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 243, 255, 0.98) 100%) !important;
+    border: 1px solid rgba(123, 47, 242, 0.14) !important;
+    border-radius: 30px !important;
+    box-shadow: 0 28px 70px rgba(88, 48, 165, 0.22) !important;
+    text-align: left;
+    overflow: hidden;
+}
+
+.layui-layout-admin .feedback-show .feedback-container > .feedback-card {
+    position: relative;
+    padding: 24px 24px 22px !important;
+}
+
+.layui-layout-admin .feedback-show .feedback-container > .feedback-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 28px;
+    bottom: 28px;
+    width: 6px;
+    border-radius: 0 999px 999px 0;
+    background: linear-gradient(180deg, #7B2FF2 0%, #5A1BD3 100%);
+}
+
+.layui-layout-admin .feedback-show .feedback-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(123, 47, 242, 0.12);
+    border-radius: 999px;
+    background: rgba(123, 47, 242, 0.08);
+    color: #7B2FF2;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.layui-layout-admin .feedback-show .feedback-badge i {
+    font-size: 13px;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .title {
+    margin-top: 16px;
+    padding-right: 44px;
+    color: #1E1A2B;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .time {
+    display: inline-flex;
+    align-items: center;
+    min-height: 18px;
+    margin: 12px 0 0;
+    padding: 0;
+    color: #9B91B7 !important;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .id {
+    display: none;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid rgba(123, 47, 242, 0.12);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .close:hover,
+.layui-layout-admin .feedback-show .feedback-container div .close:active {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(123, 47, 242, 0.12);
+    background: #FFFFFF;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .close .close-icon {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .close .close-icon::before,
+.layui-layout-admin .feedback-show .feedback-container div .close .close-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    border-radius: 999px;
+    background: #7B2FF2;
+    transform-origin: center;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .close .close-icon::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .close .close-icon::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.layui-layout-admin .feedback-show .desc-wrap {
+    margin-top: 16px;
+    padding: 18px 18px 8px;
+    border: 1px solid rgba(123, 47, 242, 0.1);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .desc {
+    margin: 0;
+    color: #625A77 !important;
+    font-size: 15px;
+    line-height: 1.9;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 6;
+}
+
+.layui-layout-admin .feedback-show .feedback-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+
+.layui-layout-admin .feedback-show .feedback-container div .show-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 132px;
+    height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #8138F5 0%, #5B1FDB 100%);
+    color: #FFFFFF !important;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 16px 30px rgba(123, 47, 242, 0.22);
+}
+
+@media screen and (max-width: 420px) {
+    .layui-layout-admin .feedback-show {
+        padding: 16px;
+    }
+
+    .layui-layout-admin .feedback-show .feedback-container {
+        width: 100% !important;
+        border-radius: 26px !important;
+    }
+
+    .layui-layout-admin .feedback-show .feedback-container > .feedback-card {
+        padding: 20px 18px 18px !important;
+    }
+
+    .layui-layout-admin .feedback-show .feedback-container div .title {
+        font-size: 21px;
+    }
+
+    .layui-layout-admin .feedback-show .desc-wrap {
+        padding: 16px 16px 6px;
+        border-radius: 18px;
+    }
+
+    .layui-layout-admin .feedback-show .feedback-container div .desc {
+        font-size: 14px;
+        line-height: 1.85;
+    }
+
+    .layui-layout-admin .feedback-show .feedback-container div .show-more {
+        width: 100%;
+    }
+
+    .layui-layout-admin .feedback-show .feedback-actions {
+        justify-content: stretch;
+    }
+}
+
+.icon-cp {
+    box-shadow: 0 18px 40px rgba(123, 47, 242, 0.22);
+}

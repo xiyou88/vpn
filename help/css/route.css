@@ -1,0 +1,25 @@
+.layuimini-main-route{display: flow-root;}
+.layuimini-main-route .top{margin-top: 20px;}
+.layuimini-main-route .top .title{height: 40px;margin: 0 auto;background-color: white;}
+.layuimini-main-route .top .title button{float: left;width: 50%;font-size: 15px;line-height: 40px;text-align: center;color: #2468F2;font-weight: bold;}
+.layuimini-main-route .top .title .select{background-color: #2468F2;color: white;}
+.layuimini-main-route .body{margin: 22px auto;}
+.layuimini-main-route .body ul li .fixed{position: absolute;width: 153px;height: 31px;margin-top: -7px;}
+.layuimini-main-route .body ul li .use{background: url("../images/route-using.png") 0 0 no-repeat;background-size: cover;}
+.layuimini-main-route .body ul li{height: 65px;margin-bottom: 20px;background-color: white;font-size: 15px;position: relative;}
+.layuimini-main-route .body ul li .route-body{padding: 22px 19px;color: #2A2C2E;display: flow-root;}
+.layuimini-main-route .body ul li .route-body img{height: 21px;margin-right: 18px;}
+.layuimini-main-route .body ul li .route-body div{float: left;color: #929292;}
+.layuimini-main-route .body ul li .route-body div:last-child{float: right}
+.layuimini-main-route .body ul li  .route-detail{cursor: pointer;}
+.layuimini-main-route .svip{display: none;}
+.layuimini-main-route .vip{display: block;}
+.layuimini-main-route .show{position: absolute;top:0;left: 0;width: 100%;height: 100%;background: rgba(74,74,74,0.5);display: none;}
+.layuimini-main-route .show > div{width: 263px; margin: 120px auto 0 auto;background-color: white;text-align: center;position: relative;}
+.layuimini-main-route .show div > img{width: 64px;height: 64px;margin-top: -25px;}
+.layuimini-main-route .show div .title{margin-top: 15px;font-size: 17px;font-weight: bold;line-height: 22px;color: #393D41;}
+.layuimini-main-route .show div .sign{width: 250px;margin: 10px auto 0 auto;font-size: 15px;line-height: 25px;color: #727272;}
+.layuimini-main-route .show div .sign span{width: 250px;word-break: break-all;}
+.layuimini-main-route .show div .close{position: absolute;top: 0;right: 0;width: 40px;height: 40px;cursor: pointer;}
+.layuimini-main-route .show div .close img{width: 13px;height: 14px;margin-top: 10px;}
+.layuimini-main-route .show div .copy{width: 198px;height: 40px;margin: 26px auto 13px auto;background-color: #2468F2;font-size: 15px;color: white;line-height: 40px;}

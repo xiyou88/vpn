@@ -1,0 +1,126 @@
+<div class="layuimini-container layuimini-page-anim">
+  <div class="layuimini-main-feedback-list">
+    <div class="title page-header">
+      <button type="button" class="page-back" aria-label="返回">
+        <span class="back-icon" aria-hidden="true"></span>
+      </button>
+      <span class="page-title">反馈记录</span>
+    </div>
+    <div class="record-list"></div>
+    <div class="record-empty" style="display: none;">
+      <div class="empty-icon"><i class="fa fa-comments-o" aria-hidden="true"></i></div>
+      <div class="empty-title">暂无反馈记录</div>
+    </div>
+  </div>
+</div>
+<script src="js/utils.js" charSet="utf-8"></script>
+<script>
+  layui.use(['form', 'miniPage'], function () {
+    var $ = layui.jquery,
+      layer = layui.layer,
+      miniPage = layui.miniPage,
+      form = layui.form;
+
+    function goBack(defaultPage) {
+      if (window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+      let now = parseInt(new Date().getTime() / 1000);
+      miniPage.hashChange(defaultPage );
+    }
+
+    function escapeHtml(text) {
+      return String(text == null ? '' : text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function normalizeText(text) {
+      return String(text == null ? '' : text).replace(/\r\n/g, '\n');
+    }
+
+    function renderRecord(item) {
+      var replied = Number(item.state) === 1 && item.reply;
+      var stateText = replied ? '已回复' : '待处理';
+      var stateValue = replied ? dateUnixFormat(item.reply_created || item.updated || item.created) : '等待处理中';
+      var cardClass = replied ? 'replied' : 'waiting';
+      var detailText = replied
+        ? normalizeText(item.reply)
+        : '你的反馈已经收到，我们会尽快查看并补充回复内容。处理完成后，可再次进入本页查看最新结果。';
+      var detailHtml = replied
+        ? detailText
+        : escapeHtml(detailText).replace(/\n/g, '<br>');
+
+      return `
+        <div class="record-card ${cardClass}">
+          <div class="record-head">
+            <div class="record-time">提交于 ${escapeHtml(dateUnixFormat(item.created))}</div>
+            <div class="record-status ${cardClass}">${stateText}</div>
+          </div>
+          <div class="record-section">
+            <div class="section-label">反馈内容</div>
+            <div class="section-body feedback-text">${escapeHtml(normalizeText(item.desc)).replace(/\n/g, '<br>')}</div>
+          </div>
+          <div class="record-section reply-section">
+            <div class="section-top">
+              <div class="section-label">${replied ? '官方回复' : '处理进度'}</div>
+              <div class="section-time">${escapeHtml(stateValue)}</div>
+            </div>
+            <div class="section-body ${replied ? 'reply-text' : 'pending-text'}">${detailHtml}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    $(".layuimini-main-feedback-list .page-back").on('click', function () {
+      goBack('feedback.html');
+    });
+
+    var loadIndex = layer.load(2, {shade: [0.2, '#000000']});
+    axios({
+      "method": "GET",
+      "url": `${API_URL}/common/feedback/list`
+    }).then((json) => {
+      layer.close(loadIndex);
+      if (json.code == 200) {
+        var list = (json.data && Array.isArray(json.data.list)) ? json.data.list.slice() : [];
+        var htmlList = [];
+        $('#feedback-id').removeClass("layui-badge-dot");
+        $('#feedback-service-dot').hide();
+        layui.data('badge', {key: "feedback", value: 0});
+
+        if (list.length > 0) {
+          list.sort(function (a, b) {
+            return Number(b.created || 0) - Number(a.created || 0);
+          });
+          layui.data('feedback', {key: "last", value: list[0].id});
+          layui.each(list, function (index, item) {
+            htmlList.push(renderRecord(item));
+          });
+          $('.layuimini-main-feedback-list .record-list').html(htmlList.join(''));
+          $('.layuimini-main-feedback-list .record-empty').hide();
+        } else {
+          $('.layuimini-main-feedback-list .record-list').empty();
+          $('.layuimini-main-feedback-list .record-empty').show();
+        }
+      } else if (json.code == 4003) {
+        layer.msg(json.msg, {
+          time: 1000
+        }, function () {
+          window.location = 'login.html';
+        });
+      } else {
+        layer.msg(json.msg);
+      }
+    }, (e) => {
+      layer.close(loadIndex);
+      layer.msg(e.errorType);
+    });
+
+    form.render();
+  });
+</script>

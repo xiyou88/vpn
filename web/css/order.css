@@ -1,0 +1,422 @@
+.layuimini-main-order {
+    padding: 18px 16px 28px;
+    color: #17142a;
+}
+
+.layuimini-main-order .page-header {
+    position: relative;
+    height: 50px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.layuimini-main-order .page-title {
+    display: inline-block;
+    line-height: 50px;
+    color: #17142a;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.layuimini-main-order .page-back {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(123, 47, 242, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    cursor: pointer;
+}
+
+.layuimini-main-order .page-back .back-icon {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin-left: 3px;
+    border-left: 2px solid #7b2ff2;
+    border-bottom: 2px solid #7b2ff2;
+    transform: rotate(45deg);
+}
+
+.layuimini-main-order .order-hero,
+.layuimini-main-order .order-section,
+.layuimini-main-order .order-empty {
+    border: 1px solid rgba(123, 47, 242, 0.12);
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top left, rgba(123, 47, 242, 0.12), transparent 38%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 244, 255, 0.98) 100%);
+    box-shadow: 0 20px 48px rgba(76, 37, 145, 0.08);
+}
+
+.layuimini-main-order .order-hero {
+    padding: 20px 18px 18px;
+}
+
+.layuimini-main-order .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid rgba(123, 47, 242, 0.14);
+    border-radius: 999px;
+    background: rgba(123, 47, 242, 0.07);
+    color: #7b2ff2;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.layuimini-main-order .hero-title {
+    margin-top: 14px;
+    color: #17142a;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.layuimini-main-order .hero-desc {
+    margin-top: 10px;
+    color: #6f6884;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.layuimini-main-order .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.layuimini-main-order .hero-stat {
+    padding: 12px 10px;
+    border: 1px solid rgba(123, 47, 242, 0.08);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.84);
+    text-align: center;
+}
+
+.layuimini-main-order .hero-stat-value {
+    color: #231d35;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.layuimini-main-order .hero-stat-label {
+    margin-top: 4px;
+    color: #8e87a2;
+    font-size: 11px;
+}
+
+.layuimini-main-order .order-section {
+    margin-top: 16px;
+    padding: 18px;
+}
+
+.layuimini-main-order .section-title {
+    color: #211a32;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.layuimini-main-order .section-desc {
+    margin-top: 6px;
+    color: #7c748f;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.layuimini-main-order .order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.layuimini-main-order .order-card {
+    position: relative;
+    border: 1px solid rgba(123, 47, 242, 0.08);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.96);
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(89, 43, 161, 0.06);
+}
+
+.layuimini-main-order .order-card::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    bottom: 22px;
+    left: 0;
+    width: 6px;
+    border-radius: 0 999px 999px 0;
+    background: linear-gradient(180deg, #7b2ff2 0%, #5b1fd4 100%);
+}
+
+.layuimini-main-order .order-card.pending {
+    border-color: rgba(123, 47, 242, 0.12);
+}
+
+.layuimini-main-order .order-card.unpaid {
+    border-color: rgba(220, 115, 132, 0.2);
+}
+
+.layuimini-main-order .order-card.pending::before {
+    background: linear-gradient(180deg, #ffb948 0%, #f59e0b 100%);
+}
+
+.layuimini-main-order .order-card.unpaid::before {
+    background: linear-gradient(180deg, #c8c3d5 0%, #9f97b1 100%);
+}
+
+.layuimini-main-order .order-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 28px 26px 16px 28px;
+}
+
+.layuimini-main-order .order-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-width: 0;
+    flex: 1;
+}
+
+.layuimini-main-order .order-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(123, 47, 242, 0.1), rgba(123, 47, 242, 0.06));
+    color: #6a28dc;
+    flex: 0 0 auto;
+}
+
+.layuimini-main-order .order-card.pending .order-icon {
+    background: linear-gradient(180deg, rgba(255, 185, 72, 0.14), rgba(245, 158, 11, 0.08));
+    color: #8B84A0;
+}
+
+.layuimini-main-order .order-card.unpaid .order-icon {
+    background: linear-gradient(180deg, rgba(223, 102, 127, 0.14), rgba(192, 79, 103, 0.08));
+    color: #8B84A0;
+}
+
+.layuimini-main-order .order-icon i {
+    font-size: 30px;
+}
+
+.layuimini-main-order .order-meta {
+    min-width: 0;
+    flex: 1;
+}
+
+.layuimini-main-order .order-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.layuimini-main-order .order-status,
+.layuimini-main-order .order-paytype {
+    display: inline-flex;
+    align-items: center;
+    height: 26px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.layuimini-main-order .order-status.done {
+    background: rgba(123, 47, 242, 0.12);
+    color: #7b2ff2;
+}
+
+.layuimini-main-order .order-status.pending {
+    background: rgba(255, 185, 72, 0.18);
+    color: #b87100;
+}
+
+.layuimini-main-order .order-status.unpaid {
+    background: rgba(220, 115, 132, 0.14);
+    color: #8B84A0;
+}
+
+.layuimini-main-order .order-paytype {
+    padding: 0;
+    background: transparent;
+    color: #8a83a0;
+    font-size: 13px;
+}
+
+.layuimini-main-order .order-title {
+    margin-top: 12px;
+    color: #1e1830;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.layuimini-main-order .order-subtitle {
+    margin-top: 10px;
+    color: #8c85a0;
+    font-size: 14px;
+    line-height: 1.75;
+    max-width: 420px;
+}
+
+.layuimini-main-order .order-amount {
+    flex: 0 0 auto;
+    text-align: right;
+}
+
+.layuimini-main-order .amount-label {
+    color: #998faa;
+    font-size: 12px;
+}
+
+.layuimini-main-order .amount-value {
+    margin-top: 4px;
+    color: #6a28dc;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.layuimini-main-order .order-card.unpaid .amount-value {
+    color: #8B84A0;
+}
+
+.layuimini-main-order .order-card.pending .amount-value {
+    color: #8B84A0;
+}
+
+.layuimini-main-order .order-body {
+    padding: 0 26px 28px 28px;
+}
+
+.layuimini-main-order .order-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.layuimini-main-order .order-item {
+    padding: 18px 20px;
+    border: 1px solid rgba(123, 47, 242, 0.08);
+    border-radius: 22px;
+    background: #f6f2fc;
+}
+
+.layuimini-main-order .order-item.full {
+    grid-column: 1 / -1;
+}
+
+.layuimini-main-order .item-label {
+    color: #938da1;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.layuimini-main-order .item-value {
+    margin-top: 10px;
+    color: #352f45;
+    font-size: 12px;
+    line-height: 1.7;
+    word-break: break-all;
+}
+
+.layuimini-main-order .order-empty {
+    display: none;
+    margin-top: 16px;
+    padding: 46px 24px;
+    text-align: center;
+}
+
+.layuimini-main-order .empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 16px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(123, 47, 242, 0.12), rgba(91, 31, 212, 0.06));
+    color: #7b2ff2;
+    font-size: 28px;
+}
+
+.layuimini-main-order .empty-title {
+    color: #23212c;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.layuimini-main-order .empty-desc {
+    margin-top: 8px;
+    color: #9691a2;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media (max-width: 420px) {
+    .layuimini-main-order {
+        padding: 16px 14px 24px;
+    }
+
+    .layuimini-main-order .hero-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .layuimini-main-order .order-head {
+        padding: 22px 18px 14px 20px;
+        gap: 10px;
+    }
+
+    .layuimini-main-order .order-amount {
+        text-align: right;
+    }
+
+    .layuimini-main-order .amount-value {
+        font-size: 24px;
+    }
+
+    .layuimini-main-order .order-body {
+        padding: 0 18px 20px 20px;
+    }
+
+    .layuimini-main-order .order-item {
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .layuimini-main-order .order-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 16px;
+    }
+
+    .layuimini-main-order .order-icon i {
+        font-size: 24px;
+    }
+
+    .layuimini-main-order .order-title {
+        font-size: 17px;
+    }
+
+    .layuimini-main-order .order-subtitle {
+        font-size: 12px;
+    }
+}

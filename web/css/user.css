@@ -1,0 +1,306 @@
+.layuimini-main-user {
+    min-height: calc(100% - 68px);
+    padding: 18px 16px 28px;
+    background: #ffffff;
+    color: #222222;
+}
+
+.layuimini-main-user * {
+    box-sizing: border-box;
+}
+
+.layuimini-main-user .section-title {
+    margin: 26px 2px 12px;
+    color: #4b4f58;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.layuimini-main-user .info-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 12px 0 10px;
+    background: #ffffff;
+}
+
+.layuimini-main-user .profile-avatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #f3f4f1, #e6e9e6);
+    flex: 0 0 auto;
+}
+
+.layuimini-main-user .profile-avatar::before {
+    content: "XiYou";
+    color: #a9afb1;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.layuimini-main-user .profile-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.layuimini-main-user .info-row {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.layuimini-main-user .info-row + .info-row {
+    margin-top: 12px;
+}
+
+.layuimini-main-user .info-copy {
+    min-width: 0;
+}
+
+.layuimini-main-user .info-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.layuimini-main-user .info-label,
+.layuimini-main-user .info-value {
+    color: #393538;
+    font-size: 15px;
+    line-height: 1.45;
+    font-weight: 500;
+}
+
+.layuimini-main-user .info-value {
+    min-width: 0;
+    word-break: break-all;
+}
+
+.layuimini-main-user .copy-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.layuimini-main-user .copy-icon img {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.layuimini-main-user .membership-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.layuimini-main-user .member-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    border: 0;
+    background: #f3f0eb;
+    position: relative;
+    overflow: hidden;
+}
+
+.layuimini-main-user .vip-card {
+    background: #ecb365 url("../images/vip-bg-select.png") center center no-repeat;
+    background-size: cover;
+}
+
+.layuimini-main-user .svip-card {
+    background: #62291c url("../images/svip-bg-select.png") center center no-repeat;
+    background-size: cover;
+}
+
+.layuimini-main-user .member-card.is-expired {
+    background: linear-gradient(135deg, #e2e4e7 0%, #cbcfd4 100%);
+}
+
+.layuimini-main-user .member-main {
+    min-width: 0;
+    flex: 1;
+}
+
+.layuimini-main-user .member-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.layuimini-main-user .member-badge-text {
+    color: #62291c;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+}
+
+.layuimini-main-user .svip-card .member-badge-text {
+    color: #ecb365;
+}
+
+.layuimini-main-user .member-card.is-expired .member-badge-text {
+    color: #767d86;
+}
+
+.layuimini-main-user .member-name {
+    color: #62291c;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.layuimini-main-user .svip-card .member-name {
+    color: #ecb365 !important;
+}
+
+.layuimini-main-user .member-card.is-expired .member-name {
+    color: #69717a;
+}
+
+.layuimini-main-user .member-status {
+    display: none !important;
+}
+
+.layuimini-main-user .member-expire {
+    margin-top: 8px;
+    color: #62291c;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.layuimini-main-user .svip-card .member-expire {
+    color: #ecb365 !important;
+}
+
+.layuimini-main-user .member-card.is-expired .member-expire {
+    color: #7f8790;
+}
+
+.layuimini-main-user .member-action {
+    height: 28px;
+    padding: 0 12px;
+    border: 0;
+    background: rgba(88, 46, 22, 0.88);
+    color: #fff7ee;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.layuimini-main-user .svip-card .member-action {
+    background: rgba(255, 242, 220, 0.16);
+    color: #fff2dc;
+}
+
+.layuimini-main-user .member-card.is-expired .member-action {
+    background: #8d939b;
+    color: #ffffff;
+}
+
+.layuimini-main-user .service-panel {
+    overflow: hidden;
+    margin-top: 14px;
+    border: 1px solid rgba(38, 204, 196, 0.1);
+    background: #ffffff;
+}
+
+.layuimini-main-user .service-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(38, 204, 196, 0.08);
+}
+
+.layuimini-main-user .service-item:last-child {
+    border-bottom: 0;
+}
+
+.layuimini-main-user .service-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 1;
+}
+
+.layuimini-main-user .service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: rgba(38, 204, 196, 0.08);
+    color: #26ccc4;
+    flex: 0 0 auto;
+}
+
+.layuimini-main-user .service-icon i {
+    font-size: 20px;
+}
+
+.layuimini-main-user .service-copy {
+    flex: 1;
+    min-width: 0;
+}
+
+.layuimini-main-user .service-title {
+    color: #262b32;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.layuimini-main-user .service-tail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.layuimini-main-user .service-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff8679;
+}
+
+.layuimini-main-user .service-arrow {
+    color: #9ea4ac;
+    font-size: 28px;
+    line-height: 1;
+}
+
+.layuimini-main-user .logout-btn {
+    display: block;
+    width: 100%;
+    height: 46px;
+    margin-top: 18px;
+    border: 1px solid rgba(255, 107, 107, 0.18);
+    background: #ffffff;
+    color: #e35d5d;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}

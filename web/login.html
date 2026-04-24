@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>西柚</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="./lib/layui-v2.6.7/css/layui.css" media="all">
+    <link rel="stylesheet" href="./css/public.css" media="all">
+    <link rel="stylesheet" href="./css/login.css" media="all">
+    <link rel="stylesheet" href="./css/theme-tech.css" media="all">
+    <link rel="stylesheet" href="./css/theme-refresh.css" media="all">
+    <link rel="apple-touch-icon" sizes="108x108" href="./images/icon-cp.png">
+    <link rel="icon" href="./favicon.ico">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <style>
+        .box{height: 40px;padding: 5px 10px;line-height: 40px;display: none;}
+        .marquee-container {
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .marquee-container .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .marquee-text-animation {
+            animation: marquee 10s linear infinite; /* 滚动动画，时间可根据需要调整 */
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layui-container">
+        <div class="admin-login-background">
+            <div class="layui-form login-form">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item logo-title">
+                        <div class="icon-cp"></div>
+                        <h1 style="font-size: 24px;line-height: 31px;color: #393D41;">西柚VPN</h1>
+                    </div>
+
+                    <div class="form-body">
+                        <div class="layui-form-item input">
+                            <!-- <label class="layui-icon layui-icon-username"></label> -->
+                            <img src="./images/icon_username.svg" class="icon" />
+                            <input type="text" name="username" placeholder="请输入您的手机号" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-item input">
+                            <img src="./images/icon_password_new.svg" class="icon" />
+                            <input type="text" id="login-password" name="password" autocomplete="off" placeholder="请输入您的密码" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item login">
+                        <button lay-submit="" lay-filter="login">登 录</button>
+                    </div>
+                </form>
+                <button id="register" class="register-entry" type="button">
+                    <span class="register-copy">
+                        <span class="register-label">没有账号？</span>
+                        <span class="register-action">立即注册</span>
+                    </span>
+                    <span class="register-arrow" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="lib/layui-v2.6.7/layui.js" charset="utf-8"></script>
+    <script src="js/md5.min.js" charset="utf-8"></script>
+    <script src="js/utils.js" charset="utf-8"></script>
+  
+    <script>
+        let channel = '';
+        layui.use(['form'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.jquery;
+
+
+            let request = GetRequestParams(layui.router().href);
+            if (request["channel"] != undefined && request["channel"] != ""){
+                layui.data('channel',{key:"info",value: request["channel"]});
+                channel = request["channel"]
+            }
+            if(request["expire"] != undefined){
+                $(".box").show()
+            }
+           
+            $('#forgot-password').on('click', function () {
+                location.href = "forgot_password.html";
+            });
+
+            $('#register').on('click', function () {
+                location.href = "register.html";
+            });
+
+            $("#login-password").bind("input propertychange",function(event){
+                let password = $("#login-password").val();
+                if (password.length <=0){
+                    $("#login-password").attr("type","text");
+                }else {
+                    $("#login-password").attr("type","password");
+                }
+            });
+
+            layui.data('warning',{key:"info",value: 0});
+
+            $(".login-warning-show .toLoginHelp").on('click', function(){
+                goNewEnter()
+            })
+
+            const container = document.querySelector(".marquee-container");
+            const text = document.querySelector(".marquee-text");
+
+            // 公告模块可能不存在，缺失时直接跳过跑马灯逻辑。
+            if (container && text) {
+                if (text.getBoundingClientRect().width > container.clientWidth) {
+                    text.classList.add("marquee-text-animation");
+                } else {
+                    text.classList.remove("marquee-text-animation");
+                }
+            }
+
+            // 进行登录操作
+            form.on('submit(login)', function(data) {
+                data = data.field;
+                if (data.username.length<6) {
+                    layer.msg('用户名长度为6-20位', {
+                        time: 1000
+                    });
+                    return false;
+                }
+                if (data.password.length < 6 || data.password.length > 20) {
+                    layer.msg('密码长度为6-20位', {
+                        time: 1000
+                    });
+                    return false;
+                }
+
+                var loadIndex = layer.load(2, {
+                    shade: [0.2,'#000000'] //0.1透明度的白色背景
+                });
+
+                axios({
+                    "method": "POST",
+                    "url": `${API_URL}/user/login`,
+                    "data": data,
+                }).then((json) => {
+                    layer.close(loadIndex);
+                    if (json.code == 200) {
+                        json.data.cache_ts = parseInt(new Date().getTime()/1000);
+                        layui.data('user',{key:"userInfo",value: json.data});
+                        layui.data('token', {key:"info",value: json.data.token});
+                        layui.data('uid', {key:"uid",value: json.data.uid});
+
+                        layer.msg('登录成功', {
+                            time: 1000
+                        }, function() {
+                            setTimeout(window.location = 'index.html',500);
+                        });
+                    } else {
+                        layer.msg(json.msg);
+                    }
+                }, (e) => {
+                    layer.close(loadIndex);
+                    layer.msg(e.errorType);
+                });
+
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

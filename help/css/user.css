@@ -1,0 +1,51 @@
+.layuimini-main-user{margin: 8px;height: calc(100% - 88px);margin-top: 0px;}
+.layuimini-main-user .top{background-color: white;padding: 5px 20px;}
+.layuimini-main-user .top > div.title{text-align: center;height: 60px;width: 100%;display: flex;}
+.layuimini-main-user .top  > div.title img{width: 60px;height: 60px;}
+.layuimini-main-user .top  > div.title div{font-weight: bold;color: #313131;font-size: 20px;}
+.layuimini-main-user .top  > div.title > div{margin-left: 10px;}
+.layuimini-main-user .top  > div.title .btn{font-size: 12px;padding: 4px 8px;font-weight: normal;}
+.layuimini-main-user .top  > div.title .modify-password{border: 1px solid #1e9fff;color: #1e9fff;border-radius: 6px;}
+.layuimini-main-user .top  > div.title .logout{border: 1px solid #ff5722;color: #ff5722;border-radius: 6px;margin-left: 15px}
+.layuimini-main-user .top .username{margin-left: -20px;margin-bottom: 4px;}
+.layuimini-main-user .top .membership{margin-top: 20px;}
+
+.layuimini-main-user .top .membership .content{text-align: center;}
+.layuimini-main-user .top .membership .content img{width: 94px;height: 70px;margin-top: 39px;}
+.layuimini-main-user .top .membership .content div{margin-top: 15px;font-size: 13px;font-weight: bold;line-height: 17px;color: #B4B2B2;}
+.layuimini-main-user .top .membership .content button{width: 100%;height: 45px;background: #2468F2;color: white;line-height: 45px;margin: 32px 0;}
+.layuimini-main-user .top .membership .vip-content > div{height: 78px;margin-bottom: 14px;background: url('../images/vip-bg.png') 0 0 no-repeat;background-size: cover;}
+.layuimini-main-user .top .membership .vip-content > div.valid{background: url('../images/valid-vip-bg.png') 0 0 no-repeat;background-size: cover;}
+.layuimini-main-user .top .membership .vip-content .left{margin: 18px 0 0 20px;width: 60%;float: left;}
+.layuimini-main-user .top .membership .vip-content .left .title img{width: 19px;height: 17px;margin-right: 5px;}
+.layuimini-main-user .top .membership .vip-content .left .time{font-size: 12px;line-height: 16px;color: #C2AC8D;margin-top: 5px;}
+.layuimini-main-user .top .membership .vip-content button{float: right;margin: 26px 17px 0 0;width: 81px;height: 27px;background-color: #5187F5;border-radius: 15px;font-size: 15px;line-height: 27px;color: white}
+.layuimini-main-user .top .membership .vip-content .left .title span{color: #8B8B8B;}
+.layuimini-main-user .top .membership .vip-content .left .time{color: #8B8B8B;}
+.layuimini-main-user .top .membership .vip-content .left .title .font-valid{color: #B4731C;}
+.layuimini-main-user .top .membership .vip-content button.valid{background-color: #B4731C}
+
+.layuimini-main-user .body{margin-top: 20px;}
+.layuimini-main-user .body .route-desc{font-size: 14px;line-height: 24px;}
+.layuimini-main-user .body .route-desc div{color: #2468F2;cursor: pointer;}
+
+.layuimini-main-user .body ul li .fixed{position: absolute;width: 153px;height: 31px;margin-top: -7px;}
+.layuimini-main-user .body ul li{margin-bottom: 20px;background-color: white;font-size: 15px;position: relative;border: 1px solid #1e9fff;border-radius: 8px;margin-top: 15px;}
+.layuimini-main-user .body ul li .route-body{padding: 19px;color: #2A2C2E;display: flow-root;}
+.layuimini-main-user .body ul li .route-body img{height: 21px;margin-right: 18px;}
+.layuimini-main-user .body ul li .route-body div{float: left;}
+.layuimini-main-user .body ul li .route-body div:last-child{float: right}
+.layuimini-main-user .body ul li  .route-detail{color: #16b777;}
+
+
+.layuimini-main-user .show{position: absolute;top:0;left: 0;width: 100%;height: 100%;background: rgba(74,74,74,0.5);display: none;}
+.layuimini-main-user .show > div{border-radius: 2px;display: grid;width: 263px; margin: 220px auto 0 auto;background-color: white;text-align: center;position: relative;}
+.layuimini-main-user .show div .title{margin-top: 15px;font-size: 17px;font-weight: bold;line-height: 22px;color: #393D41;}
+.layuimini-main-user .show div .desc{width: 250px;margin: 10px auto 0 auto;font-size: 15px;line-height: 25px;color: black;text-align: left;}
+.layuimini-main-user .show div .desc span{width: 250px;word-break: break-all;}
+.layuimini-main-user .show div .footer2{margin: 20px auto;}
+.layuimini-main-user .show div .footer2 button{width: 100px;height: 35px;background-color: #2468F2;border-radius: 2px;color: white;}
+.layuimini-main-user .show div .footer2 button:last-child{margin-left: 20px;}
+.layuimini-main-user .show div .footer2 button.cancel{border: 1px solid #2468F2;color: black;background:none;}
+.layuimini-main-user .show div .close{position: absolute;top: 0;right: 0;width: 40px;height: 40px;cursor: pointer;}
+.layuimini-main-user .show div .close img{width: 13px;height: 14px;margin-top: 10px;}
