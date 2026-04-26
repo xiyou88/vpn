@@ -468,9 +468,12 @@ body.layui-layout-body {
 
     .layui-layout-admin .footer {
         position: fixed;
-        left: 12px;
-        right: 12px;
-        bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
         z-index: 1000;
     }
 }
