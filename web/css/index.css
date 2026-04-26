@@ -448,20 +448,29 @@ body.layui-layout-body {
 
 @media (max-width: 520px) {
     body.layui-layout-body {
-        padding: 0 0 104px;
+        padding: 0 0 calc(116px + env(safe-area-inset-bottom, 0px));
     }
 
     .layui-layout-admin {
         height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
         border-radius: 0;
         border-left: 0;
         border-right: 0;
         max-width: none;
     }
 
+    .layui-body {
+        margin-bottom: calc(108px + env(safe-area-inset-bottom, 0px));
+    }
+
     .layui-layout-admin .footer {
+        position: fixed;
         left: 12px;
         right: 12px;
         bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+        z-index: 1000;
     }
 }
